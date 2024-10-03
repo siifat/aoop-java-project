@@ -38,6 +38,7 @@
 #editClassesLabel,
 #manageStudsLabel,
 #settingsLabel,
+#privateFilesLabel,
 #myProfileLabel{
     -fx-background-radius: 12;
     -fx-border-radius: 12;
@@ -48,6 +49,8 @@
 #manageStudsLabel:hover,
 #myProfileLabel:hover,
 #settingsLabel:hover,
+#privateFilesLabel:hover,
+#privateFilesLabel:focused,
 #settingsLabel:focused,
 #myProfileLabel:focused,
 #manageStudsLabel:focused,
@@ -58,12 +61,6 @@
 
 #designPane{
     -fx-background-color: #e5f1ff;
-    -fx-background-radius: 12;
-    -fx-border-radius: 12;
-}
-
-#classStatsPane{
-    -fx-background-color: white;
     -fx-background-radius: 12;
     -fx-border-radius: 12;
 }
@@ -81,4 +78,22 @@
     -fx-text-fill: white;
     -fx-background-radius: 16;
     -fx-border-radius: 16;
+}
+
+.all-inner-panes {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+
+.view-all-labels{
+    -fx-text-fill: grey;
+}
+
+#deleteAccountBtn{
+    -fx-text-fill: red;
+}
+
+#saveChangesBtn{
+    -fx-text-fill: blue;
 }
