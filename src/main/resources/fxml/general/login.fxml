@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXRadioButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="root" prefHeight="845.0" prefWidth="1550.0" stylesheets="@../../css/login.css"
+            xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="lms.controller.general.Login">
+    <children>
+        <Pane fx:id="pane" layoutX="310.0" layoutY="108.0" prefHeight="630.0" prefWidth="930.0">
+            <children>
+                <MFXTextField fx:id="idField" floatMode="BORDER" floatingText="Student ID" floatingTextGap="10.0"
+                              layoutX="506.0" layoutY="104.0" prefHeight="48.0" prefWidth="373.0"/>
+                <MFXPasswordField fx:id="passField" allowCopy="true" allowCut="true" allowPaste="true"
+                                  floatMode="BORDER" floatingText="Password" layoutX="506.0" layoutY="181.0"
+                                  prefHeight="48.0" prefWidth="373.0"/>
+                <MFXRadioButton fx:id="rbStudent" layoutX="567.0" layoutY="321.0" onAction="#studentRBselected"
+                                selected="true" text="Student">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="g1"/>
+                    </toggleGroup>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </MFXRadioButton>
+                <MFXRadioButton fx:id="rbTeacher" layoutX="738.0" layoutY="321.0" onAction="#teacherRBselected"
+                                text="Teacher" toggleGroup="$g1">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </MFXRadioButton>
+                <MFXButton fx:id="loginButton" buttonType="RAISED" depthLevel="LEVEL3" layoutX="506.0" layoutY="390.0"
+                           onAction="#loginClicked" prefHeight="48.0" prefWidth="373.0" rippleAnimateBackground="false"
+                           rippleAnimationSpeed="0.0" rippleBackgroundOpacity="0.0" rippleRadius="0.0"
+                           rippleRadiusMultiplier="0.0" text="LOGIN">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </MFXButton>
+                <ImageView fitHeight="630.0" fitWidth="450.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/general/learning.gif"/>
+                    </image>
+                </ImageView>
+                <Label fx:id="headerLabel" alignment="CENTER" focusTraversable="false" layoutX="468.0" layoutY="14.0"
+                       prefHeight="32.0" prefWidth="450.0" text="Log In"/>
+
+                <Label fx:id="loginAsLabel" focusTraversable="false" layoutX="506.0" layoutY="265.0" text="Login As :"/>
+                <Separator focusTraversable="false" layoutX="506.0" layoutY="483.0" prefHeight="0.0" prefWidth="161.0"/>
+                <Separator focusTraversable="false" layoutX="718.0" layoutY="481.0" prefHeight="3.0" prefWidth="161.0"/>
+                <Label focusTraversable="false" layoutX="684.0" layoutY="473.0" text="OR"/>
+                <Label fx:id="forgotPassLabel" layoutX="506.0" layoutY="523.0" onMouseClicked="#forgotPassClicked"
+                       text="Forgot Password?">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Label>
+                <Label fx:id="CreateAccLabel" layoutX="729.0" layoutY="523.0" onMouseClicked="#createAccClicked"
+                       text="Create A New Account!">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Label>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

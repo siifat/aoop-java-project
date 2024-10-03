@@ -1,0 +1,125 @@
+#root{
+    /*-fx-background-color: radial-gradient(center 50% 100%, radius 50%, #0f0c29, #302b63, #24243e);*/
+    -fx-background-color: #f5f6fa;
+}
+
+.selected-label {
+    /*-fx-background-color: #b3d1ff; !* or any color to indicate selection *!*/
+    -fx-background-color: #e5f1ff; /* or any color to indicate selection */
+    -fx-border-color: #056efe;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+}
+
+#sidePane{
+    /*-fx-background-color: #161b22;*/
+    -fx-background-color: #d3d3d3;
+    -fx-background-radius: 18px;
+    -fx-border-width: 1px;
+    -fx-border-radius: 18px;
+    -fx-border-color: white;
+    -fx-border-style: solid; /* Optional: you can use dotted, dashed, etc. */
+}
+
+#upperpane{
+    -fx-background-color: #d3d3d3;
+    -fx-background-radius: 18px;
+    -fx-border-width: 1px;
+    -fx-border-radius: 18px;
+    -fx-border-color: white;
+    -fx-border-style: solid;
+}
+
+#homeButton,
+#manageButton,
+#logButton,
+#configButton{
+    /*-fx-background-color: linear-gradient(to right, #302b63, #24243e);*/
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-background-color: white;
+    -fx-alignment: CENTER_LEFT;-fx-padding: 0 0 0 50; /* Add padding to the left */
+    -fx-text-alignment: right;
+    -fx-font-size: 16;
+    -fx-text-fill: black;
+}
+
+#homeButton:hover,
+#manageButton:hover,
+#logButton:hover,
+#configButton:hover{
+    /*-fx-background-color: linear-gradient(to right, #0f0c29, #302b63, #24243e);*/
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-background-color: e5f1ff;
+    -fx-cursor: hand;
+    -fx-font-smoothing-type: lcd;
+}
+
+#icon1:hover,
+#icon2:hover,
+#icon3:hover,
+#icon4:hover,
+#icon6:hover{
+    -fx-cursor: hand;
+}
+
+#icon5:hover{
+    -fxbackground-color: #FFD700;
+    -fx-text-fill: #FFD700;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.9), 20, 0.3, 2, 2);
+}
+
+#label1{
+    -fx-text-fill: black;
+}
+
+#label1:hover{
+    -fx-text-fill: #FFD700;
+    -fx-cursor: hand;
+    /*-fx-effect: dropshadow(three-pass-box, rgba(255, 255, 0, 0.6), 50, 0.0, 0, 1);*/
+    /*-fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.9), 20, 0.0, 2, 2);*/
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.9), 20, 0.3, 2, 2);
+}
+
+#stackPane{
+    -fx-background-color: white;
+}
+
+#s1Button,
+#t1Button,
+#save2Button,
+#save2Button1{
+    -fx-font-size: 17;
+    -fx-text-fill: white;
+    -fx-background-color: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    -fx-cursor: hand;
+}
+
+#st1Label,
+#stLabel1{
+    -fx-text-alignment: right;
+    -fx-font-size: 16;
+}
+
+#admissionRB,
+#registrationRB,
+#courseRB,
+#infoRB ,
+#roleRB,
+#tadmissionRB,
+#troleRB,
+#tcourseRB,
+#tinfoRB ,
+#umLabel1,
+#umLabel2,
+#umLabel3,
+#umLabel4,
+#umLabel5,
+#umLabel6 {
+    -fx-font-size: 16px;
+    -fx-font-family: "Poppins Medium";
+    -fx-font-weight: bold;
+
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.to_do_list.MainWindowController">
+    <left>
+        <ListView fx:id="toDoListView" onMouseClicked="#handleClickListView" prefHeight="200.0" prefWidth="200.0"
+                  BorderPane.alignment="CENTER"/>
+    </left>
+    <center>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <TextArea fx:id="itemDescriptionTextArea" prefHeight="402.0" prefWidth="400.0" VBox.vgrow="ALWAYS"/>
+                <HBox prefHeight="45.0" prefWidth="400.0" spacing="5.0">
+                    <children>
+                        <Label prefHeight="18.0" prefWidth="42.0" text="Due: "/>
+                        <Label fx:id="deadlineLabel" prefHeight="18.0" prefWidth="138.0" text="deadline">
+                            <HBox.margin>
+                                <Insets/>
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu fx:id="fileButton" mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem fx:id="NewButton" mnemonicParsing="false" onAction="#OnNewClicked" text="New "/>
+                        <MenuItem fx:id="ExitButton" mnemonicParsing="false" onAction="#OnExitClicked" text="Exit"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+</BorderPane>

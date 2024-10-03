@@ -1,0 +1,86 @@
+.label{
+    -fx-text-fill: #000000;
+    -fx-font-size: 13px;
+    -fx-font-family: "Poppins Medium";
+    -fx-font-smoothing-type: lcd;
+}
+
+.mfx-radio-button {
+    -fx-background-radius: 14px;
+    -fx-background-color: rgba(0, 0, 0, 0.0);
+    -fx-border-radius: 14px;
+    -fx-border-width: 5px;
+    -fx-border-color: rgba(0, 0, 0, 0);
+    -fx-font-smoothing-type: lcd;
+}
+.mfx-radio-button:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+    -fx-font-smoothing-type: lcd;
+}
+
+
+#root{
+    -fx-background-color: #7a0ed9;
+    -fx-font-smoothing-type: lcd;
+}
+
+#headerLabel,
+#headerLabel1,
+#newPassHeaderLabel{
+    -fx-text-fill: #7a0ed9;
+    -fx-font-weight: bold;
+    -fx-font-size: 22px;
+}
+
+#upperLabel{
+    -fx-text-fill: grey;
+}
+
+#countdownLabel{
+    -fx-font-size: 12px;
+    -fx-text-fill: red;
+}
+
+#resendEmailLink{
+    -fx-font-size: 12px;
+    -fx-text-fill: red;
+}
+
+/*Panes*/
+#sendEmailPane,
+#enterCodePane,
+#updatePassPane{
+    -fx-background-color: #FFFFFF;
+    -fx-font-smoothing-type: lcd;
+    -fx-border-radius: 14px;
+    -fx-background-radius: 14px;
+}
+
+/*Fields*/
+#emailField,
+#securityCodeField,
+#newPassField,
+#confirmNewPassField{
+    -fx-border-radius: 22px;
+    -fx-background-radius: 22px;
+}
+
+/*Buttons*/
+#nextButton,
+#resetButton,
+#updatePassButton{
+    -fx-background-color: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bolder;
+    -fx-font-size: 15px;
+    -fx-border-radius: 22px;
+    -fx-background-radius: 22px;
+}
+
+#nextButton:pressed,
+#resetButton:pressed,
+#updatePassButton:pressed{
+    -fx-background-color: linear-gradient(to right, #8E2DE2, #4A00E0);
+    -fx-font-smoothing-type: lcd;
+}
+

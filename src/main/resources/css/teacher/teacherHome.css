@@ -1,0 +1,84 @@
+.selected-label {
+    /*-fx-background-color: #b3d1ff; !* or any color to indicate selection *!*/
+    -fx-background-color: #e5f1ff; /* or any color to indicate selection */
+    -fx-border-color: #056efe;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+}
+
+/*.my-pane {*/
+/*    -fx-background-image: url("../images/FAX9Jf5.jpg"); !* Relative to resources folder *!*/
+/*    -fx-background-repeat: no-repeat;*/
+/*    -fx-background-position: center;*/
+/*    -fx-background-size: cover; !* Scales image to cover pane *!*/
+/*}*/
+
+#root{
+    /*-fx-background-color: #e9eff7;*/
+    -fx-background-color: #f5f6fa;
+}
+
+/*icons*/
+#smileIcon{
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0.0, 0, 7);
+}
+
+
+/*side pane*/
+#sidePane{
+    /*-fx-background-color: #1b1f72;*/
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+
+}
+
+/*side pane labels*/
+#dashboardLabel,
+#editClassesLabel,
+#manageStudsLabel,
+#settingsLabel,
+#myProfileLabel{
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+
+#dashboardLabel:hover,
+#editClassesLabel:hover,
+#manageStudsLabel:hover,
+#myProfileLabel:hover,
+#settingsLabel:hover,
+#settingsLabel:focused,
+#myProfileLabel:focused,
+#manageStudsLabel:focused,
+#editClassesLabel:focused,
+#dashboardLabel:focused{
+    -fx-background-color: #e5f1ff;
+}
+
+#designPane{
+    -fx-background-color: #e5f1ff;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+
+#classStatsPane{
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+
+/*Fields*/
+#searchField{
+    -fx-border-radius: 22px;
+    -fx-background-radius: 22px;
+}
+
+
+/*buttons*/
+#createGroupButton{
+    -fx-background-color: #056efe;
+    -fx-text-fill: white;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}

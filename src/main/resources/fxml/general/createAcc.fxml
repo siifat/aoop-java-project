@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXRadioButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="root" prefHeight="845.0" prefWidth="1550.0" stylesheets="@../../css/createAcc.css"
+            xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="lms.controller.general.CreateAcc">
+    <children>
+        <Pane fx:id="pane" layoutX="310.0" layoutY="48.0" prefHeight="750.0" prefWidth="930.0">
+            <children>
+                <MFXTextField fx:id="nameField" floatMode="BORDER" floatingText="Full Name" floatingTextGap="10.0"
+                              layoutX="506.0" layoutY="99.0" prefHeight="48.0" prefWidth="373.0"/>
+                <MFXPasswordField fx:id="passField" allowCopy="true" allowCut="true" allowPaste="true"
+                                  floatMode="BORDER" floatingText="Enter Your Password" layoutX="506.0" layoutY="305.0"
+                                  prefHeight="48.0" prefWidth="373.0"/>
+                <MFXRadioButton fx:id="rbStudent" layoutX="568.0" layoutY="503.0" selected="true" text="Student">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="g1"/>
+                    </toggleGroup>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </MFXRadioButton>
+                <MFXRadioButton fx:id="rbTeacher" layoutX="739.0" layoutY="503.0" text="Teacher" toggleGroup="$g1">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </MFXRadioButton>
+                <MFXButton fx:id="createButton" buttonType="RAISED" depthLevel="LEVEL3" layoutX="506.0" layoutY="571.0"
+                           onAction="#createAcc" prefHeight="48.0" prefWidth="373.0" rippleAnimateBackground="false"
+                           rippleAnimationSpeed="0.0" rippleBackgroundOpacity="0.0" rippleRadius="0.0"
+                           rippleRadiusMultiplier="0.0" text="CREATE ACCOUNT">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </MFXButton>
+                <ImageView fitHeight="729.0" fitWidth="450.0" layoutX="14.0" layoutY="70.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/general/signUp.gif"/>
+                    </image>
+                </ImageView>
+                <Label fx:id="headerLabel" alignment="CENTER" focusTraversable="false" layoutX="468.0" layoutY="14.0"
+                       prefHeight="32.0" prefWidth="450.0" text="Create New Account"/>
+
+                <Label fx:id="signUpAsLabel" focusTraversable="false" layoutX="507.0" layoutY="454.0"
+                       text="Sign Up As :"/>
+                <Separator focusTraversable="false" layoutX="507.0" layoutY="664.0" prefHeight="0.0" prefWidth="161.0"/>
+                <Separator focusTraversable="false" layoutX="719.0" layoutY="662.0" prefHeight="3.0" prefWidth="161.0"/>
+                <Label focusTraversable="false" layoutX="685.0" layoutY="654.0" text="OR"/>
+                <Label fx:id="signInLabel" layoutX="673.0" layoutY="700.0" onMouseClicked="#signInClicked"
+                       text="Sign In">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Label>
+                <MFXTextField fx:id="emailField" floatMode="BORDER" floatingText="Email" floatingTextGap="10.0"
+                              layoutX="506.0" layoutY="166.0" prefHeight="48.0" prefWidth="373.0"/>
+                <MFXTextField fx:id="idField" floatMode="BORDER" floatingText="Student ID" floatingTextGap="10.0"
+                              layoutX="506.0" layoutY="231.0" prefHeight="48.0" prefWidth="373.0"/>
+                <MFXPasswordField fx:id="confirmPassField" allowCopy="true" allowCut="true" allowPaste="true"
+                                  floatMode="BORDER" floatingText="Re-enter Your Password" layoutX="506.0"
+                                  layoutY="380.0" prefHeight="48.0" prefWidth="373.0"/>
+                <Label id="validationLabel" fx:id="validationLabel" layoutX="515.0" layoutY="354.0"
+                       maxWidth="1.7976931348623157E308" minHeight="-Infinity" textFill="#e46a6a"
+                       wrapText="true"/>
+                <Label id="validationLabel" fx:id="confirmValidationLabel" layoutX="515.0" layoutY="429.0"
+                       maxWidth="1.7976931348623157E308" minHeight="-Infinity" textFill="#e46a6a"
+                       wrapText="true"/>
+                <Label id="validationLabel" fx:id="idValidationLabel" layoutX="515.0" layoutY="280.0"
+                       maxWidth="1.7976931348623157E308" minHeight="-Infinity" textFill="#e46a6a"
+                       wrapText="true"/>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

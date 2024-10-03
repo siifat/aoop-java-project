@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<DialogPane fx:id="rootDialogPane" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lms.controller.teacher.SendLinkDialogController">
+    <content>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="711.0" prefWidth="967.0">
+            <children>
+                <Label layoutX="30.0" layoutY="32.0" text="Generate and send study group link to everyone" />
+                <MFXTextField fx:id="chatIDField" floatMode="BORDER" floatingText="Enter group chat ID" layoutX="74.0" layoutY="76.0" prefHeight="38.0" prefWidth="263.0" />
+                <MFXToggleButton fx:id="shareWithEveryoneTBtn" layoutX="729.0" layoutY="61.0" selected="true" text="Share link with everyone" />
+                <TableView fx:id="tableView" disable="true" layoutX="27.0" layoutY="254.0" prefHeight="350.0" prefWidth="914.0">
+                    <columns>
+                        <TableColumn fx:id="nameCol" prefWidth="321.0" text="Name" />
+                        <TableColumn fx:id="idCol" prefWidth="177.0" text="ID" />
+                        <TableColumn fx:id="emailCol" prefWidth="307.0" text="Email" />
+                        <TableColumn fx:id="selectCol" prefWidth="108.0" text="Select" />
+                    </columns>
+                </TableView>
+                <MFXButton fx:id="shareLinkBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="408.0" layoutY="630.0" onAction="#shareLinkClicked" prefHeight="41.0" prefWidth="151.0" text="Share Link">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@../../images/teacher/send.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </MFXButton>
+                <MFXTextField fx:id="searchField" disable="true" floatMode="BORDER" floatingText="Search for a student" layoutX="30.0" layoutY="152.0" prefHeight="49.0" prefWidth="472.0" />
+                <ImageView layoutX="30.0" layoutY="79.0">
+                    <image>
+                        <Image url="@../../images/teacher/telegram.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+    </content>
+</DialogPane>

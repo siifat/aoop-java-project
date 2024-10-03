@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="765.0" prefWidth="1540.0" stylesheets="@../../css/teacher/teacherHome.css"
+            xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="lms.controller.teacher.TeacherHome">
+    <children>
+        <Pane fx:id="sidePane" layoutX="14.0" layoutY="14.0" prefHeight="741.0" prefWidth="250.0"
+              AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="12.0">
+            <children>
+                <Label layoutX="56.0" layoutY="29.0" text="Advanced" textFill="#51a841">
+                    <font>
+                        <Font name="System Bold" size="18.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="140.0" layoutY="29.0" text="-eLMS" textFill="#3e8ffe">
+                    <font>
+                        <Font name="System Bold" size="18.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="dashboardLabel" layoutX="14.0" layoutY="90.0" onMouseClicked="#dashboardClicked"
+                       prefHeight="52.0" prefWidth="222.0" text="  Dashboard">
+                    <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+                    </padding>
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@../../images/general/dashboard.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Label>
+                <Label fx:id="editClassesLabel" layoutX="14.0" layoutY="154.0" onMouseClicked="#editClassClicked"
+                       prefHeight="52.0" prefWidth="222.0" text="  Edit Classes">
+                    <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+                    </padding>
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@../../images/general/editing.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Label>
+                <Label fx:id="manageStudsLabel" layoutX="14.0" layoutY="218.0" onMouseClicked="#manageStudsClicked"
+                       prefHeight="52.0" prefWidth="222.0" text="  Manage Students">
+                    <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+                    </padding>
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@../../images/general/student.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Label>
+                <Separator layoutX="25.0" layoutY="353.0" prefWidth="200.0"/>
+                <Label fx:id="myProfileLabel" layoutX="14.0" layoutY="371.0" onMouseClicked="#myProfileClicked"
+                       prefHeight="52.0" prefWidth="222.0" text="  My Profile">
+                    <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+                    </padding>
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@../../images/general/user.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Label>
+                <Label fx:id="settingsLabel" layoutX="14.0" layoutY="434.0" onMouseClicked="#settingsClicked"
+                       prefHeight="52.0" prefWidth="222.0" text="  Settings">
+                    <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+                    </padding>
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@../../images/general/settings.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Label>
+                <Pane fx:id="designPane" layoutX="25.0" layoutY="548.0" prefHeight="180.0" prefWidth="200.0">
+                    <children>
+                        <MFXButton fx:id="createGroupButton" buttonType="RAISED" depthLevel="LEVEL5" layoutX="50.0"
+                                   layoutY="133.0" onAction="#createGroupBtnClicked" prefHeight="33.0" prefWidth="100.0"
+                                   text="Create Group">
+                            <font>
+                                <Font size="13.0"/>
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </MFXButton>
+                        <Label layoutX="38.0" layoutY="42.0" text="Student Group">
+                            <font>
+                                <Font name="System Bold" size="18.0"/>
+                            </font>
+                        </Label>
+                        <Label layoutX="8.0" layoutY="71.0" prefHeight="52.0" prefWidth="184.0"
+                               text="Create a student group and talk with them about their doubts, notices, etc."
+                               wrapText="true">
+                            <font>
+                                <Font size="11.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </Pane>
+                <ImageView fx:id="smileIcon" layoutX="93.0" layoutY="516.0">
+                    <image>
+                        <Image url="@../../images/general/smile.png"/>
+                    </image>
+                </ImageView>
+                <Label fx:id="privateFilesLabel" layoutX="14.0" layoutY="282.0" onMouseClicked="#privateFilesClicked"
+                       prefHeight="52.0" prefWidth="222.0" text="  Private Files">
+                    <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+                    </padding>
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@../../images/general/insurance.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Label>
+            </children>
+        </Pane>
+        <StackPane layoutX="262.0" prefHeight="765.0" prefWidth="1278.0">
+            <children>
+                <AnchorPane fx:id="dashboardPane" prefHeight="765.0" prefWidth="1278.0">
+                    <children>
+                        <MFXTextField fx:id="searchField" floatMode="BORDER" layoutX="14.0" layoutY="14.0"
+                                      prefHeight="49.0" prefWidth="885.0"
+                                      promptText="Search for students, Programs, Assignments..."/>
+                        <Circle fx:id="profilePicCircle" fill="DODGERBLUE" layoutX="1239.0" layoutY="39.0" radius="25.0"
+                                stroke="BLACK" strokeType="INSIDE"/>
+                        <Label alignment="CENTER_RIGHT" layoutX="1020.0" layoutY="18.0" prefHeight="21.0"
+                               prefWidth="184.0" text="Sifat Ullah">
+                            <font>
+                                <Font name="System Bold" size="15.0"/>
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="1020.0" layoutY="40.0" prefHeight="17.0"
+                               prefWidth="184.0" text="CSE Dept."/>
+                        <Separator focusTraversable="false" layoutX="1009.0" layoutY="25.0" orientation="VERTICAL"
+                                   prefHeight="27.0" prefWidth="0.0"/>
+                        <ImageView layoutX="869.0" layoutY="28.0">
+                            <image>
+                                <Image url="@../../images/general/search.png"/>
+                            </image>
+                        </ImageView>
+                        <ImageView layoutX="971.0" layoutY="28.0">
+                            <image>
+                                <Image url="@../../images/general/notification.png"/>
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </ImageView>
+                        <ImageView fx:id="chatIcon" layoutX="927.0" layoutY="28.0" onMouseClicked="#chatIconClicked">
+                            <image>
+                                <Image url="@../../images/general/chat.png"/>
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </ImageView>
+                        <Circle fx:id="notiDot" fill="#ff1f1f" layoutX="990.0" layoutY="32.0" radius="4.0"
+                                stroke="#8d8080" strokeType="INSIDE"/>
+                        <Circle fx:id="messageDot" fill="#ff1f1f" layoutX="950.0" layoutY="33.0" radius="4.0"
+                                stroke="#8d8080" strokeType="INSIDE"/>
+                        <Label layoutX="14.0" layoutY="79.0" text="Dashboard">
+                            <font>
+                                <Font name="System Bold" size="22.0"/>
+                            </font>
+                        </Label>
+                        <AnchorPane fx:id="classStatsPane" layoutX="14.0" layoutY="128.0" prefHeight="280.0"
+                                    prefWidth="386.0"/>
+                    </children>
+                </AnchorPane>
+            </children>
+        </StackPane>
+    </children>
+</AnchorPane>

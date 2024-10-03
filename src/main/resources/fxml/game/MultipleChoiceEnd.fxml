@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="mcAnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.retardict.MultipleChoiceEndController">
+   <children>
+      <Button id="functionButton" layoutX="516.0" layoutY="342.0" mnemonicParsing="false" onAction="#switchToGameScene" prefHeight="50.0" prefWidth="200.0" text="Game Menu" />
+      <Label fx:id="scoreBox" contentDisplay="CENTER" layoutX="324.0" layoutY="34.0" prefHeight="122.0" prefWidth="606.0" text="Label" />
+      <Button id="functionButton" layoutX="516.0" layoutY="404.0" mnemonicParsing="false" onAction="#replay" prefHeight="50.0" prefWidth="200.0" text="Replay" />
+   </children>
+</AnchorPane>

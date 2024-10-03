@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXListView?>
+<?import io.github.palexdev.materialfx.controls.MFXRadioButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane fx:id="root" prefHeight="765.0" prefWidth="1540.0" stylesheets="@../../css/admin/adminHome.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lms.controller.admin.AdminHome">
+    <children>
+        <Pane fx:id="sidePane" layoutX="14.0" layoutY="14.0" prefHeight="736.0" prefWidth="224.0">
+            <children>
+                <MFXButton fx:id="homeButton" alignment="CENTER_RIGHT" layoutX="3.0" layoutY="186.0" onAction="#homeClicked" prefHeight="68.0" prefWidth="218.0" text="Home" textAlignment="CENTER" textFill="#2f2929" wrapText="true">
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                    <effect>
+                        <Blend />
+                    </effect>
+                </MFXButton>
+                <MFXButton fx:id="manageButton" alignment="CENTER_RIGHT" layoutX="3.0" layoutY="277.0" onAction="#manageClicked" prefHeight="68.0" prefWidth="218.0" text="User Management">
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                    <effect>
+                        <Blend />
+                    </effect>
+                </MFXButton>
+                <MFXButton fx:id="logButton" alignment="CENTER_RIGHT" layoutX="3.0" layoutY="368.0" onAction="#reportClicked" prefHeight="68.0" prefWidth="218.0" text="Reports and Logs">
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                    <effect>
+                        <Blend />
+                    </effect>
+                </MFXButton>
+                <MFXButton fx:id="configButton" alignment="CENTER_RIGHT" layoutX="3.0" layoutY="459.0" onAction="#configClicked" prefHeight="68.0" prefWidth="218.0" text="System Configuration">
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                    <effect>
+                        <Blend />
+                    </effect>
+                </MFXButton>
+                <FontIcon fx:id="icon1" iconLiteral="fas-house-user" iconSize="25" layoutX="18.0" layoutY="227.0" wrappingWidth="22.5" />
+                <FontIcon fx:id="icon2" iconLiteral="fas-briefcase" iconSize="25" layoutX="19.0" layoutY="318.0" />
+                <FontIcon fx:id="icon3" iconLiteral="far-file-archive" iconSize="25" layoutX="20.0" layoutY="409.0" text="" wrappingWidth="14.0" />
+                <FontIcon fx:id="icon4" iconLiteral="fas-cog" iconSize="25" layoutX="17.0" layoutY="502.0" />
+                <FontIcon fx:id="icon5" iconColor="WHITE" iconLiteral="fas-sign-out-alt" iconSize="25" layoutX="87.0" layoutY="684.0" onDragDetected="#signoutClicked" />
+                <Label fx:id="label1" layoutX="66.0" layoutY="687.0" onMouseClicked="#signoutClicked" prefHeight="27.0" prefWidth="73.0" text="Sign out" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="43.0" layoutY="39.0" text="Advanced" textFill="#51a841">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="127.0" layoutY="39.0" text="-eLMS" textFill="#3e8ffe">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <Pane fx:id="upperpane" layoutX="248.0" layoutY="14.0" prefHeight="91.0" prefWidth="1283.0">
+            <children>
+                <Circle fx:id="proPicCircle" fill="DODGERBLUE" layoutX="1236.0" layoutY="46.0" radius="33.0" stroke="BLACK" strokeType="INSIDE" />
+            </children>
+        </Pane>
+        <StackPane fx:id="stackPane" layoutX="248.0" layoutY="115.0" prefHeight="635.0" prefWidth="1283.0">
+            <children>
+                <Pane fx:id="homep1Pane" prefHeight="600.0" prefWidth="200.0" />
+                <Pane fx:id="ump1Pane" prefHeight="462.0" prefWidth="1283.0" visible="false">
+                    <children>
+                        <MFXButton fx:id="s1Button" layoutX="233.0" layoutY="204.0" onAction="#studButtonClicked" text="Student" />
+                        <MFXButton fx:id="t1Button" layoutX="386.0" layoutY="204.0" onAction="#teachButtonClicked" text="Teacher" textFill="WHITE" />
+                        <MFXListView fx:id="updateLogLV" layoutX="685.0" layoutY="73.0" prefHeight="544.0" prefWidth="582.0" />
+                        <Label fx:id="st1Label" layoutX="685.0" layoutY="34.0" text="Recent updates" />
+                    </children>
+                </Pane>
+                <Pane fx:id="ump2Pane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                    <children>
+                        <MFXRadioButton fx:id="admissionRB" layoutX="76.0" layoutY="63.0" onMouseClicked="#sadmiitRBClicked" selected="true" text="Admission">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="home2" />
+                            </toggleGroup>
+                        </MFXRadioButton>
+                        <MFXRadioButton fx:id="registrationRB" layoutX="292.0" layoutY="63.0" onMouseClicked="#sregRBClicked" text="Registration" toggleGroup="$home2" />
+                        <MFXRadioButton fx:id="courseRB" layoutX="735.0" layoutY="63.0" onMouseClicked="#scourseRBClicked" text="Course Assign/Expultion" toggleGroup="$home2" />
+                        <MFXRadioButton fx:id="infoRB" layoutX="1034.0" layoutY="63.0" onMouseClicked="#sinfoRBClicked" text="Information update" toggleGroup="$home2" />
+                        <MFXRadioButton fx:id="roleRB" layoutX="532.0" layoutY="63.0" onMouseClicked="#sroleRBClicked" text="Role Assign" toggleGroup="$home2" />
+                        <MFXButton fx:id="save2Button" layoutX="614.0" layoutY="579.0" onAction="#stSaveCngClicked" text="Save Changes" />
+                        <MFXButton contentDisplay="GRAPHIC_ONLY" layoutX="32.0" layoutY="30.0" onAction="#p2backClicked">
+                            <graphic>
+                                <FontIcon fx:id="icon6" iconLiteral="fas-chevron-left" iconSize="25" text="" />
+                            </graphic>
+                        </MFXButton>
+                        <TableView fx:id="sapprovalTable" layoutX="64.0" layoutY="123.0" onMouseClicked="#sapprovalTableClicked" prefHeight="425.0" prefWidth="868.0">
+                            <columns>
+                                <TableColumn fx:id="sidCol" prefWidth="102.0" text="ID" />
+                                <TableColumn fx:id="snameCol" prefWidth="230.0" text="Name" />
+                                <TableColumn fx:id="semailCol" prefWidth="195.0" text="Email" />
+                                <TableColumn fx:id="smobileCol" prefWidth="104.0" text="Mobile" />
+                                <TableColumn fx:id="sroleCol" prefWidth="93.0" text="Role" />
+                                <TableColumn fx:id="sregCol" prefWidth="75.0" text="Registration" />
+                                <TableColumn fx:id="sappCol" prefWidth="68.0" text="Approve" />
+                            </columns>
+                        </TableView>
+                        <Pane layoutX="952.0" layoutY="123.0" prefHeight="425.0" prefWidth="278.0" style="-fx-background-color: grey;">
+                            <children>
+                                <TextField fx:id="stf1" editable="false" layoutX="115.0" layoutY="35.0" />
+                                <TextField fx:id="stf2" layoutX="115.0" layoutY="86.0" />
+                                <TextField fx:id="stf3" layoutX="115.0" layoutY="137.0" />
+                                <TextField fx:id="stf4" layoutX="115.0" layoutY="188.0" />
+                                <ComboBox fx:id="scb1" layoutX="114.0" layoutY="239.0" prefWidth="150.0" />
+                                <ComboBox fx:id="scb2" layoutX="114.0" layoutY="290.0" prefWidth="150.0" />
+                                <Label fx:id="umLabel1" layoutX="17.0" layoutY="35.0" text="Student ID" />
+                                <Label fx:id="umLabel2" layoutX="19.0" layoutY="86.0" text="Name" />
+                                <Label fx:id="umLabel3" layoutX="20.0" layoutY="137.0" text="Email" />
+                                <Label fx:id="umLabel4" layoutX="20.0" layoutY="188.0" text="Mobile" />
+                                <Label fx:id="umLabel5" layoutX="24.0" layoutY="239.0" text="Role" />
+                                <Label fx:id="umLabel6" layoutX="17.0" layoutY="290.0" text="Registration" />
+                                <Button fx:id="approveButton" layoutX="108.0" layoutY="348.0" mnemonicParsing="false" onAction="#approveClicked" text="Approve" />
+                            </children>
+                        </Pane>
+                    </children>
+                </Pane>
+                <Pane fx:id="ump3Pane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                    <children>
+                        <MFXRadioButton fx:id="tadmissionRB" layoutX="167.0" layoutY="63.0" selected="true" text="Admission">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="home21" />
+                            </toggleGroup>
+                        </MFXRadioButton>
+                        <MFXRadioButton fx:id="tcourseRB" layoutX="672.0" layoutY="63.0" text="Course Assign/Expultion" toggleGroup="$home21" />
+                        <MFXRadioButton fx:id="tinfoRB" layoutX="961.0" layoutY="63.0" text="Information update" toggleGroup="$home21" />
+                        <MFXRadioButton fx:id="troleRB" layoutX="431.0" layoutY="63.0" text="Role Assign" toggleGroup="$home21" />
+                        <MFXButton fx:id="save2Button1" layoutX="614.0" layoutY="579.0" onAction="#tSaveCngClicked" text="Save Changes" />
+                        <MFXButton contentDisplay="GRAPHIC_ONLY" layoutX="32.0" layoutY="30.0" onAction="#p2backClicked">
+                            <graphic>
+                                <FontIcon fx:id="icon61" iconLiteral="fas-chevron-left" iconSize="25" text="" />
+                            </graphic>
+                        </MFXButton>
+                        <TableView fx:id="tapprovalTable" layoutX="64.0" layoutY="123.0" onMouseClicked="#tapprovalTableClicked" prefHeight="425.0" prefWidth="868.0">
+                            <columns>
+                                <TableColumn fx:id="tinitialCol" prefWidth="102.0" text="Faculty Initial" />
+                                <TableColumn fx:id="tnameCol" prefWidth="230.0" text="Faculty Name" />
+                                <TableColumn fx:id="temailCol" prefWidth="195.0" text="Email" />
+                                <TableColumn fx:id="tmobileCol" prefWidth="104.0" text="Mobile" />
+                                <TableColumn fx:id="troleCol" prefWidth="155.0" text="Role" />
+                                <TableColumn fx:id="tappCol" prefWidth="81.0" text="Approve" />
+                            </columns>
+                        </TableView>
+                        <Pane layoutX="952.0" layoutY="123.0" prefHeight="425.0" prefWidth="278.0" style="-fx-background-color: grey;">
+                            <children>
+                                <TextField fx:id="ttf1" editable="false" layoutX="113.0" layoutY="57.0" />
+                                <TextField fx:id="ttf2" layoutX="113.0" layoutY="108.0" />
+                                <TextField fx:id="ttf3" layoutX="113.0" layoutY="159.0" />
+                                <TextField fx:id="ttf4" layoutX="113.0" layoutY="210.0" />
+                                <ComboBox fx:id="tcb1" layoutX="112.0" layoutY="261.0" prefWidth="150.0" />
+                                <Label fx:id="umLabel11" layoutX="15.0" layoutY="57.0" text="Faculty Initial" />
+                                <Label fx:id="umLabel21" layoutX="17.0" layoutY="108.0" text="Faculty Name" />
+                                <Label fx:id="umLabel31" layoutX="18.0" layoutY="159.0" text="Email" />
+                                <Label fx:id="umLabel41" layoutX="18.0" layoutY="210.0" text="Mobile" />
+                                <Label fx:id="umLabel51" layoutX="22.0" layoutY="261.0" text="Role" />
+                                <Button fx:id="tapproveButton1" layoutX="108.0" layoutY="348.0" mnemonicParsing="false" onAction="#tapproveClicked" text="Approve" />
+                            </children>
+                        </Pane>
+                    </children>
+                </Pane>
+                <Pane fx:id="rlp1Pane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                    <children>
+                        <TableView fx:id="complainTV" layoutX="47.0" layoutY="85.0" prefHeight="486.0" prefWidth="1169.0">
+                            <columns>
+                                <TableColumn fx:id="cNameCol" prefWidth="197.0" text="Name" />
+                                <TableColumn fx:id="cIDCol" minWidth="0.0" prefWidth="75.0" text="ID" />
+                                <TableColumn fx:id="cEmailCol" prefWidth="163.0" text="Email" />
+                                <TableColumn fx:id="cRoleCol" prefWidth="90.0" text="Role" />
+                                <TableColumn fx:id="cComTitleCol" prefWidth="196.0" text="Complain title" />
+                                <TableColumn fx:id="cDescripCol" minWidth="0.0" prefWidth="345.0" text="Description" />
+                                <TableColumn prefWidth="102.0" text="Issue solved" />
+                            </columns>
+                        </TableView>
+                        <MFXTextField fx:id="searchField2" layoutX="47.0" layoutY="23.0" prefHeight="48.0" prefWidth="985.0" />
+                    </children>
+                </Pane>
+                <Pane fx:id="sconfigp1Pane" prefHeight="200.0" prefWidth="200.0" visible="false" />
+            </children>
+        </StackPane>
+    </children>
+</AnchorPane>

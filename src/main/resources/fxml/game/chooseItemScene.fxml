@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane id="mcAnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.retardict.ChooseItemController">
+    <children>
+        <Label id="mcQuestion" fx:id="questionBox" layoutX="218.0" layoutY="183.0" text="Label" />
+        <HBox layoutX="347.0" layoutY="316.0" prefHeight="211.0" prefWidth="647.0" spacing="50.0">
+            <children>
+                <ImageView id="image" fx:id="imageView1" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#clickImageView1" pickOnBounds="true" preserveRatio="true" />
+                <ImageView id="image" fx:id="imageView2" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#clickImageView2" pickOnBounds="true" preserveRatio="true" />
+                <ImageView id="image" fx:id="imageView3" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#clickImageView3" pickOnBounds="true" preserveRatio="true" />
+                <ImageView id="image" fx:id="imageView4" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#clickImageView4" pickOnBounds="true" preserveRatio="true" />
+            </children>
+        </HBox>
+      <GridPane id="mcGridPane1" prefHeight="47.0" prefWidth="1280.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+              <Button id="functionButton" mnemonicParsing="false" onAction="#setQuestionByAction" prefHeight="26.0" prefWidth="274.0" text="Generate new question" GridPane.columnIndex="3" />
+            <Button id="functionButton" mnemonicParsing="false" onAction="#switchToGameScene" text="Back" />
+            <Button id="functionButton" mnemonicParsing="false" onAction="#end" text="End game" GridPane.columnIndex="2">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets left="200.0" />
+               </GridPane.margin>
+            </Button>
+            <Label id="mcText" fx:id="scoreBox" text="Score">
+               <GridPane.margin>
+                  <Insets left="270.0" />
+               </GridPane.margin>
+            </Label>
+            <Label id="mcText" fx:id="correctLabel" prefHeight="18.0" prefWidth="316.0" text="Correct" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="70.0" />
+               </GridPane.margin>
+            </Label>
+         </children>
+      </GridPane>
+    </children>
+</AnchorPane>

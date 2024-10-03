@@ -1,0 +1,102 @@
+.root {
+    -main-color: #f1f1f1;
+    -secondary-color: #e8e8e8;
+    /*-accent-color: #df8c52;*/
+    -accent-color: #b3d6ff;
+    -text-color: #1a1a1a;
+}
+
+.sidePaneLabels{
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+
+.sidePaneLabels:hover{
+    -fx-background-color: #e5f1ff;
+}
+
+.selected-label{
+    -fx-background-color: #e5f1ff; /* or any color to indicate selection */
+    -fx-border-color: #056efe;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+}
+
+/*list view*/
+.list-view {
+    -fx-background-color: -secondary-color;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.list-view:focused {
+    -fx-background-color: -main-color;
+    -fx-border-color: -accent-color;
+}
+
+.list-cell {
+    -fx-background-color: -secondary-color;
+    -fx-background-radius: 10;
+    -fx-text-fill: -text-color;
+}
+
+.list-cell:odd {
+    -fx-background-color: -main-color;
+}
+
+.list-cell:focused {
+    -fx-background-color: -accent-color;
+}
+
+/*tooltip*/
+.tooltip {
+    -fx-show-delay: 0ms;
+}
+
+
+#root{
+    /*-fx-background-color: #e9eff7;*/
+    -fx-background-color: #f5f6fa;
+}
+
+/*side pane*/
+#sidePane{
+    /*-fx-background-color: #1b1f72;*/
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+
+/*search bar*/
+#wordSearchField,
+#searchField,
+#meaningField{
+    -fx-border-radius: 22px;
+    -fx-background-radius: 22px;
+}
+
+#infoPane,
+#infoPane2{
+    -fx-background-color: linear-gradient(to bottom, #99c9ff, #b3d6ff);
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+
+#bottomAnchorPane{
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+
+.result-labels{
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}
+
+/*buttons*/
+#addButton,
+#deleteButton{
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}

@@ -1,0 +1,79 @@
+.label{
+    -fx-text-fill: #000000;
+    -fx-font-size: 13px;
+    -fx-font-family: "Poppins Medium";
+    -fx-font-smoothing-type: lcd;
+    /*-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 10, 0.0, 0, 1);*/
+}
+
+#idField,
+#passField{
+    -fx-border-radius: 22px;
+    -fx-background-radius: 22px;
+}
+
+#root{
+    /*-fx-background-color: linear-gradient(to right, #5C258D, #4389A2);*/
+    /*-fx-background-color: linear-gradient(to right, #8E2DE2, #4A00E0);*/
+    /*-fx-background-color: linear-gradient(to right, #4b6cb7, #182848);*/
+    /*-fx-background-color: linear-gradient(to right, #4e54c8, #8f94fb);*/
+    -fx-background-color: #7a0ed9;
+    -fx-font-smoothing-type: lcd;
+}
+
+#pane{
+    -fx-background-color: white;
+    -fx-border-radius: 14px;
+    -fx-background-radius: 14px;
+    -fx-font-smoothing-type: lcd;
+}
+
+#innerPane{
+    -fx-background-color: #4a50bf;
+    -fx-border-radius: 14px;
+    -fx-background-radius: 14px;
+    -fx-font-smoothing-type: lcd;
+}
+
+#headerLabel{
+    -fx-text-fill: #7a0ed9;
+    -fx-font-weight: bold;
+    -fx-font-size: 22px;
+}
+
+#loginAsLabel{
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.mfx-radio-button {
+    -fx-background-radius: 14px;
+    -fx-background-color: rgba(0, 0, 0, 0.0);
+    -fx-border-radius: 14px;
+    -fx-border-width: 5px;
+    -fx-border-color: rgba(0, 0, 0, 0);
+    -fx-font-smoothing-type: lcd;
+}
+.mfx-radio-button:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+    -fx-font-smoothing-type: lcd;
+}
+
+
+#loginButton{
+    /*-fx-background-color: linear-gradient(to right, #8E2DE2, #4A00E0);*/
+    -fx-background-color: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+    /*-fx-background-color: #7a0ed9;*/
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bolder;
+    -fx-font-size: 15px;
+    -fx-border-radius: 22px;
+    -fx-background-radius: 22px;
+}
+
+#loginButton:pressed{
+    -fx-background-color: linear-gradient(to right, #8E2DE2, #4A00E0);
+    /*-fx-background-color: radial-gradient(radius 50%, #8E2DE2, #4A00E0);*/
+
+    -fx-font-smoothing-type: lcd;
+}
