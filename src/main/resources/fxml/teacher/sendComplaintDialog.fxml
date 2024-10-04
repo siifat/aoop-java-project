@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane styleClass="rootDialogPane" stylesheets="@../../css/teacher/sendComplaintDialog.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lms.controller.teacher.SendComplaintDialogController">
+    <content>
+        <AnchorPane fx:id="root" prefHeight="584.0" prefWidth="628.0">
+            <children>
+                <Label layoutX="194.0" layoutY="14.0" text="Add a new complaint">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <MFXToggleButton fx:id="anonymousTB" layoutX="44.0" layoutY="75.0" selected="true" text="Keep my identity hidden">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </MFXToggleButton>
+                <MFXTextField fx:id="titleField" floatMode="BORDER" floatingText="Title" layoutX="44.0" layoutY="157.0" prefHeight="38.0" prefWidth="539.0">
+                    <cursor>
+                        <Cursor fx:constant="TEXT" />
+                    </cursor>
+                </MFXTextField>
+                <TextArea fx:id="detailArea" layoutX="56.0" layoutY="295.0" prefHeight="191.0" prefWidth="545.0" wrapText="true" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="285.0">
+                    <cursor>
+                        <Cursor fx:constant="TEXT" />
+                    </cursor>
+                </TextArea>
+                <Label layoutX="44.0" layoutY="239.0" text="Details">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <MFXButton fx:id="sendButton" buttonType="RAISED" depthLevel="LEVEL5" layoutX="272.0" layoutY="511.0" onAction="#sendButtonPressed" prefHeight="38.0" prefWidth="84.0" rippleAnimateShadow="true" text="Send">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </MFXButton>
+            </children>
+        </AnchorPane>
+    </content>
+</DialogPane>

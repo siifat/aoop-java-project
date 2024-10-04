@@ -17,7 +17,15 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         launch();
+
+//        URL url = new URL("https://api.api-ninjas.com/v1/quotes?category=happiness");
+//        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//        connection.setRequestProperty("accept", "application/json");
+//        InputStream responseStream = connection.getInputStream();
+//        ObjectMapper mapper = new ObjectMapper();
+//        JsonNode root = mapper.readTree(responseStream);
+//        System.out.println(root.path("fact").asText());
     }
 }

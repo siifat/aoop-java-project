@@ -8,6 +8,10 @@ public class UserService {
     public static final String URL = "jdbc:sqlite:" + databaseLocation;
     public static final String complaintDatabaseLocation = "src/main/resources/database/Complain.db";
     public static final String COMPLAINT_URL = "jdbc:sqlite:" + complaintDatabaseLocation;
+
+    public static final String AnnouncementDatabaseLocation = "src/main/resources/database/Announcement.db";
+    public static final String ANNOUNCEMENT_URL = "jdbc:sqlite:" + AnnouncementDatabaseLocation;
+
     public static final String TABLE_TEACHERS = "teachers";
     public static final String TABLE_STUDENTS = "students";
     public static final String COLUMN_NAME = "name";

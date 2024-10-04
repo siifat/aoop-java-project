@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXListView?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import io.github.palexdev.materialfx.controls.MFXRadioButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.Blend?>
@@ -80,18 +85,53 @@
         </Pane>
         <Pane fx:id="upperpane" layoutX="248.0" layoutY="14.0" prefHeight="91.0" prefWidth="1283.0">
             <children>
-                <Circle fx:id="proPicCircle" fill="DODGERBLUE" layoutX="1236.0" layoutY="46.0" radius="33.0" stroke="BLACK" strokeType="INSIDE" />
+                <Circle fx:id="proPicCircle" fill="DODGERBLUE" layoutX="1240.0" layoutY="46.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1068.0" layoutY="17.0" text="Hassan Bin Abedin">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="1107.0" layoutY="42.0" text="Admin, CITS">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
             </children>
         </Pane>
         <StackPane fx:id="stackPane" layoutX="248.0" layoutY="115.0" prefHeight="635.0" prefWidth="1283.0">
             <children>
-                <Pane fx:id="homep1Pane" prefHeight="600.0" prefWidth="200.0" />
+                <Pane fx:id="homep1Pane" prefHeight="600.0" prefWidth="200.0">
+               <children>
+                  <MFXComboBox fx:id="programComboBox" floatingText="Program" layoutX="61.0" layoutY="41.0" prefHeight="39.0" prefWidth="200.0" />
+                  <Pane fx:id="graphPane" layoutX="39.0" layoutY="118.0" prefHeight="478.0" prefWidth="478.0" />
+               </children></Pane>
                 <Pane fx:id="ump1Pane" prefHeight="462.0" prefWidth="1283.0" visible="false">
                     <children>
-                        <MFXButton fx:id="s1Button" layoutX="233.0" layoutY="204.0" onAction="#studButtonClicked" text="Student" />
-                        <MFXButton fx:id="t1Button" layoutX="386.0" layoutY="204.0" onAction="#teachButtonClicked" text="Teacher" textFill="WHITE" />
+                        <MFXButton fx:id="s1Button" layoutX="191.0" layoutY="123.0" onAction="#studButtonClicked" text="Student" />
+                        <MFXButton fx:id="t1Button" layoutX="344.0" layoutY="123.0" onAction="#teachButtonClicked" text="Teacher" textFill="WHITE" />
                         <MFXListView fx:id="updateLogLV" layoutX="685.0" layoutY="73.0" prefHeight="544.0" prefWidth="582.0" />
                         <Label fx:id="st1Label" layoutX="685.0" layoutY="34.0" text="Recent updates" />
+                  <MFXTextField fx:id="aTitleField" floatMode="BORDER" floatingText="Announcement title" layoutX="77.0" layoutY="250.0" prefHeight="48.0" prefWidth="289.0">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></MFXTextField>
+                  <MFXButton fx:id="publishButton" layoutX="270.0" layoutY="575.0" onAction="#publishClicked" text="Publish" />
+                  <TextArea fx:id="aField" layoutX="77.0" layoutY="314.0" prefHeight="229.0" prefWidth="506.0" promptText="Announcement">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextArea>
+                  <MFXToggleButton fx:id="userTB" layoutX="415.0" layoutY="250.0" text="Select User" />
+                  <Label layoutX="77.0" layoutY="204.0" text="Send Notice">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="77.0" layoutY="60.0" text="Edit Informations">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
                     </children>
                 </Pane>
                 <Pane fx:id="ump2Pane" prefHeight="200.0" prefWidth="200.0" visible="false">
@@ -186,21 +226,66 @@
                 </Pane>
                 <Pane fx:id="rlp1Pane" prefHeight="200.0" prefWidth="200.0" visible="false">
                     <children>
-                        <TableView fx:id="complainTV" layoutX="47.0" layoutY="85.0" prefHeight="486.0" prefWidth="1169.0">
+                        <TableView fx:id="complainTV" layoutX="47.0" layoutY="167.0" prefHeight="404.0" prefWidth="1169.0">
                             <columns>
                                 <TableColumn fx:id="cNameCol" prefWidth="197.0" text="Name" />
                                 <TableColumn fx:id="cIDCol" minWidth="0.0" prefWidth="75.0" text="ID" />
                                 <TableColumn fx:id="cEmailCol" prefWidth="163.0" text="Email" />
                                 <TableColumn fx:id="cRoleCol" prefWidth="90.0" text="Role" />
-                                <TableColumn fx:id="cComTitleCol" prefWidth="196.0" text="Complain title" />
-                                <TableColumn fx:id="cDescripCol" minWidth="0.0" prefWidth="345.0" text="Description" />
+                                <TableColumn fx:id="cComTitleCol" prefWidth="166.0" text="Complain title" />
+                                <TableColumn fx:id="cDescripCol" minWidth="0.0" prefWidth="375.0" text="Description" />
                                 <TableColumn prefWidth="102.0" text="Issue solved" />
                             </columns>
                         </TableView>
-                        <MFXTextField fx:id="searchField2" layoutX="47.0" layoutY="23.0" prefHeight="48.0" prefWidth="985.0" />
+                        <MFXTextField fx:id="searchField2" floatingText="Search for Complain" layoutX="179.0" layoutY="96.0" prefHeight="48.0" prefWidth="857.0" />
+                  <FontIcon iconLiteral="fab-searchengin" iconSize="25" layoutX="141.0" layoutY="129.0" text="" />
+                  <MFXButton fx:id="searchButton" layoutX="1060.0" layoutY="104.0" onAction="#tSaveCngClicked" text="Search" />
                     </children>
                 </Pane>
-                <Pane fx:id="sconfigp1Pane" prefHeight="200.0" prefWidth="200.0" visible="false" />
+                <Pane fx:id="sconfigp1Pane" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <children>
+                  <Label layoutX="58.0" layoutY="49.0" text="Profile Settings">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="58.0" layoutY="83.0" prefWidth="200.0" />
+                  <Label layoutX="58.0" layoutY="120.0" text="Name:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <MFXTextField layoutX="158.0" layoutY="106.0" prefHeight="49.0" prefWidth="442.0" />
+                  <Label layoutX="60.0" layoutY="191.0" text="Email:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="58.0" layoutY="256.0" text="Bio:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <MFXTextField layoutX="158.0" layoutY="176.0" prefHeight="49.0" prefWidth="442.0" />
+                  <MFXTextField layoutX="158.0" layoutY="241.0" prefHeight="49.0" prefWidth="442.0" />
+                  <Label layoutX="60.0" layoutY="341.0" text="Security Settings">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="58.0" layoutY="374.0" prefWidth="200.0" />
+                  <MFXButton fx:id="saveChangesBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="596.0" layoutY="573.0" prefHeight="40.0" prefWidth="113.0" rippleAnimateShadow="true" rippleColor="#4b53e8" text="Save Changes">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </MFXButton>
+                  <Label layoutX="60.0" layoutY="403.0" text="Password">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <MFXPasswordField layoutX="158.0" layoutY="389.0" prefHeight="49.0" prefWidth="442.0" />
+               </children></Pane>
             </children>
         </StackPane>
     </children>

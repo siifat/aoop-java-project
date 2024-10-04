@@ -196,15 +196,12 @@
             <version>2.10.1</version>
         </dependency>
 
-<!--        Telegram-->
+        <!--        Telegram-->
         <dependency>
             <groupId>org.telegram</groupId>
             <artifactId>telegrambots</artifactId>
             <version>6.1.0</version> <!-- Check for the latest version -->
         </dependency>
-
-
-
 
 
     </dependencies>

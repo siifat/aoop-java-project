@@ -17,27 +17,27 @@ public class ComplainData {
         this.cDescription = cDescription;
     }
 
-    public String getcName() {
+    public String getCName() {
         return cName;
     }
 
-    public String getcId() {
+    public String getCId() {
         return cId;
     }
 
-    public String getcEmail() {
+    public String getCEmail() {
         return cEmail;
     }
 
-    public String getcRole() {
+    public String getCRole() {
         return cRole;
     }
 
-    public String getcComplainTitle() {
+    public String getCComplainTitle() {
         return cComplainTitle;
     }
 
-    public String getcDescription() {
+    public String getCDescription() {
         return cDescription;
     }
 }

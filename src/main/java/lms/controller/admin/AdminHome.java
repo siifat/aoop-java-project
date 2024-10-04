@@ -1,7 +1,9 @@
 package lms.controller.admin;
 
+import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXListView;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -21,23 +23,33 @@ import java.sql.*;
 public class AdminHome {
 
     public Pane homep1Pane;
+    public Pane graphPane;
     public Pane ump1Pane;
     public Pane ump2Pane;
     public Pane ump3Pane;
     public Pane rlp1Pane;
+
     public Pane sconfigp1Pane;
     public Circle proPicCircle;
+
     public TextField stf1;
     public TextField stf2;
     public TextField stf3;
     public TextField stf4;
     public ComboBox scb1;
     public ComboBox scb2;
+
     public TextField ttf1;
     public TextField ttf2;
     public TextField ttf3;
     public TextField ttf4;
     public ComboBox tcb1;
+
+//    public TextField aTitleField;
+//    public TextField aField;
+
+    @FXML
+    private MFXComboBox<String> programComboBox;
     @FXML
     private TableView<TeachApproveData> tapprovalTable;
     @FXML
@@ -80,6 +92,9 @@ public class AdminHome {
     private ObservableList<StApproveData> adt = FXCollections.observableArrayList();
 
     @FXML
+    private TableView<ComplainData> complainTV;
+
+    @FXML
     private TableColumn<ComplainData, String> cNameCol;
 
     @FXML
@@ -99,23 +114,46 @@ public class AdminHome {
 
     @FXML
     private MFXTextField searchField2;
-    @FXML
-    private TableView<ComplainData> complainTV;
-    @FXML
-    private TableColumn<ComplainData, String> nameCol;
-    @FXML
-    private TableColumn<ComplainData, String> idCol;
-    @FXML
-    private TableColumn<ComplainData, String> emailCol;
-    @FXML
-    private TableColumn<ComplainData, String> selectCol;
+//    @FXML
+//    private TableColumn<ComplainData, String> nameCol;
+//    @FXML
+//    private TableColumn<ComplainData, String> idCol;
+//    @FXML
+//    private TableColumn<ComplainData, String> emailCol;
+//    @FXML
+//    private TableColumn<ComplainData, String> selectCol;
 
     private ObservableList<ComplainData> complains = FXCollections.observableArrayList();
+
+    //announcement
+    @FXML
+    private MFXTextField aTitleField;
+    @FXML
+    private TextArea aField;
+
+    @FXML
+    private MFXToggleButton userTB;
 
     public void initialize() {
         // Load the image from the resources folder
 //        Image proPic = new Image(getClass().getResource("/images/admin.jpg").toExternalForm());
 //        proPicCircle.setFill(new ImagePattern(proPic));
+
+        //HOMEPAGE
+        userTB.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue){
+                userTB.setText("Student");
+            } else{
+                userTB.setText("Teacher");
+            }
+        });
+        displayBarGraph();
+
+        programComboBox.getItems().addAll("Computer Science", "Business Administration", "Electrical Engineering", "Civil Engineering", "Mechanical Engineering");
+        programComboBox.selectFirst();
+
+
+        //USER_MANAGEMENT
 
         sidCol.setCellValueFactory(new PropertyValueFactory<StApproveData, String>("id"));
         snameCol.setCellValueFactory(new PropertyValueFactory<StApproveData, String>("name"));
@@ -138,16 +176,14 @@ public class AdminHome {
         tapprovalTable.getItems().clear();
         loadItemsIntoTeacherTable();
 
-        //homePage -Graph
-        displayBarGraph();
 
-        //report -search
-        cNameCol.setCellValueFactory(new PropertyValueFactory<ComplainData, String>("cName"));
-        cIDCol.setCellValueFactory(new PropertyValueFactory<ComplainData, String>("cId"));
-        cEmailCol.setCellValueFactory(new PropertyValueFactory<ComplainData, String>("cEmail"));
-        cRoleCol.setCellValueFactory(new PropertyValueFactory<ComplainData, String>("cRole"));
-        cComTitleCol.setCellValueFactory(new PropertyValueFactory<ComplainData, String>("cComplainTile"));
-        cDescripCol.setCellValueFactory(new PropertyValueFactory<ComplainData, String>("cDescription"));
+        //REPORT_&_LOG
+        cNameCol.setCellValueFactory(new PropertyValueFactory<>("CName"));
+        cIDCol.setCellValueFactory(new PropertyValueFactory<>("CId"));
+        cEmailCol.setCellValueFactory(new PropertyValueFactory<>("CEmail"));
+        cRoleCol.setCellValueFactory(new PropertyValueFactory<>("CRole"));
+        cComTitleCol.setCellValueFactory(new PropertyValueFactory<>("CComplainTitle"));
+        cDescripCol.setCellValueFactory(new PropertyValueFactory<>("CDescription"));
 
         complainTV.getItems().clear();
         loadComplainTableView();
@@ -166,11 +202,11 @@ public class AdminHome {
                 // Compare name, id, and email of every student with the filter text
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (student.getcName().toLowerCase().contains(lowerCaseFilter)) {
+                if (student.getCName().toLowerCase().contains(lowerCaseFilter)) {
                     return true; // Filter matches name
-                } else if (student.getcId().toLowerCase().contains(lowerCaseFilter)) {
+                } else if (student.getCId().toLowerCase().contains(lowerCaseFilter)) {
                     return true; // Filter matches id
-                } else if (student.getcEmail().toLowerCase().contains(lowerCaseFilter)) {
+                } else if (student.getCEmail().toLowerCase().contains(lowerCaseFilter)) {
                     return true; // Filter matches email
                 }
 
@@ -180,6 +216,9 @@ public class AdminHome {
 
         // Bind the filtered list to the complainTV
         complainTV.setItems(filteredData);
+
+
+        //SYSTEM_CONFIGURATION
 
     }
 
@@ -266,8 +305,8 @@ public class AdminHome {
         BarChart<String, Number> chart = barGraph.createBarChart();
 
         // Clear previous content if necessary
-        homep1Pane.getChildren().clear();
-        homep1Pane.getChildren().add(chart);
+        graphPane.getChildren().clear();
+        graphPane.getChildren().add(chart);
     }
 
     public void showChartButtonClicked(ActionEvent event) {
@@ -609,4 +648,85 @@ public class AdminHome {
             throw new RuntimeException(e);
         }
     }
-}
+
+    private void loadAnnouncements() {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        ObservableList<AnnouncementData> announcementData = FXCollections.observableArrayList(); // Create a new list for announcements
+
+        try {
+            conn = DriverManager.getConnection(UserService.ANNOUNCEMENT_URL);
+            stmt = conn.createStatement();
+            String query = "SELECT * FROM notice"; // Adjust the table name as needed
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                String title = rs.getString("Title");
+                String description = rs.getString("Announcement");
+                announcementData.add(new AnnouncementData(title, description));
+            }
+
+            // Assuming you have a TableView for announcements
+            // Make sure to declare it in your class
+            // Example: @FXML private TableView<AnnouncementData> announcementTable;
+            // And set it like this:
+            // announcementTable.setItems(announcementData);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public void publishClicked(ActionEvent actionEvent) {
+            String title = aTitleField.getText().trim();
+            String description = aField.getText().trim();
+
+            if (title.isEmpty() || description.isEmpty()) {
+                new Alert(Alert.AlertType.WARNING, "Title and description cannot be empty").showAndWait();
+                return;
+            }
+
+            Connection conn = null;
+            PreparedStatement pstmt = null;
+
+            try {
+                conn = DriverManager.getConnection(UserService.ANNOUNCEMENT_URL);
+                String sql = "INSERT INTO notice (Title, Announcement) VALUES (?, ?)";
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, title);
+                pstmt.setString(2, description);
+                pstmt.executeUpdate();
+
+                // Clear the input fields
+                aTitleField.clear();
+                aField.clear();
+
+                // Optionally, you can show a success message
+                new Alert(Alert.AlertType.INFORMATION, "Announcement published successfully!").showAndWait();
+
+                // Reload announcements to reflect the new entry
+                loadAnnouncements();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Error while publishing announcement: " + e.getMessage()).showAndWait();
+            } finally {
+                try {
+                    if (pstmt != null) pstmt.close();
+                    if (conn != null) conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+

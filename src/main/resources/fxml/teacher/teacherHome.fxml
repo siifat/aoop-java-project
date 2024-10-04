@@ -20,6 +20,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
 
 <AnchorPane fx:id="root" prefHeight="765.0" prefWidth="1540.0" stylesheets="@../../css/teacher/teacherHome.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lms.controller.teacher.TeacherHome">
     <children>
@@ -215,194 +216,302 @@
                             </font>
                         </Label>
                         <AnchorPane fx:id="classStatsPane" layoutX="14.0" layoutY="128.0" prefHeight="222.0" prefWidth="516.0" styleClass="all-inner-panes">
-                     <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Class Statictics">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font></Label>
-                        <ImageView layoutX="47.0" layoutY="56.0">
-                           <image>
-                              <Image url="@../../../../../../../Downloads/children%20(3).png" />
-                           </image>
-                        </ImageView>
-                        <ImageView layoutX="218.0" layoutY="52.0">
-                           <image>
-                              <Image url="@../../../../../../../Downloads/fear.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView layoutX="384.0" layoutY="56.0">
-                           <image>
-                              <Image url="@../../../../../../../Downloads/winner.png" />
-                           </image>
-                        </ImageView>
-                        <Label layoutX="41.0" layoutY="176.0" text="Total Students" />
-                        <Label layoutX="222.0" layoutY="172.0" text="Struggling" />
-                        <Label layoutX="393.0" layoutY="176.0" text="Excelling" />
-                        <Label layoutX="60.0" layoutY="136.0" text="100">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font></Label>
-                        <Label layoutX="240.0" layoutY="136.0" text="40">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font></Label>
-                        <Label layoutX="406.0" layoutY="136.0" text="60">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font></Label>
-                     </children></AnchorPane>
-                  <AnchorPane layoutX="14.0" layoutY="367.0" prefHeight="381.0" prefWidth="516.0" styleClass="all-inner-panes">
-                     <children>
-                        <Label layoutX="14.0" layoutY="17.0" text="Struggling &amp; Excelling">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="393.0" layoutY="21.0" styleClass="view-all-labels" text="View Details &gt;">
-                           <font>
-                              <Font size="13.0" />
-                           </font></Label>
-                        <Label layoutX="16.0" layoutY="62.0" text="Bottom 3 Stuggling">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font></Label>
-                        <Label layoutX="16.0" layoutY="214.0" text="Top 3 Excelling">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font></Label>
-                        <ListView layoutX="14.0" layoutY="92.0" prefHeight="99.0" prefWidth="470.0" />
-                        <ListView layoutX="16.0" layoutY="240.0" prefHeight="99.0" prefWidth="470.0" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="548.0" layoutY="508.0" prefHeight="242.0" prefWidth="685.0" styleClass="all-inner-panes">
-                     <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Assignments">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <ListView layoutX="14.0" layoutY="54.0" prefHeight="180.0" prefWidth="659.0" />
-                     </children></AnchorPane>
-                  <AnchorPane layoutX="548.0" layoutY="128.0" prefHeight="320.0" prefWidth="685.0" styleClass="all-inner-panes">
-                     <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Overall Class Performance">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font></Label>
-                        <Label layoutX="578.0" layoutY="14.0" styleClass="view-all-labels" text="View Details &gt;">
-                           <font>
-                              <Font size="13.0" />
-                           </font></Label>
-                        <Label layoutX="14.0" layoutY="47.0" text="Skill Profeciency" />
-                        <PieChart layoutX="27.0" layoutY="87.0" prefHeight="206.0" prefWidth="250.0" />
-                        <Label layoutX="453.0" layoutY="79.0" text="Advanced" />
-                        <Label layoutX="564.0" layoutY="79.0" text="Intermediate" />
-                        <Label layoutX="453.0" layoutY="153.0" text="Basic" />
-                        <Label layoutX="564.0" layoutY="153.0" text="Profecient" />
-                        <Circle fill="#27ff1f" layoutX="436.0" layoutY="103.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="#eb6bd1" layoutX="548.0" layoutY="103.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="#fc8924" layoutX="436.0" layoutY="177.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fill="#3193ee" layoutX="548.0" layoutY="177.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Label layoutX="454.0" layoutY="102.0" text="50%">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="564.0" layoutY="102.0" text="50%">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="452.0" layoutY="176.0" text="50%">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="564.0" layoutY="176.0" text="50%">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-                  <MFXComboBox layoutX="1088.0" layoutY="459.0" prefHeight="40.0" prefWidth="145.0" />
+                            <children>
+                                <Label layoutX="14.0" layoutY="14.0" text="Class Statictics">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <ImageView layoutX="47.0" layoutY="56.0">
+                                    <image>
+                                        <Image url="@../../../../../../../Downloads/children%20(3).png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView layoutX="218.0" layoutY="52.0">
+                                    <image>
+                                        <Image url="@../../../../../../../Downloads/fear.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView layoutX="384.0" layoutY="56.0">
+                                    <image>
+                                        <Image url="@../../../../../../../Downloads/winner.png" />
+                                    </image>
+                                </ImageView>
+                                <Label layoutX="41.0" layoutY="176.0" text="Total Students" />
+                                <Label layoutX="222.0" layoutY="172.0" text="Struggling" />
+                                <Label layoutX="393.0" layoutY="176.0" text="Excelling" />
+                                <Label layoutX="60.0" layoutY="136.0" text="100">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="240.0" layoutY="136.0" text="40">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="406.0" layoutY="136.0" text="60">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="14.0" layoutY="367.0" prefHeight="381.0" prefWidth="516.0" styleClass="all-inner-panes">
+                            <children>
+                                <Label layoutX="14.0" layoutY="17.0" text="Struggling &amp; Excelling">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="393.0" layoutY="21.0" styleClass="view-all-labels" text="View Details &gt;">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="16.0" layoutY="62.0" text="Bottom 3 Stuggling">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="16.0" layoutY="214.0" text="Top 3 Excelling">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <ListView layoutX="14.0" layoutY="92.0" prefHeight="99.0" prefWidth="470.0" />
+                                <ListView layoutX="16.0" layoutY="240.0" prefHeight="99.0" prefWidth="470.0" />
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="548.0" layoutY="508.0" prefHeight="242.0" prefWidth="685.0" styleClass="all-inner-panes">
+                            <children>
+                                <Label layoutX="14.0" layoutY="14.0" text="Assignments">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <ListView layoutX="14.0" layoutY="54.0" prefHeight="180.0" prefWidth="659.0" />
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="548.0" layoutY="128.0" prefHeight="320.0" prefWidth="685.0" styleClass="all-inner-panes">
+                            <children>
+                                <Label layoutX="14.0" layoutY="14.0" text="Overall Class Performance">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="578.0" layoutY="14.0" styleClass="view-all-labels" text="View Details &gt;">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="14.0" layoutY="47.0" text="Skill Profeciency" />
+                                <PieChart layoutX="27.0" layoutY="87.0" prefHeight="206.0" prefWidth="250.0" />
+                                <Label layoutX="453.0" layoutY="79.0" text="Advanced" />
+                                <Label layoutX="564.0" layoutY="79.0" text="Intermediate" />
+                                <Label layoutX="453.0" layoutY="153.0" text="Basic" />
+                                <Label layoutX="564.0" layoutY="153.0" text="Profecient" />
+                                <Circle fill="#27ff1f" layoutX="436.0" layoutY="103.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                                <Circle fill="#eb6bd1" layoutX="548.0" layoutY="103.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                                <Circle fill="#fc8924" layoutX="436.0" layoutY="177.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                                <Circle fill="#3193ee" layoutX="548.0" layoutY="177.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                                <Label layoutX="454.0" layoutY="102.0" text="50%">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="564.0" layoutY="102.0" text="50%">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="452.0" layoutY="176.0" text="50%">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="564.0" layoutY="176.0" text="50%">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                        <MFXComboBox layoutX="1088.0" layoutY="459.0" prefHeight="40.0" prefWidth="145.0" />
                     </children>
                 </AnchorPane>
-            <AnchorPane fx:id="settingsPane" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes">
-                     <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Profile Settings">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="14.0" layoutY="80.0" text="Name:">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="16.0" layoutY="140.0" text="Email:">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="15.0" layoutY="371.0" text="Security">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="19.0" layoutY="438.0" text="Password:">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="15.0" layoutY="508.0" text="Send annonymous data for development advancements">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="15.0" layoutY="570.0" text="Delete Account" textFill="#ee6161">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="15.0" layoutY="618.0" text="Once you delete your account, there is no going back. Please be certain." />
-                        <Separator layoutX="15.0" layoutY="604.0" prefHeight="3.0" prefWidth="1197.0" />
-                        <Separator layoutX="16.0" layoutY="405.0" prefHeight="3.0" prefWidth="1197.0" />
-                        <MFXToggleButton layoutX="456.0" layoutY="498.0" text="ON">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </MFXToggleButton>
-                        <MFXButton fx:id="deleteAccountBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="15.0" layoutY="653.0" prefHeight="40.0" prefWidth="113.0" rippleAnimateShadow="true" rippleColor="#ee6161" text="Delete Account">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </MFXButton>
-                        <ScrollPane layoutX="95.0" layoutY="199.0">
-                           <content>
-                              <TextArea prefHeight="143.0" prefWidth="442.0" wrapText="true" />
-                           </content>
-                        </ScrollPane>
-                        <Label layoutX="16.0" layoutY="202.0" text="Bio">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <MFXTextField layoutX="94.0" layoutY="63.0" prefHeight="49.0" prefWidth="442.0" />
-                        <MFXTextField layoutX="95.0" layoutY="123.0" prefHeight="49.0" prefWidth="442.0" />
-                        <Separator layoutX="15.0" layoutY="48.0" prefHeight="3.0" prefWidth="1197.0" />
-                        <MFXPasswordField layoutX="94.0" layoutY="424.0" prefHeight="49.0" prefWidth="442.0" />
-                        <MFXButton fx:id="saveChangesBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="1090.0" layoutY="678.0" prefHeight="40.0" prefWidth="113.0" rippleAnimateShadow="true" rippleColor="#4b53e8" text="Save Changes">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </MFXButton>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </AnchorPane>
+                <AnchorPane fx:id="privateFilesLoginPane" prefHeight="699.0" prefWidth="1225.0" visible="false">
+                    <children>
+                        <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes">
+                            <children>
+                                <ImageView layoutX="575.0" layoutY="105.0">
+                                    <image>
+                                        <Image url="@../../../../../../../Downloads/privacy-policy%20(1).png" />
+                                    </image>
+                                </ImageView>
+                                <Label layoutX="550.0" layoutY="256.0" text="My Private Files">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Label>
+                                <MFXPasswordField fx:id="privateFilePassField" floatMode="BORDER" floatingText="Enter your secrate passowrd" layoutX="449.0" layoutY="339.0" prefHeight="64.0" prefWidth="381.0">
+                                    <cursor>
+                                        <Cursor fx:constant="TEXT" />
+                                    </cursor>
+                                </MFXPasswordField>
+                                <MFXButton fx:id="enterVaultBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="586.0" layoutY="449.0" prefHeight="41.0" prefWidth="108.0" rippleAnimateShadow="true" rippleColor="#88d772" text="Enter Vault">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </MFXButton>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="privateFilesPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                    <children>
+                        <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="myProfilePane" prefHeight="200.0" prefWidth="200.0">
+                    <children>
+                        <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes">
+                            <children>
+                                <Label layoutX="18.0" layoutY="14.0" text="Profile Information">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Separator layoutX="18.0" layoutY="48.0" prefWidth="200.0" />
+                                <Label layoutX="24.0" layoutY="202.0" text="Name:">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="24.0" layoutY="233.0" text="Teacher ID:">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="24.0" layoutY="266.0" text="Email:">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="24.0" layoutY="294.0" text="Initials:">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="24.0" layoutY="328.0" text="Mobile No. :">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                                <MFXToggleButton layoutX="20.0" layoutY="435.0" selected="true" text="I want email notifications" />
+                                <MFXButton buttonType="RAISED" depthLevel="LEVEL5" layoutX="18.0" layoutY="371.0" prefHeight="35.0" prefWidth="93.0" rippleAnimateShadow="true" text="Edit Profile" />
+                                <Label layoutX="148.0" layoutY="210.0" text="nameLabel" />
+                                <Label layoutX="148.0" layoutY="241.0" text="teacherIDLabel" />
+                                <Label layoutX="148.0" layoutY="274.0" text="teacheremailLabel" />
+                                <Label layoutX="148.0" layoutY="302.0" text="teacher initials label" />
+                                <Label layoutX="148.0" layoutY="335.0" text="teacher mobile number" />
+                                <Circle fill="DODGERBLUE" layoutX="72.0" layoutY="120.0" radius="54.0" stroke="BLACK" strokeType="INSIDE" />
+                                <MFXButton buttonType="RAISED" depthLevel="LEVEL5" layoutX="18.0" layoutY="663.0" onAction="#addComplaintClicked" prefHeight="33.0" prefWidth="130.0" rippleAnimateShadow="true" text="Add a complaint">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </MFXButton>
+                                <Label layoutX="18.0" layoutY="510.0" text="Give Us Feedback">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Separator layoutX="18.0" layoutY="543.0" prefWidth="200.0" />
+                                <Rating fx:id="rating" layoutX="284.0" layoutY="566.0" onMouseClicked="#handleRating" rating="0.0">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Rating>
+                                <Label fx:id="ratingLabel" layoutX="18.0" layoutY="573.0" text="User Rating:" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="settingsPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                    <children>
+                        <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes">
+                            <children>
+                                <Label layoutX="14.0" layoutY="14.0" text="Profile Settings">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="14.0" layoutY="80.0" text="Name:">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="16.0" layoutY="140.0" text="Email:">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="15.0" layoutY="371.0" text="Security">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="19.0" layoutY="438.0" text="Password:">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="15.0" layoutY="508.0" text="Send annonymous data for development advancements">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="15.0" layoutY="570.0" text="Delete Account" textFill="#ee6161">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="15.0" layoutY="618.0" text="Once you delete your account, there is no going back. Please be certain." />
+                                <Separator layoutX="15.0" layoutY="604.0" prefHeight="3.0" prefWidth="1197.0" />
+                                <Separator layoutX="16.0" layoutY="405.0" prefHeight="3.0" prefWidth="1197.0" />
+                                <MFXToggleButton layoutX="456.0" layoutY="498.0" text="ON">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </MFXToggleButton>
+                                <MFXButton fx:id="deleteAccountBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="15.0" layoutY="653.0" prefHeight="40.0" prefWidth="113.0" rippleAnimateShadow="true" rippleColor="#ee6161" text="Delete Account">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </MFXButton>
+                                <ScrollPane layoutX="95.0" layoutY="199.0">
+                                    <content>
+                                        <TextArea fx:id="teacherBioField" prefHeight="143.0" prefWidth="442.0" wrapText="true" />
+                                    </content>
+                                </ScrollPane>
+                                <Label layoutX="16.0" layoutY="202.0" text="Bio">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <MFXTextField layoutX="94.0" layoutY="63.0" prefHeight="49.0" prefWidth="442.0" />
+                                <MFXTextField layoutX="95.0" layoutY="123.0" prefHeight="49.0" prefWidth="442.0" />
+                                <Separator layoutX="15.0" layoutY="48.0" prefHeight="3.0" prefWidth="1197.0" />
+                                <MFXPasswordField layoutX="94.0" layoutY="424.0" prefHeight="49.0" prefWidth="442.0" />
+                                <MFXButton fx:id="saveChangesBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="1090.0" layoutY="678.0" prefHeight="40.0" prefWidth="113.0" rippleAnimateShadow="true" rippleColor="#4b53e8" text="Save Changes">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </MFXButton>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
             </children>
         </StackPane>
     </children>

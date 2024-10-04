@@ -16,6 +16,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lms.App;
+import org.controlsfx.control.Rating;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -29,6 +30,10 @@ public class TeacherHome {
     public Label settingsLabel;
     public Label privateFilesLabel;
     public Circle profilePicCircle;
+    @FXML
+    private Rating rating;
+    @FXML
+    private Label ratingLabel;
 
     @FXML
     private AnchorPane root;
@@ -108,7 +113,8 @@ public class TeacherHome {
 
     }
 
-    public void createGroupBtnClicked(ActionEvent actionEvent) {
+    @FXML
+    private void createGroupBtnClicked(ActionEvent actionEvent) {
 
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(root.getScene().getWindow());
@@ -120,6 +126,34 @@ public class TeacherHome {
         } catch (IOException e) {
             System.out.println("Couldn't load the dialog");
             throw new RuntimeException(e);
+        }
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+        Optional<ButtonType> result = dialog.showAndWait();
+    }
+
+    @FXML
+    private void handleRating(MouseEvent event) {
+        System.out.println(rating.getRating());
+        String labelString = "User Rating: " + rating.getRating();
+        if (rating.getRating() == 5) labelString += " Thank you";
+        else labelString += "   Nothing but 5 stars please 😊";
+        if (rating.getRating() != 5) rating.setRating(5);
+        ratingLabel.setText(labelString);
+    }
+
+    @FXML
+    private void addComplaintClicked(ActionEvent e){
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(root.getScene().getWindow());
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/fxml/teacher/sendComplaintDialog.fxml"));
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e1) {
+            System.out.println("Couldn't load the dialog");
+            throw new RuntimeException(e1);
         }
 
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);

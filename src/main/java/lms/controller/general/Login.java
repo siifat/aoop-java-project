@@ -18,13 +18,19 @@ import lms.controller.student.DashboardController;
 import lms.util.ChangeScene;
 import lms.util.Scenes;
 import lms.util.UserAttribute;
+import lms.util.UserService;
 
 import java.io.IOException;
+import java.sql.*;
 
 import static lms.util.UserService.getPassword;
 import static lms.util.UserService.userExists;
 
 public class Login {
+
+    public static CurrentLoggedInTeacher currentLoggedInTeacher;
+    public static CurrentLoggedInStudent currentLoggedInStudent;
+
 
     public static final String CREATE_ACC = "/general/createAcc.fxml";
 
@@ -88,26 +94,47 @@ public class Login {
 
         if (isPasswordCorrect(typedID)) {
 
-            System.out.println("\nWelcome to your new HOMEPAGE!\n");
+            if (rbStudent.isSelected()) {
 
-            // Load the FXML file for the dashboard
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/student/dashboard.fxml"));
-            System.out.println(Scenes.STUDENT_DASHBOARD.getResourceLocation());
-            Parent dashboardRoot = loader.load();
+                setCurrentLoggedInStudent(typedID);
 
-            // Get the controller for the dashboard scene
-            DashboardController dashboardController = loader.getController();
+                System.out.println("\nWelcome to your new HOMEPAGE!\n");
 
-            // Set the IDLabel
-            dashboardController.setIDLabel(typedID);
+                // Load the FXML file for the dashboard
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/student/dashboard.fxml"));
+                System.out.println(Scenes.STUDENT_DASHBOARD.getResourceLocation());
+                Parent dashboardRoot = loader.load();
+
+                // Get the controller for the dashboard scene
+                DashboardController dashboardController = loader.getController();
+
+                // Set the IDLabel
+                dashboardController.setIDLabel(currentLoggedInStudent.getId());
 
 //            ChangeScene.change(Scenes.STUDENT_DASHBOARD, event);
 
-            // Change the scene
-            Scene dashboardScene = new Scene(dashboardRoot);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(dashboardScene);
-            stage.show();
+                // Change the scene
+                Scene dashboardScene = new Scene(dashboardRoot);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(dashboardScene);
+                stage.show();
+
+            } else if (rbTeacher.isSelected()) {
+                setCurrentLoggedInTeacher(typedID);
+
+                System.out.println(currentLoggedInTeacher.getId());
+                System.out.println(currentLoggedInTeacher.getName());
+
+                // Load the FXML file for the dashboard
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/teacher/teacherHome.fxml"));
+                Parent dashboardRoot = loader.load();
+
+                // Change the scene
+                Scene dashboardScene = new Scene(dashboardRoot);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(dashboardScene);
+                stage.show();
+            }
 
         } else {
             System.out.println("Password did not match.");
@@ -136,6 +163,82 @@ public class Login {
 
     public void createAccClicked(MouseEvent mouseEvent) {
         ChangeScene.change(Scenes.CREATE_ACC, mouseEvent);
+    }
+
+
+    private void setCurrentLoggedInTeacher(String id) {
+        try {
+
+            Connection conn = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+
+            conn = DriverManager.getConnection(UserService.URL);
+            stmt = conn.createStatement();
+
+            String query = "SELECT * FROM teachers WHERE id = '" + id + "'";
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String teacher_id = rs.getString("id");
+                System.out.println("TEACHEEE : " + teacher_id);
+                String password = rs.getString("password");
+                String initial = rs.getString("initial");
+                String mobile = rs.getString("mobile");
+                String role = rs.getString("role");
+                String approve = rs.getString("approve");
+                String wantEmail = rs.getString("wantEmail");
+
+                currentLoggedInTeacher = new CurrentLoggedInTeacher(name, email, teacher_id, password, initial, mobile, role, approve, wantEmail);
+            }
+
+            conn.close();
+            stmt.close();
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setCurrentLoggedInStudent(String id) {
+        try {
+
+            Connection conn = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+
+            conn = DriverManager.getConnection(UserService.URL);
+            stmt = conn.createStatement();
+
+            String query = "SELECT * FROM students WHERE id = '" + id + "'";
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String student_id = rs.getString("id");
+                System.out.println("Student " + name + ", ID: " + student_id);
+                String password = rs.getString("password");
+                String approved = rs.getString("approved");
+                String mobile = rs.getString("mobile");
+                String registration = rs.getString("registration");
+                String role = rs.getString("role");
+                String wantEmail = rs.getString("wantEmail");
+
+                currentLoggedInStudent = new CurrentLoggedInStudent(name, email, student_id, password, approved,
+                        registration, mobile, role, wantEmail);
+            }
+
+            conn.close();
+            stmt.close();
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -90,11 +90,15 @@
 #s1Button,
 #t1Button,
 #save2Button,
-#save2Button1{
-    -fx-font-size: 17;
+#save2Button1,
+#publishButton,
+#searchButton {
+    -fx-font-size: 16;
     -fx-text-fill: white;
     -fx-background-color: linear-gradient(to right, #24243e, #302b63, #0f0c29);
     -fx-cursor: hand;
+    -fx-border-radius: 33px;
+    -fx-background-radius: 33px;
 }
 
 #st1Label,
@@ -122,4 +126,10 @@
     -fx-font-family: "Poppins Medium";
     -fx-font-weight: bold;
 
+}
+
+#aTitleField,
+#aField{
+    /*-fx-border-radius: 22px;*/
+    /*-fx-background-radius: 22px;*/
 }

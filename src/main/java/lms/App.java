@@ -21,8 +21,8 @@ public class App extends Application {
                 .build()
                 .setGlobal();
 
-//        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/general/login.fxml"));
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/teacher/teacherHome.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/general/login.fxml"));
+//        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/teacher/teacherHome.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/admin/adminHome.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/dictionary/dictionaryHomepage.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/student/dashboard.fxml"));

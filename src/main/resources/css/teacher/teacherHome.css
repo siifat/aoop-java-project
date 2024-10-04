@@ -71,6 +71,9 @@
     -fx-background-radius: 22px;
 }
 
+#privateFilePassField{
+    -fx-border-color: green;
+}
 
 /*buttons*/
 #createGroupButton{
@@ -78,6 +81,18 @@
     -fx-text-fill: white;
     -fx-background-radius: 16;
     -fx-border-radius: 16;
+}
+
+#deleteAccountBtn{
+    -fx-text-fill: red;
+}
+
+#saveChangesBtn{
+    -fx-text-fill: blue;
+}
+
+#enterVaultBtn{
+    -fx-text-fill: green;
 }
 
 .all-inner-panes {
@@ -90,10 +105,3 @@
     -fx-text-fill: grey;
 }
 
-#deleteAccountBtn{
-    -fx-text-fill: red;
-}
-
-#saveChangesBtn{
-    -fx-text-fill: blue;
-}
