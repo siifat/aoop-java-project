@@ -198,7 +198,7 @@ public class SendLinkDialogController {
                     // Send the email
                     new Thread(() -> {
 
-                        if (sendEmail(s.getEmail(), invitation_URL)) {
+                        if (sendEmail(s.getEmail(), "Group Chat Invitation Link" ,invitation_URL)) {
                             System.out.println("Email send successful");
 
                         } else {
@@ -252,7 +252,7 @@ public class SendLinkDialogController {
 
                     // Send the email
                     new Thread(() -> {
-                        if (sendEmail(s.getEmail(), invitation_URL)) {
+                        if (sendEmail(s.getEmail(), "Group Chat Invitation Link" ,invitation_URL)) {
                             System.out.println("Email send successful");
 
                         } else {
