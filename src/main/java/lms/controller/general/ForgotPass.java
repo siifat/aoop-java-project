@@ -62,7 +62,7 @@ public class ForgotPass {
 
         // Send the email
         new Thread(() -> {
-            if(sendEmail(recipientEmail, messageBody)){
+            if(sendEmail(recipientEmail, "Security Code" ,messageBody)){
                 System.out.println("Email send successful");
 
                 // Start countdown after sending email
@@ -169,7 +169,7 @@ public class ForgotPass {
 
         // Send the email
         new Thread(() -> {
-            if(sendEmail(recipientEmail, messageBody)){
+            if(sendEmail(recipientEmail, "Security Code", messageBody)){
                 System.out.println("Email send successful");
 
                 // Start countdown after sending email

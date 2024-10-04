@@ -197,6 +197,7 @@ public class SendLinkDialogController {
                     System.out.println(s.getEmail());
                     // Send the email
                     new Thread(() -> {
+
                         if (sendEmail(s.getEmail(), invitation_URL)) {
                             System.out.println("Email send successful");
 

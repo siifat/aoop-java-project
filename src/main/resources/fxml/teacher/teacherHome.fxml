@@ -176,7 +176,7 @@
         </Pane>
         <StackPane layoutX="262.0" prefHeight="765.0" prefWidth="1278.0">
             <children>
-                <AnchorPane fx:id="dashboardPane" prefHeight="765.0" prefWidth="1278.0" visible="false">
+                <AnchorPane fx:id="dashboardPane" prefHeight="765.0" prefWidth="1278.0">
                     <children>
                         <MFXTextField fx:id="searchField" floatMode="BORDER" layoutX="14.0" layoutY="14.0" prefHeight="49.0" prefWidth="885.0" promptText="Search for students, Programs, Assignments..." />
                         <Circle fx:id="profilePicCircle" fill="DODGERBLUE" layoutX="1239.0" layoutY="39.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
@@ -224,17 +224,17 @@
                                 </Label>
                                 <ImageView layoutX="47.0" layoutY="56.0">
                                     <image>
-                                        <Image url="@../../../../../../../Downloads/children%20(3).png" />
+                                        <Image url="@../../images/teacher/children.png" />
                                     </image>
                                 </ImageView>
                                 <ImageView layoutX="218.0" layoutY="52.0">
                                     <image>
-                                        <Image url="@../../../../../../../Downloads/fear.png" />
+                                        <Image url="@../../images/teacher/fear.png" />
                                     </image>
                                 </ImageView>
                                 <ImageView layoutX="384.0" layoutY="56.0">
                                     <image>
-                                        <Image url="@../../../../../../../Downloads/winner.png" />
+                                        <Image url="@../../images/teacher/winner.png" />
                                     </image>
                                 </ImageView>
                                 <Label layoutX="41.0" layoutY="176.0" text="Total Students" />
@@ -346,7 +346,7 @@
                             <children>
                                 <ImageView layoutX="575.0" layoutY="105.0">
                                     <image>
-                                        <Image url="@../../../../../../../Downloads/privacy-policy%20(1).png" />
+                                        <Image url="@../../images/teacher/privacy-policy.png" />
                                     </image>
                                 </ImageView>
                                 <Label layoutX="550.0" layoutY="256.0" text="My Private Files">
@@ -373,7 +373,7 @@
                         <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes" />
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="myProfilePane" prefHeight="200.0" prefWidth="200.0">
+                <AnchorPane fx:id="myProfilePane" prefHeight="200.0" prefWidth="200.0" visible="false">
                     <children>
                         <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes">
                             <children>
@@ -410,11 +410,11 @@
                                 </Label>
                                 <MFXToggleButton layoutX="20.0" layoutY="435.0" selected="true" text="I want email notifications" />
                                 <MFXButton buttonType="RAISED" depthLevel="LEVEL5" layoutX="18.0" layoutY="371.0" prefHeight="35.0" prefWidth="93.0" rippleAnimateShadow="true" text="Edit Profile" />
-                                <Label layoutX="148.0" layoutY="210.0" text="nameLabel" />
-                                <Label layoutX="148.0" layoutY="241.0" text="teacherIDLabel" />
-                                <Label layoutX="148.0" layoutY="274.0" text="teacheremailLabel" />
-                                <Label layoutX="148.0" layoutY="302.0" text="teacher initials label" />
-                                <Label layoutX="148.0" layoutY="335.0" text="teacher mobile number" />
+                                <Label layoutX="148.0" layoutY="205.0" text="nameLabel" />
+                                <Label layoutX="148.0" layoutY="236.0" text="teacherIDLabel" />
+                                <Label layoutX="148.0" layoutY="269.0" text="teacheremailLabel" />
+                                <Label layoutX="148.0" layoutY="297.0" text="teacher initials label" />
+                                <Label layoutX="148.0" layoutY="330.0" text="teacher mobile number" />
                                 <Circle fill="DODGERBLUE" layoutX="72.0" layoutY="120.0" radius="54.0" stroke="BLACK" strokeType="INSIDE" />
                                 <MFXButton buttonType="RAISED" depthLevel="LEVEL5" layoutX="18.0" layoutY="663.0" onAction="#addComplaintClicked" prefHeight="33.0" prefWidth="130.0" rippleAnimateShadow="true" text="Add a complaint">
                                     <cursor>

@@ -1,8 +1,5 @@
 package lms.util;
 
-import javafx.application.Platform;
-import javafx.scene.control.Alert;
-
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -10,7 +7,7 @@ import java.util.Properties;
 
 public class EmailService {
 
-    public static boolean sendEmail(String recipientEmail, String messageBody) {
+    public static boolean sendEmail(String recipientEmail, String subject, String messageBody) {
 
         Properties properties = new Properties();
 
@@ -29,15 +26,13 @@ public class EmailService {
             }
         });
 
-        Message message = preparedMessage(session, myEmail, recipientEmail, messageBody);
+        Message message = preparedMessage(session, myEmail, recipientEmail, subject,messageBody);
 
         if (message != null) {
-            Platform.runLater(() ->
-                    new Alert(Alert.AlertType.INFORMATION, "Email send Successfully!").show());
+            System.out.println("Email send Successfully!");
 
         } else {
-            Platform.runLater(() ->
-                    new Alert(Alert.AlertType.INFORMATION, "Email send hoynai!").show());
+            System.out.println("Email send failed!");
         }
 
         try {
@@ -51,14 +46,14 @@ public class EmailService {
         }
     }
 
-    private static Message preparedMessage(Session session, String myEmail, String recipientEmail, String msg) {
+    private static Message preparedMessage(Session session, String myEmail, String recipientEmail, String subject ,String msg) {
 
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myEmail));
             message.setRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress(recipientEmail)});
 
-            message.setSubject("Security Code");
+            message.setSubject(subject);
             message.setText(msg);
 
             return message;

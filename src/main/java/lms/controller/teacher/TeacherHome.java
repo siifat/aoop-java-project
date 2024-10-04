@@ -30,6 +30,15 @@ public class TeacherHome {
     public Label settingsLabel;
     public Label privateFilesLabel;
     public Circle profilePicCircle;
+
+    // panes
+    @FXML private AnchorPane dashboardPane;
+    @FXML private AnchorPane privateFilesLoginPane;
+    @FXML private AnchorPane privateFilesPane;
+    @FXML private AnchorPane myProfilePane;
+    @FXML private AnchorPane settingsPane;
+
+
     @FXML
     private Rating rating;
     @FXML
@@ -55,6 +64,12 @@ public class TeacherHome {
 
     public void dashboardClicked(MouseEvent mouseEvent) {
         setSelectedLabel(dashboardLabel);
+
+        privateFilesLoginPane.setVisible(false);
+        privateFilesPane.setVisible(false);
+        myProfilePane.setVisible(false);
+        settingsPane.setVisible(false);
+        dashboardPane.setVisible(true);
     }
 
     public void editClassClicked(MouseEvent mouseEvent) {
@@ -67,14 +82,32 @@ public class TeacherHome {
 
     public void myProfileClicked(MouseEvent mouseEvent) {
         setSelectedLabel(myProfileLabel);
+
+        privateFilesLoginPane.setVisible(false);
+        privateFilesPane.setVisible(false);
+        settingsPane.setVisible(false);
+        dashboardPane.setVisible(false);
+        myProfilePane.setVisible(true);
     }
 
     public void settingsClicked(MouseEvent mouseEvent) {
         setSelectedLabel(settingsLabel);
+
+        privateFilesLoginPane.setVisible(false);
+        privateFilesPane.setVisible(false);
+        myProfilePane.setVisible(false);
+        dashboardPane.setVisible(false);
+        settingsPane.setVisible(true);
     }
 
     public void privateFilesClicked(MouseEvent mouseEvent) {
         setSelectedLabel(privateFilesLabel);
+
+        privateFilesPane.setVisible(false);
+        myProfilePane.setVisible(false);
+        settingsPane.setVisible(false);
+        dashboardPane.setVisible(false);
+        privateFilesLoginPane.setVisible(true);
     }
 
     private void setSelectedLabel(Label label) {
