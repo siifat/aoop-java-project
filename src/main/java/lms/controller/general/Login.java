@@ -189,9 +189,10 @@ public class Login {
                 String approve = rs.getString("approve");
                 String wantEmail = rs.getString("wantEmail");
                 String profilePicture = rs.getString("proPic");
+                String bio = rs.getString("bio");
 
                 currentLoggedInTeacher = new CurrentLoggedInTeacher(name, email, teacher_id, password, initial, mobile,
-                        role, approve, wantEmail, profilePicture);
+                        role, approve, wantEmail, profilePicture, bio);
             }
 
             conn.close();
@@ -227,9 +228,10 @@ public class Login {
                 String role = rs.getString("role");
                 String wantEmail = rs.getString("wantEmail");
                 String profilePicture = rs.getString("proPic");
+                String bio = rs.getString("bio");
 
                 currentLoggedInStudent = new CurrentLoggedInStudent(name, email, student_id, password, approved,
-                        registration, mobile, role, wantEmail, profilePicture);
+                        registration, mobile, role, wantEmail, profilePicture, bio);
             }
 
             conn.close();

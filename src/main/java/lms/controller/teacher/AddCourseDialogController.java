@@ -55,7 +55,7 @@ public class AddCourseDialogController {
     private void browseClicked(ActionEvent actionEvent) {
 
         FileChooser fc = new FileChooser();
-        fc.setInitialDirectory(new File("C:\\Users\\sifat\\Documents\\aoop-java-project\\src\\main\\resources\\courseMaterials\\0112320247\\SecA"));
+        fc.setInitialDirectory(new File("C:\\Users\\sifat\\Documents\\aoop-java-project\\src\\main\\resources\\courseMaterials\\0112320247\\Section A"));
         selectedFile = fc.showOpenDialog(null);
 
         if (selectedFile != null) {

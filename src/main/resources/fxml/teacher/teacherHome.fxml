@@ -179,7 +179,7 @@
         </Pane>
         <StackPane layoutX="262.0" prefHeight="765.0" prefWidth="1278.0">
             <children>
-                <AnchorPane fx:id="dashboardPane" prefHeight="765.0" prefWidth="1278.0" visible="false">
+                <AnchorPane fx:id="dashboardPane" prefHeight="765.0" prefWidth="1278.0">
                     <children>
                         <MFXTextField fx:id="searchField" floatMode="BORDER" layoutX="14.0" layoutY="14.0" prefHeight="49.0" prefWidth="885.0" promptText="Search for students, Programs, Assignments..." />
                         <Circle fx:id="profilePicCircle" fill="DODGERBLUE" layoutX="1239.0" layoutY="39.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
@@ -399,7 +399,7 @@
                                         <Cursor fx:constant="TEXT" />
                                     </cursor>
                                 </MFXPasswordField>
-                                <MFXButton fx:id="enterVaultBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="586.0" layoutY="449.0" prefHeight="41.0" prefWidth="108.0" rippleAnimateShadow="true" rippleColor="#88d772" text="Enter Vault">
+                                <MFXButton fx:id="enterVaultBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="586.0" layoutY="449.0" onAction="#enterVaultClicked" prefHeight="41.0" prefWidth="108.0" rippleAnimateShadow="true" rippleColor="#88d772" text="Enter Vault">
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
@@ -413,7 +413,7 @@
                         <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes" />
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="myProfilePane" prefHeight="200.0" prefWidth="200.0">
+                <AnchorPane fx:id="myProfilePane" prefHeight="200.0" prefWidth="200.0" visible="false">
                     <children>
                         <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes">
                             <children>
@@ -473,11 +473,11 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Circle>
-                        <TextField layoutX="185.0" layoutY="177.0" prefHeight="30.0" prefWidth="221.0" />
-                        <TextField layoutX="185.0" layoutY="219.0" prefHeight="30.0" prefWidth="221.0" />
-                        <TextField layoutX="185.0" layoutY="261.0" prefHeight="30.0" prefWidth="221.0" />
-                        <TextField layoutX="185.0" layoutY="303.0" prefHeight="30.0" prefWidth="221.0" />
-                        <TextField layoutX="185.0" layoutY="345.0" prefHeight="30.0" prefWidth="221.0" />
+                        <TextField fx:id="pNameField" layoutX="185.0" layoutY="177.0" prefHeight="30.0" prefWidth="221.0" />
+                        <TextField fx:id="pIDField" layoutX="185.0" layoutY="219.0" prefHeight="30.0" prefWidth="221.0" />
+                        <TextField fx:id="pEmailField" layoutX="185.0" layoutY="261.0" prefHeight="30.0" prefWidth="221.0" />
+                        <TextField fx:id="pInitialField" layoutX="185.0" layoutY="303.0" prefHeight="30.0" prefWidth="221.0" />
+                        <TextField fx:id="pMobileField" layoutX="185.0" layoutY="345.0" prefHeight="30.0" prefWidth="221.0" />
                             </children>
                         </AnchorPane>
                     </children>
@@ -544,11 +544,11 @@
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
-                                <MFXTextField layoutX="94.0" layoutY="63.0" prefHeight="49.0" prefWidth="442.0" />
-                                <MFXTextField layoutX="95.0" layoutY="123.0" prefHeight="49.0" prefWidth="442.0" />
+                                <MFXTextField fx:id="sNameField" layoutX="94.0" layoutY="63.0" prefHeight="49.0" prefWidth="442.0" />
+                                <MFXTextField fx:id="sEmailField" layoutX="95.0" layoutY="123.0" prefHeight="49.0" prefWidth="442.0" />
                                 <Separator layoutX="15.0" layoutY="48.0" prefHeight="3.0" prefWidth="1197.0" />
-                                <MFXPasswordField layoutX="94.0" layoutY="424.0" prefHeight="49.0" prefWidth="442.0" />
-                                <MFXButton fx:id="saveChangesBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="1090.0" layoutY="678.0" prefHeight="40.0" prefWidth="113.0" rippleAnimateShadow="true" rippleColor="#4b53e8" text="Save Changes">
+                                <MFXPasswordField fx:id="sPassField" allowPaste="true" floatMode="DISABLED" layoutX="94.0" layoutY="424.0" prefHeight="49.0" prefWidth="442.0" />
+                                <MFXButton fx:id="saveChangesBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="1090.0" layoutY="678.0" onAction="#saveChangesClicked" prefHeight="40.0" prefWidth="113.0" rippleAnimateShadow="true" rippleColor="#4b53e8" text="Save Changes">
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>

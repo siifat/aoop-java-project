@@ -11,8 +11,9 @@ public class CurrentLoggedInTeacher {
     private String approve;
     private String wantEmail;
     private String profilePicture;
+    private String bio;
 
-    public CurrentLoggedInTeacher(String name, String email, String id, String password, String initial, String mobile, String role, String approve, String wantEmail, String profilePicture) {
+    public CurrentLoggedInTeacher(String name, String email, String id, String password, String initial, String mobile, String role, String approve, String wantEmail, String profilePicture, String bio) {
         this.name = name;
         this.email = email;
         this.id = id;
@@ -23,6 +24,7 @@ public class CurrentLoggedInTeacher {
         this.approve = approve;
         this.wantEmail = wantEmail;
         this.profilePicture = profilePicture;
+        this.bio = bio;
     }
 
     public String getName() {
@@ -103,5 +105,13 @@ public class CurrentLoggedInTeacher {
 
     public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 }

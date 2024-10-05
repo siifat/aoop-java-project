@@ -1,6 +1,8 @@
 package lms.controller.teacher;
 
 import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -13,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.*;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -48,6 +52,22 @@ public class TeacherHome {
     public Label settingsLabel;
     public Label privateFilesLabel;
     public Circle profilePicCircle;
+
+
+    @FXML private MFXPasswordField privateFilePassField;
+
+    @FXML private MFXTextField sNameField;
+    @FXML private MFXTextField sEmailField;
+    @FXML private MFXPasswordField sPassField;
+    @FXML private TextArea teacherBioField;
+
+    @FXML private TextField pNameField;
+    @FXML private TextField pIDField;
+    @FXML private TextField pEmailField;
+    @FXML private TextField pInitialField;
+    @FXML private TextField pMobileField;
+
+
     @FXML private MFXComboBox<String> sectionSelectionCB;
 
     // panes
@@ -91,15 +111,33 @@ public class TeacherHome {
 
     public void initialize() {
 
+        sNameField.setText(Login.currentLoggedInTeacher.getName());
+        sEmailField.setText(Login.currentLoggedInTeacher.getEmail());
+        sPassField.setText(Login.currentLoggedInTeacher.getPassword());
+        teacherBioField.setText(Login.currentLoggedInTeacher.getBio());
+
+        pNameField.setText(Login.currentLoggedInTeacher.getName());
+        pIDField.setText(Login.currentLoggedInTeacher.getId());
+        pEmailField.setText(Login.currentLoggedInTeacher.getEmail());
+        pInitialField.setText(Login.currentLoggedInTeacher.getInitial());
+        pMobileField.setText(Login.currentLoggedInTeacher.getMobile());
+
         String camLoc = "/images/teacher/photo.png";
         Image cam = new Image(getClass().getResource(camLoc).toExternalForm());
         cameraCircle.setFill(new ImagePattern(cam));
 
-//        setProfilePic(Login.currentLoggedInTeacher.getProfilePicture());
+        setProfilePic(Login.currentLoggedInTeacher.getProfilePicture());
+
+        if(Login.currentLoggedInTeacher.getWantEmail().equalsIgnoreCase("yes")){
+            wantEmailTB.setSelected(true);
+        } else {
+            wantEmailTB.setSelected(false);
+        }
 
         setSelectedLabel(dashboardLabel);
         initializeSectionSelectionCB();
         initCourseAndAssignmentTableColumns();
+
 
 
         wantEmailTB.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -179,16 +217,20 @@ public class TeacherHome {
         });
     }
 
-//    private void setProfilePic(String picLocation) {
-//        Image proPic = new Image(picLocation);
-//        Image profileImage = new Image(selectedFile.toURI().toString());
-//
-//        // Set the image as the fill for myProfileCircle
-//        myProfileCircle.setFill(new ImagePattern(profileImage));
-//        profilePicCircle.setFill(new ImagePattern(profileImage));
-//        profilePicCircle.setFill(new ImagePattern(proPic));
-//        myProfileCircle.setFill(new ImagePattern(proPic));
-//    }
+    public void setProfilePic(String picLocation) {
+        try {
+            // Load the image from the given location
+            Image profileImage = new Image("file:" + picLocation);
+
+            // Set the image in the Circle shape as an ImagePattern
+            myProfileCircle.setFill(new ImagePattern(profileImage));
+            profilePicCircle.setFill(new ImagePattern(profileImage));
+
+        } catch (IllegalArgumentException e) {
+            // Handle cases where the image could not be loaded
+            System.out.println("Error: Could not load the image from " + picLocation);
+        }
+    }
 
     public void dashboardClicked(MouseEvent mouseEvent) {
         setSelectedLabel(dashboardLabel);
@@ -661,6 +703,47 @@ public class TeacherHome {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    @FXML
+    private void saveChangesClicked(){
+
+        String name = sNameField.getText();
+        String email = sEmailField.getText();
+        String bio = teacherBioField.getText();
+
+        Connection conn = null;
+        Statement statement = null;
+
+        try {
+            conn = DriverManager.getConnection(UserService.URL);
+            statement = conn.createStatement();
+
+            String query = "UPDATE teachers SET name='" + name + "'," +
+                    "email='" + email + "', bio='"
+                    + bio + "' WHERE id= '" +
+                    Login.currentLoggedInTeacher.getId() + "'";
+
+            statement.executeUpdate(query);
+
+            conn.close();
+            statement.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    private void enterVaultClicked(){
+        if(privateFilePassField.getText().equals(Login.currentLoggedInTeacher.getPassword())){
+            dashboardPane.setVisible(false);
+            myProfilePane.setVisible(false);
+            settingsPane.setVisible(false);
+            editClassesPane.setVisible(false);
+            privateFilesLoginPane.setVisible(false);
+            privateFilesPane.setVisible(true);
         }
     }
 }
