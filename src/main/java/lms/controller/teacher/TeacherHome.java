@@ -14,9 +14,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
-import javafx.scene.control.*;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -746,4 +746,36 @@ public class TeacherHome {
             privateFilesPane.setVisible(true);
         }
     }
+
+//    public void addFilesClicked(Stage stage) {
+//        // Open FileChooser
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Choose a File");
+//
+//        // Let the user pick a file
+//        File selectedFile = fileChooser.showOpenDialog(stage);
+//
+//        // If a file is chosen, proceed with copying
+//        if (selectedFile != null) {
+//            try {
+//                // Get the file name
+//                String fileName = selectedFile.getName();
+//
+//                // Define the destination path for the copied file
+//                Path destinationPath = Paths.get(DESTINATION_FOLDER, fileName);
+//
+//                // Copy the file to the destination folder
+//                Files.copy(selectedFile.toPath(), destinationPath);
+//
+//                // Print the new absolute path of the copied file
+//                System.out.println("File copied to: " + destinationPath.toAbsolutePath().toString());
+//
+//            } catch (IOException e) {
+//                // Handle errors during file copying
+//                System.out.println("Error copying the file: " + e.getMessage());
+//            }
+//        } else {
+//            System.out.println("No file was selected.");
+//        }
+//    }
 }
