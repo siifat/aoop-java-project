@@ -10,8 +10,9 @@ public class CurrentLoggedInTeacher {
     private String role;
     private String approve;
     private String wantEmail;
+    private String profilePicture;
 
-    public CurrentLoggedInTeacher(String name, String email, String id, String password, String initial, String mobile, String role, String approve, String wantEmail) {
+    public CurrentLoggedInTeacher(String name, String email, String id, String password, String initial, String mobile, String role, String approve, String wantEmail, String profilePicture) {
         this.name = name;
         this.email = email;
         this.id = id;
@@ -21,6 +22,7 @@ public class CurrentLoggedInTeacher {
         this.role = role;
         this.approve = approve;
         this.wantEmail = wantEmail;
+        this.profilePicture = profilePicture;
     }
 
     public String getName() {
@@ -93,5 +95,13 @@ public class CurrentLoggedInTeacher {
 
     public void setWantEmail(String wantEmail) {
         this.wantEmail = wantEmail;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }

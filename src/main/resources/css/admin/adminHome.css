@@ -1,4 +1,4 @@
-#root{
+#root {
     /*-fx-background-color: radial-gradient(center 50% 100%, radius 50%, #0f0c29, #302b63, #24243e);*/
     -fx-background-color: #f5f6fa;
 }
@@ -22,12 +22,22 @@
 }
 
 #upperpane{
-    -fx-background-color: #d3d3d3;
+    -fx-background-color: #f2f2f2;
     -fx-background-radius: 18px;
     -fx-border-width: 1px;
     -fx-border-radius: 18px;
     -fx-border-color: white;
     -fx-border-style: solid;
+}
+
+#graphPane,
+#overViewPane,
+#overViewPane1,
+#calendarPane {
+    -fx-background-color: #f2f2f2;
+    -fx-background-radius: 18px;
+    -fx-border-width: 1px;
+    -fx-border-radius: 18px;
 }
 
 #homeButton,
@@ -107,6 +117,8 @@
     -fx-font-size: 16;
 }
 
+#tAnnounceRB,
+#sAnnounceRB,
 #admissionRB,
 #registrationRB,
 #courseRB,
@@ -133,3 +145,4 @@
     /*-fx-border-radius: 22px;*/
     /*-fx-background-radius: 22px;*/
 }
+

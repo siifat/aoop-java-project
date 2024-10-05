@@ -12,7 +12,10 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -176,7 +179,7 @@
         </Pane>
         <StackPane layoutX="262.0" prefHeight="765.0" prefWidth="1278.0">
             <children>
-                <AnchorPane fx:id="dashboardPane" prefHeight="765.0" prefWidth="1278.0">
+                <AnchorPane fx:id="dashboardPane" prefHeight="765.0" prefWidth="1278.0" visible="false">
                     <children>
                         <MFXTextField fx:id="searchField" floatMode="BORDER" layoutX="14.0" layoutY="14.0" prefHeight="49.0" prefWidth="885.0" promptText="Search for students, Programs, Assignments..." />
                         <Circle fx:id="profilePicCircle" fill="DODGERBLUE" layoutX="1239.0" layoutY="39.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
@@ -340,6 +343,43 @@
                         <MFXComboBox layoutX="1088.0" layoutY="459.0" prefHeight="40.0" prefWidth="145.0" />
                     </children>
                 </AnchorPane>
+            <AnchorPane fx:id="editClassesPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <children>
+                  <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes">
+                     <children>
+                        <MFXComboBox fx:id="sectionSelectionCB" floatMode="BORDER" floatingText="Select Section" layoutX="60.0" layoutY="22.0" prefHeight="40.0" prefWidth="176.0" />
+                        <MFXButton buttonType="RAISED" depthLevel="LEVEL5" layoutX="944.0" layoutY="566.0" onAction="#addNewAssignmentClicked" prefHeight="40.0" prefWidth="176.0" rippleAnimateShadow="true" text="Add New Assignment" />
+                        <TableView fx:id="assignmentTableView" layoutX="60.0" layoutY="452.0" prefHeight="267.0" prefWidth="755.0">
+                          <columns>
+                            <TableColumn fx:id="aTitle" prefWidth="283.0" text="Title" />
+                            <TableColumn fx:id="aDesc" prefWidth="255.0" text="Description" />
+                              <TableColumn fx:id="aDueDate" prefWidth="127.0" text="Due Date" />
+                              <TableColumn fx:id="aSec" prefWidth="89.0" text="Section" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="63.0" layoutY="417.0" text="All Assignments">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="courseMaterialTableView" layoutX="60.0" layoutY="130.0" prefHeight="267.0" prefWidth="755.0">
+                          <columns>
+                            <TableColumn fx:id="cTitle" prefWidth="278.0" text="Title" />
+                            <TableColumn fx:id="cDesc" prefWidth="258.0" text="Description" />
+                              <TableColumn fx:id="cUploadDate" prefWidth="129.0" text="Upload Date" />
+                              <TableColumn fx:id="cSec" prefWidth="89.0" text="Section" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="60.0" layoutY="96.0" text="Course Materials">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <MFXButton buttonType="RAISED" depthLevel="LEVEL5" layoutX="944.0" layoutY="244.0" onAction="#addCourseElementClicked" prefHeight="40.0" prefWidth="176.0" rippleAnimateShadow="true" text="Add Course Element" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
                 <AnchorPane fx:id="privateFilesLoginPane" prefHeight="699.0" prefWidth="1225.0" visible="false">
                     <children>
                         <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes">
@@ -373,7 +413,7 @@
                         <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes" />
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="myProfilePane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                <AnchorPane fx:id="myProfilePane" prefHeight="200.0" prefWidth="200.0">
                     <children>
                         <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes">
                             <children>
@@ -383,56 +423,61 @@
                                     </font>
                                 </Label>
                                 <Separator layoutX="18.0" layoutY="48.0" prefWidth="200.0" />
-                                <Label layoutX="24.0" layoutY="202.0" text="Name:">
+                                <Label layoutX="25.0" layoutY="182.0" text="Name:">
                                     <font>
                                         <Font name="System Bold" size="13.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="24.0" layoutY="233.0" text="Teacher ID:">
+                                <Label layoutX="25.0" layoutY="224.0" text="Teacher ID:">
                                     <font>
                                         <Font name="System Bold" size="13.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="24.0" layoutY="266.0" text="Email:">
+                                <Label layoutX="25.0" layoutY="266.0" text="Email:">
                                     <font>
                                         <Font name="System Bold" size="13.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="24.0" layoutY="294.0" text="Initials:">
+                                <Label layoutX="25.0" layoutY="308.0" text="Initials:">
                                     <font>
                                         <Font name="System Bold" size="13.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="24.0" layoutY="328.0" text="Mobile No. :">
+                                <Label layoutX="25.0" layoutY="350.0" text="Mobile No. :">
                                     <font>
                                         <Font name="System Bold" size="13.0" />
                                     </font>
                                 </Label>
-                                <MFXToggleButton layoutX="20.0" layoutY="435.0" selected="true" text="I want email notifications" />
-                                <MFXButton buttonType="RAISED" depthLevel="LEVEL5" layoutX="18.0" layoutY="371.0" prefHeight="35.0" prefWidth="93.0" rippleAnimateShadow="true" text="Edit Profile" />
-                                <Label layoutX="148.0" layoutY="205.0" text="nameLabel" />
-                                <Label layoutX="148.0" layoutY="236.0" text="teacherIDLabel" />
-                                <Label layoutX="148.0" layoutY="269.0" text="teacheremailLabel" />
-                                <Label layoutX="148.0" layoutY="297.0" text="teacher initials label" />
-                                <Label layoutX="148.0" layoutY="330.0" text="teacher mobile number" />
-                                <Circle fill="DODGERBLUE" layoutX="72.0" layoutY="120.0" radius="54.0" stroke="BLACK" strokeType="INSIDE" />
-                                <MFXButton buttonType="RAISED" depthLevel="LEVEL5" layoutX="18.0" layoutY="663.0" onAction="#addComplaintClicked" prefHeight="33.0" prefWidth="130.0" rippleAnimateShadow="true" text="Add a complaint">
+                                <MFXToggleButton fx:id="wantEmailTB" layoutX="20.0" layoutY="471.0" selected="true" text="I want email notifications" />
+                                <MFXButton buttonType="RAISED" depthLevel="LEVEL5" layoutX="18.0" layoutY="410.0" prefHeight="35.0" prefWidth="93.0" rippleAnimateShadow="true" text="Edit Profile" />
+                                <Circle fx:id="myProfileCircle" fill="DODGERBLUE" layoutX="66.0" layoutY="114.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+                                <MFXButton fx:id="addComplaintBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="18.0" layoutY="663.0" onAction="#addComplaintClicked" prefHeight="33.0" prefWidth="130.0" rippleAnimateShadow="true" rippleColor="#eb6e6e" text="Add a complaint">
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
                                 </MFXButton>
-                                <Label layoutX="18.0" layoutY="510.0" text="Give Us Feedback">
+                                <Label layoutX="18.0" layoutY="536.0" text="Give Us Feedback">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
-                                <Separator layoutX="18.0" layoutY="543.0" prefWidth="200.0" />
-                                <Rating fx:id="rating" layoutX="284.0" layoutY="566.0" onMouseClicked="#handleRating" rating="0.0">
+                                <Separator layoutX="18.0" layoutY="569.0" prefWidth="200.0" />
+                                <Rating fx:id="rating" layoutX="284.0" layoutY="592.0" onMouseClicked="#handleRating" rating="0.0">
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
                                 </Rating>
-                                <Label fx:id="ratingLabel" layoutX="18.0" layoutY="573.0" text="User Rating:" />
+                                <Label fx:id="ratingLabel" layoutX="18.0" layoutY="599.0" text="User Rating:" />
+                        <Circle fx:id="cameraCircle" fill="WHITE" layoutX="93.0" layoutY="150.0" onMouseClicked="#editProfilePictureClicked" radius="12.0" stroke="BLACK" strokeType="INSIDE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Circle>
+                        <TextField layoutX="185.0" layoutY="177.0" prefHeight="30.0" prefWidth="221.0" />
+                        <TextField layoutX="185.0" layoutY="219.0" prefHeight="30.0" prefWidth="221.0" />
+                        <TextField layoutX="185.0" layoutY="261.0" prefHeight="30.0" prefWidth="221.0" />
+                        <TextField layoutX="185.0" layoutY="303.0" prefHeight="30.0" prefWidth="221.0" />
+                        <TextField layoutX="185.0" layoutY="345.0" prefHeight="30.0" prefWidth="221.0" />
                             </children>
                         </AnchorPane>
                     </children>

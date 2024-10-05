@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lms.controller.teacher.AddAssignmentDialogController">
+   <content>
+        <AnchorPane prefHeight="391.0" prefWidth="600.0">
+            <children>
+                <Label layoutX="14.0" layoutY="39.0" text="Assignment Title:">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="14.0" layoutY="144.0" text="Assignment Description:">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="14.0" layoutY="322.0" text="Add file:">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <MFXTextField fx:id="titleField" floatMode="DISABLED" layoutX="188.0" layoutY="22.0" prefHeight="49.0" prefWidth="293.0" />
+                <TextArea fx:id="descField" layoutX="188.0" layoutY="105.0" prefHeight="98.0" prefWidth="293.0" wrapText="true" />
+                <MFXTextField fx:id="filePathField" floatMode="DISABLED" floatingText="File Name" layoutX="187.0" layoutY="305.0" prefHeight="49.0" prefWidth="294.0" />
+                <MFXButton buttonType="RAISED" depthLevel="LEVEL5" layoutX="500.0" layoutY="311.0" onAction="#browseClicked" prefHeight="37.0" prefWidth="78.0" rippleAnimateShadow="true" text="Browse" />
+            <MFXDatePicker fx:id="datePicker" layoutX="188.0" layoutY="230.0" prefHeight="38.0" prefWidth="293.0" />
+            <Label layoutX="14.0" layoutY="239.0" text="Due Date:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            </children>
+        </AnchorPane>
+   </content>
+   <buttonTypes>
+      <ButtonType fx:constant="OK" />
+      <ButtonType fx:constant="CANCEL" />
+   </buttonTypes>
+</DialogPane>

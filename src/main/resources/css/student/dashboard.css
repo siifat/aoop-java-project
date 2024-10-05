@@ -18,6 +18,7 @@
 
 
 }
+
 #topPane,
 #basePane{
     -fx-background-color: #e9eff7;
@@ -25,7 +26,7 @@
 #pane1,
 #pane2,
 #pane3 {
-    -fx-background-color: #ebcad6;
+    -fx-background-color: white;
     -fx-background-radius: 30px;
     -fx-font-size: 25px;
     -fx-font-family: "Poppins Medium";
@@ -56,13 +57,7 @@
     -fx-background-color: #78fadb;
     -fx-background-radius: 18px;
 }
-#copyPane1,
-#copyPane2,
-#copyPane3,
-#copyPane4{
-    -fx-background-color:#e4ff8d;
-    -fx-background-radius: 18px;
-}
+
 #notiPane{
     -fx-background-color:white;
     -fx-background-radius: 18px;
@@ -70,7 +65,13 @@
 #course1,
 #course2,
 #course3,
-#course4{
+#course4,
+#course11,
+#course21,
+#course31,
+#course41,
+#blogcourse1,
+#blogcourse2{
     -fx-background-color: linear-gradient(to right, #FFEFBA, #FFFFFF);
 }
 .bgbasePane1{
@@ -84,11 +85,17 @@
 #enrollButton:hover,
 #progressButton:hover{
     /*-fx-background-color: linear-gradient(to right, #0f0c29, #302b63, #24243e);*/
-    -fx-background-radius: 12;
-    -fx-border-radius: 12;
-    -fx-background-color: e5f1ff;
-    -fx-cursor: hand;
-    -fx-font-smoothing-type: lcd;
+    /*-fx-background-radius: 12;*/
+    /*-fx-border-radius: 12;*/
+    /*-fx-background-color: e5f1ff;*/
+    /*-fx-cursor: hand;*/
+    /*-fx-font-smoothing-type: lcd;*/
+    -fx-background-color: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bolder;
+    -fx-font-size: 15px;
+    -fx-border-radius: 22px;
+    -fx-background-radius: 22px;
 }
 
 #generateCatBtn{
@@ -100,4 +107,35 @@
 
 #generateCatBtn:hover{
 
+}
+#seeAll1,
+#seeAll2,
+#complainButton,
+#enButton,
+#ec,
+#physics,
+#vector,
+#dld,
+#pl1,
+#pl2,
+#m1,
+#pl11,
+#ec1,
+#m2,
+#pl12,
+#vec,
+#mk,
+#pl13,
+#cm3,
+#m4,
+#back1,
+#back2,
+#back3,
+#back4,
+#submitButton,
+#return1,
+#return11,
+#enButton{
+    -fx-cursor: hand;
+    -fx-font-smoothing-type: lcd;
 }

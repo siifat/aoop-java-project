@@ -111,8 +111,6 @@ public class Login {
                 // Set the IDLabel
                 dashboardController.setIDLabel(currentLoggedInStudent.getId());
 
-//            ChangeScene.change(Scenes.STUDENT_DASHBOARD, event);
-
                 // Change the scene
                 Scene dashboardScene = new Scene(dashboardRoot);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -190,8 +188,10 @@ public class Login {
                 String role = rs.getString("role");
                 String approve = rs.getString("approve");
                 String wantEmail = rs.getString("wantEmail");
+                String profilePicture = rs.getString("proPic");
 
-                currentLoggedInTeacher = new CurrentLoggedInTeacher(name, email, teacher_id, password, initial, mobile, role, approve, wantEmail);
+                currentLoggedInTeacher = new CurrentLoggedInTeacher(name, email, teacher_id, password, initial, mobile,
+                        role, approve, wantEmail, profilePicture);
             }
 
             conn.close();
@@ -220,16 +220,16 @@ public class Login {
                 String name = rs.getString("name");
                 String email = rs.getString("email");
                 String student_id = rs.getString("id");
-                System.out.println("Student " + name + ", ID: " + student_id);
                 String password = rs.getString("password");
                 String approved = rs.getString("approved");
                 String mobile = rs.getString("mobile");
                 String registration = rs.getString("registration");
                 String role = rs.getString("role");
                 String wantEmail = rs.getString("wantEmail");
+                String profilePicture = rs.getString("proPic");
 
                 currentLoggedInStudent = new CurrentLoggedInStudent(name, email, student_id, password, approved,
-                        registration, mobile, role, wantEmail);
+                        registration, mobile, role, wantEmail, profilePicture);
             }
 
             conn.close();

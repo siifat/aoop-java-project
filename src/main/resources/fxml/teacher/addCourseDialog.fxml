@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lms.controller.teacher.AddCourseDialogController">
+   <content>
+      <AnchorPane prefHeight="373.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="14.0" layoutY="39.0" text="Course Title:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="178.0" text="Course Description:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="322.0" text="Add file:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <MFXTextField fx:id="titleField" floatMode="DISABLED" layoutX="150.0" layoutY="22.0" prefHeight="49.0" prefWidth="331.0" />
+            <TextArea fx:id="descField" layoutX="150.0" layoutY="105.0" prefHeight="152.0" prefWidth="331.0" wrapText="true" />
+            <MFXTextField fx:id="filePathField" floatMode="DISABLED" floatingText="File Name" layoutX="150.0" layoutY="305.0" prefHeight="49.0" prefWidth="331.0" />
+            <MFXButton buttonType="RAISED" depthLevel="LEVEL5" layoutX="500.0" layoutY="311.0" onAction="#browseClicked" prefHeight="37.0" prefWidth="78.0" rippleAnimateShadow="true" text="Browse" />
+         </children>
+      </AnchorPane>
+   </content>
+   <buttonTypes>
+      <ButtonType fx:constant="OK" />
+      <ButtonType fx:constant="CANCEL" />
+   </buttonTypes>
+</DialogPane>

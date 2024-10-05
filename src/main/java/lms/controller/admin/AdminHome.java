@@ -1,26 +1,39 @@
 package lms.controller.admin;
 
-import io.github.palexdev.materialfx.controls.MFXComboBox;
-import io.github.palexdev.materialfx.controls.MFXListView;
-import io.github.palexdev.materialfx.controls.MFXTextField;
-import io.github.palexdev.materialfx.controls.MFXToggleButton;
+import io.github.palexdev.materialfx.controls.*;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import lms.util.ChangeScene;
+import lms.util.ShowAlert;
 import lms.util.UserService;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
-public class AdminHome {
+import static lms.util.EmailService.sendEmail;
+
+public class AdminHome extends Application {
+
 
     public Pane homep1Pane;
     public Pane graphPane;
@@ -44,6 +57,15 @@ public class AdminHome {
     public TextField ttf3;
     public TextField ttf4;
     public ComboBox tcb1;
+
+    @FXML
+    private MFXRadioButton tAnnounceRB;
+    @FXML
+    private MFXRadioButton sAnnounceRB;
+
+    private VBox calendarPane;
+    private LocalDate currentDate;
+    private Label monthYearLabel;
 
 //    public TextField aTitleField;
 //    public TextField aField;
@@ -86,7 +108,7 @@ public class AdminHome {
     private Pane chartContainer;
 
     @FXML
-    private MFXListView<String> updateLogLV;
+    private ListView<String> updateLogLV;
 
     private ObservableList<TeachApproveData> adt1 = FXCollections.observableArrayList();
     private ObservableList<StApproveData> adt = FXCollections.observableArrayList();
@@ -114,14 +136,6 @@ public class AdminHome {
 
     @FXML
     private MFXTextField searchField2;
-//    @FXML
-//    private TableColumn<ComplainData, String> nameCol;
-//    @FXML
-//    private TableColumn<ComplainData, String> idCol;
-//    @FXML
-//    private TableColumn<ComplainData, String> emailCol;
-//    @FXML
-//    private TableColumn<ComplainData, String> selectCol;
 
     private ObservableList<ComplainData> complains = FXCollections.observableArrayList();
 
@@ -131,8 +145,6 @@ public class AdminHome {
     @FXML
     private TextArea aField;
 
-    @FXML
-    private MFXToggleButton userTB;
 
     public void initialize() {
         // Load the image from the resources folder
@@ -140,16 +152,9 @@ public class AdminHome {
 //        proPicCircle.setFill(new ImagePattern(proPic));
 
         //HOMEPAGE
-        userTB.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue){
-                userTB.setText("Student");
-            } else{
-                userTB.setText("Teacher");
-            }
-        });
-        displayBarGraph();
 
-        programComboBox.getItems().addAll("Computer Science", "Business Administration", "Electrical Engineering", "Civil Engineering", "Mechanical Engineering");
+        programComboBox.getItems().addAll("Science and Engineering", "Business and Economics", "Humanities and Social Sciences");
+        programComboBox.setOnAction(event -> programComboBoxClicked());
         programComboBox.selectFirst();
 
 
@@ -163,6 +168,12 @@ public class AdminHome {
         sregCol.setCellValueFactory(new PropertyValueFactory<StApproveData, String>("registration"));
         sappCol.setCellValueFactory(new PropertyValueFactory<StApproveData, String>("approved"));
 
+        scb1.getItems().addAll("Student", "Undergraduate Assistant", "Student & Undergraduate Assistant");
+        scb2.getItems().addAll(" ", "Enrolled", "Not Enrolled");
+
+        sapprovalTable.getItems().clear();
+        loadItemsIntoTable();
+
         tinitialCol.setCellValueFactory(new PropertyValueFactory<TeachApproveData, String>("initial"));
         tnameCol.setCellValueFactory(new PropertyValueFactory<TeachApproveData, String>("name"));
         temailCol.setCellValueFactory(new PropertyValueFactory<TeachApproveData, String>("email"));
@@ -170,14 +181,14 @@ public class AdminHome {
         troleCol.setCellValueFactory(new PropertyValueFactory<TeachApproveData, String>("role"));
         tappCol.setCellValueFactory(new PropertyValueFactory<TeachApproveData, String>("approved"));
 
-        sapprovalTable.getItems().clear();
-        loadItemsIntoTable();
+        tcb1.getItems().addAll(" ", "Teacher");
 
         tapprovalTable.getItems().clear();
         loadItemsIntoTeacherTable();
 
 
         //REPORT_&_LOG
+
         cNameCol.setCellValueFactory(new PropertyValueFactory<>("CName"));
         cIDCol.setCellValueFactory(new PropertyValueFactory<>("CId"));
         cEmailCol.setCellValueFactory(new PropertyValueFactory<>("CEmail"));
@@ -222,6 +233,7 @@ public class AdminHome {
 
     }
 
+    //PANE_SHIFT
     public void homeClicked(ActionEvent actionEvent) {
         homep1Pane.setVisible(true);
         ump1Pane.setVisible(false);
@@ -281,6 +293,248 @@ public class AdminHome {
         sconfigp1Pane.setVisible(true);
     }
 
+    //HOME
+    public void programComboBoxClicked() {
+        // Get the selected item
+        String selectedProgram = programComboBox.getValue();
+
+        // Print the selected program
+        if ("Science and Engineering".equals(selectedProgram)) {
+            displayBarGraph();
+        } else if ("Business and Economics".equals(selectedProgram)) {
+            displayBarGraph1();
+        }else if ("Humanities and Social Sciences".equals(selectedProgram)) {
+            displayBarGraph2();
+        }
+    }
+
+    public void displayBarGraph() {
+        BarGraph barGraph = new BarGraph();
+        BarChart<String, Number> chart = barGraph.createBarChart();
+
+        // Clear previous content if necessary
+        graphPane.getChildren().clear();
+        graphPane.getChildren().add(chart);
+    }
+
+    public void displayBarGraph1() {
+        BarGraph1 barGraph = new BarGraph1();
+        BarChart<String, Number> chart = barGraph.createBarChart();
+
+        // Clear previous content if necessary
+        graphPane.getChildren().clear();
+        graphPane.getChildren().add(chart);
+    }
+
+    public void displayBarGraph2() {
+        BarGraph2 barGraph = new BarGraph2();
+        BarChart<String, Number> chart = barGraph.createBarChart();
+
+        // Clear previous content if necessary
+        graphPane.getChildren().clear();
+        graphPane.getChildren().add(chart);
+    }
+
+    public void showChartButtonClicked(ActionEvent event) {
+        displayBarGraph();
+    }
+
+    public void calendarButtonClicked(ActionEvent actionEvent) {
+
+//        Calendar c = new Calendar();
+//        c.main();
+    }
+
+    @Override
+    public void start(Stage primaryStage){
+        System.out.println("Yooo");
+        currentDate = LocalDate.now();
+
+        calendarPane = new VBox();
+        calendarPane.setAlignment(Pos.CENTER);
+        calendarPane.setSpacing(30);  // Increased space between header and calendar
+
+        // Create the header with navigation
+        HBox header = createHeader();
+
+        // Create the calendar grid
+        GridPane calendarGrid = createCalendarGrid();
+
+        calendarPane.getChildren().addAll(header, calendarGrid);
+
+        Scene scene = new Scene(calendarPane, 600, 400);
+        primaryStage.setTitle("Custom 5x7 Calendar");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    private HBox createHeader() {
+        HBox header = new HBox();
+        header.setAlignment(Pos.CENTER);
+        header.setSpacing(60);  // Spacing between buttons and month label
+
+        Button prevButton = new Button("<");
+        prevButton.setStyle("-fx-background-color: #AAB7B8; -fx-text-fill: white; -fx-font-size: 14px;");
+        prevButton.setOnAction(e -> changeMonth(-1));
+
+        Button nextButton = new Button(">");
+        nextButton.setStyle("-fx-background-color: #AAB7B8; -fx-text-fill: white; -fx-font-size: 14px;");
+        nextButton.setOnAction(e -> changeMonth(1));
+
+        monthYearLabel = new Label();
+        monthYearLabel.setFont(new Font("Arial", 24));
+        monthYearLabel.setTextFill(Color.DARKBLUE);
+        updateMonthYearLabel();
+
+        // Center the monthYearLabel between the buttons
+        monthYearLabel.setMinWidth(200);
+        prevButton.setMinWidth(50);
+        nextButton.setMinWidth(50);
+
+        header.getChildren().addAll(prevButton, monthYearLabel, nextButton);
+
+        return header;
+    }
+
+    private GridPane createCalendarGrid() {
+        GridPane calendarGrid = new GridPane();
+        calendarGrid.setAlignment(Pos.CENTER);
+        calendarGrid.setVgap(10);
+        calendarGrid.setHgap(10);
+
+        // Add day labels (Sun to Sat)
+        String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+        for (int i = 0; i < days.length; i++) {
+            Label dayLabel = new Label(days[i]);
+            dayLabel.setFont(new Font("Arial", 16));
+            dayLabel.setTextFill(Color.DARKSLATEGRAY);
+            calendarGrid.add(dayLabel, i, 0);
+        }
+
+        // Generate the days for the current month in a 5x7 format
+        populateCalendarGrid(calendarGrid);
+
+        return calendarGrid;
+    }
+
+    private void populateCalendarGrid(GridPane calendarGrid) {
+        LocalDate firstDayOfMonth = currentDate.withDayOfMonth(1);
+        int dayOfWeek = firstDayOfMonth.getDayOfWeek().getValue() % 7;
+        int daysInMonth = currentDate.lengthOfMonth();
+
+        int row = 1;  // Start from the second row to allow for day labels
+        int column = dayOfWeek;  // Start from the correct day of the week
+
+        // Fill dates for the current month
+        int filledDays = 0; // To track how many dates we have filled
+        for (int day = 1; day <= daysInMonth; day++) {
+            if (row > 5) break;  // Stop if we exceed the 5th row
+
+            Button dayButton = createDateButton(day);
+            calendarGrid.add(dayButton, column, row);
+            filledDays++;
+            column++;
+
+            // Move to the next row if we've filled 5 columns
+            if (column == 7) {
+                column = 0;
+                row++;
+            }
+        }
+
+        // Fill any remaining dates in the first row
+        int firstRowColumn = 0;
+        for (int day = 1; filledDays < daysInMonth && firstRowColumn < 7; firstRowColumn++) {
+            // Check if the position is empty in the first row
+            if (calendarGrid.getChildren().get(firstRowColumn + 1) == null) {
+                // Place the next available day button in the first row
+                Button dayButton = createDateButton(day);
+                calendarGrid.add(dayButton, firstRowColumn, 1);
+                filledDays++;
+            }
+            day++; // Increment the day for the next button
+        }
+    }
+
+    private Button createDateButton(int day) {
+        Button dayButton = new Button(String.valueOf(day));
+        dayButton.setFont(new Font("Arial", 14));
+        dayButton.setMinSize(40, 40);
+
+        // Slightly curvy style for date buttons
+        dayButton.setStyle("-fx-background-color: #FFFFFF; -fx-border-radius: 15px; " +
+                "-fx-background-radius: 15px; -fx-border-color: #B0B3B7; -fx-padding: 5px;");
+
+        dayButton.setTooltip(new Tooltip("Date: " + day + " " + currentDate.getMonth() + " " + currentDate.getYear()));
+
+        if (isToday(day)) {
+            dayButton.setStyle("-fx-background-color: #FFD700; -fx-border-radius: 15px; " +
+                    "-fx-background-radius: 15px; -fx-border-color: #B0B3B7; -fx-text-fill: #000000;");
+        }
+
+        // Add hover effect on dates
+        dayButton.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> dayButton.setStyle(
+                "-fx-background-color: #D0E0E0; -fx-border-radius: 15px; " +
+                        "-fx-background-radius: 15px; -fx-border-color: #B0B3B7; -fx-padding: 5px;"
+        ));
+
+        dayButton.addEventHandler(MouseEvent.MOUSE_EXITED, event -> dayButton.setStyle(
+                isToday(day) ?
+                        "-fx-background-color: #FFD700; -fx-border-radius: 15px; " +
+                                "-fx-background-radius: 15px; -fx-border-color: #B0B3B7; -fx-text-fill: #000000;" :
+                        "-fx-background-color: #FFFFFF; -fx-border-radius: 15px; " +
+                                "-fx-background-radius: 15px; -fx-border-color: #B0B3B7; -fx-padding: 5px;"
+        ));
+
+        dayButton.setOnAction(e -> handleDayClick(day));
+        return dayButton;
+    }
+
+    private boolean isToday(int day) {
+        return currentDate.getYear() == LocalDate.now().getYear() &&
+                currentDate.getMonth() == LocalDate.now().getMonth() &&
+                day == LocalDate.now().getDayOfMonth();
+    }
+
+    private void updateCalendar() {
+        calendarPane.getChildren().remove(1);
+        GridPane calendarGrid = new GridPane();
+        calendarGrid.setAlignment(Pos.CENTER);
+        calendarGrid.setVgap(10);
+        calendarGrid.setHgap(10);
+
+        // Add day labels (Sun to Sat)
+        String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+        for (int i = 0; i < days.length; i++) {
+            Label dayLabel = new Label(days[i]);
+            dayLabel.setFont(new Font("Arial", 16));
+            dayLabel.setTextFill(Color.DARKSLATEGRAY);
+            calendarGrid.add(dayLabel, i, 0);
+        }
+
+        populateCalendarGrid(calendarGrid);
+
+        calendarPane.getChildren().add(calendarGrid);
+    }
+
+    private void changeMonth(int monthsToAdd) {
+        currentDate = currentDate.plusMonths(monthsToAdd);
+        updateMonthYearLabel();
+        updateCalendar();
+    }
+
+    private void updateMonthYearLabel() {
+        String month = currentDate.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        int year = currentDate.getYear();
+        monthYearLabel.setText(month + " " + year);
+    }
+
+    private void handleDayClick(int day) {
+        System.out.println("Clicked on day: " + day + " " + currentDate.getMonth() + " " + currentDate.getYear());
+    }
+
+
+    //USER_MANAGEMENT
 
     public void sadmiitRBClicked(MouseEvent mouseEvent) {
     }
@@ -296,23 +550,6 @@ public class AdminHome {
 
     public void sroleRBClicked(MouseEvent mouseEvent) {
     }
-
-
-    //last update----------------------------------------------------------------------------------------------
-
-    public void displayBarGraph() {
-        BarGraph barGraph = new BarGraph();
-        BarChart<String, Number> chart = barGraph.createBarChart();
-
-        // Clear previous content if necessary
-        graphPane.getChildren().clear();
-        graphPane.getChildren().add(chart);
-    }
-
-    public void showChartButtonClicked(ActionEvent event) {
-        displayBarGraph();
-    }
-    //end of last update-----------------------------------------------------------------------------------------
 
 
     private void loadItemsIntoTable() {
@@ -610,7 +847,7 @@ public class AdminHome {
     }
 
 
-    //complain
+    //REPORT_&_LOGS
 
     public void loadComplainTableView() {
         Connection conn = null;
@@ -685,18 +922,22 @@ public class AdminHome {
         }
     }
 
-
     public void publishClicked(ActionEvent actionEvent) {
             String title = aTitleField.getText().trim();
             String description = aField.getText().trim();
 
             if (title.isEmpty() || description.isEmpty()) {
-                new Alert(Alert.AlertType.WARNING, "Title and description cannot be empty").showAndWait();
+                ShowAlert.show("Announcement","Title and description cannot be empty", Alert.AlertType.WARNING);
                 return;
             }
 
             Connection conn = null;
+            Connection conn1 = null;
             PreparedStatement pstmt = null;
+            PreparedStatement pstmt1 = null;
+
+            Statement stmt = null;
+            ResultSet rs = null;
 
             try {
                 conn = DriverManager.getConnection(UserService.ANNOUNCEMENT_URL);
@@ -706,18 +947,65 @@ public class AdminHome {
                 pstmt.setString(2, description);
                 pstmt.executeUpdate();
 
+                //-------------------------------------------------------------------------------------------
+                if(sAnnounceRB.isSelected()){
+                    conn1 = DriverManager.getConnection(UserService.URL);
+                    String emailQuery = "SELECT email FROM students";  // Adjust table and column names as necessary
+                    stmt = conn1.createStatement();
+                    rs = stmt.executeQuery(emailQuery);
+
+                    // Send the email to all retrieved addresses
+                    while (rs.next()) {
+                        String email = rs.getString("email");
+
+                        new Thread(() -> {
+                            // Assuming sendEmail is a static method in EmailService that returns a boolean
+                            if (sendEmail(email, title, description)) {
+                                System.out.println("Email sent successfully to: " + email);
+                            } else {
+                                System.out.println("Failed to send email to: " + email);
+                            }
+                        }).start();
+                    }
+                    // Showing a success message
+                    ShowAlert.show("Announcement","Announcement published successfully!", Alert.AlertType.CONFIRMATION);
+                }
+                if(tAnnounceRB.isSelected()){
+                    conn1 = DriverManager.getConnection(UserService.URL);
+                    String emailQuery = "SELECT email FROM teachers";  // Adjust table and column names as necessary
+                    stmt = conn1.createStatement();
+                    rs = stmt.executeQuery(emailQuery);
+
+                    // Send the email to all retrieved addresses
+                    while (rs.next()) {
+                        String email = rs.getString("email");
+
+                        new Thread(() -> {
+                            // Assuming sendEmail is a static method in EmailService that returns a boolean
+                            if (sendEmail(email, title, description)) {
+                                System.out.println("Email sent successfully to: " + email);
+                            } else {
+                                System.out.println("Failed to send email to: " + email);
+                            }
+                        }).start();
+                    }
+                    // Showing a success message
+                    ShowAlert.show("Announcement","Announcement published successfully!", Alert.AlertType.CONFIRMATION);
+                }
+                //----------------------------------------------------------------------------------------------------------------------------------------------
+
                 // Clear the input fields
                 aTitleField.clear();
                 aField.clear();
 
-                // Optionally, you can show a success message
-                new Alert(Alert.AlertType.INFORMATION, "Announcement published successfully!").showAndWait();
-
                 // Reload announcements to reflect the new entry
                 loadAnnouncements();
+
             } catch (SQLException e) {
                 e.printStackTrace();
-                new Alert(Alert.AlertType.ERROR, "Error while publishing announcement: " + e.getMessage()).showAndWait();
+                ShowAlert.show("Announcement","Error while publishing announcement!", Alert.AlertType.ERROR);
+//                new Alert(Alert.AlertType.ERROR, "Error while publishing announcement: " + e.getMessage()).showAndWait();
+
             } finally {
                 try {
                     if (pstmt != null) pstmt.close();
@@ -728,5 +1016,7 @@ public class AdminHome {
             }
         }
 
+    public void chatIconClicked(MouseEvent mouseEvent) {
     }
+}
 

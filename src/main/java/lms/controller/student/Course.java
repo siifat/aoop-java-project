@@ -1,5 +1,7 @@
 package lms.controller.student;
 
+import javafx.beans.property.StringProperty;
+
 public class Course {
     private String sub;
     private String ct1;

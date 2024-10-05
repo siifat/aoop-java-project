@@ -12,6 +12,9 @@ public class UserService {
     public static final String AnnouncementDatabaseLocation = "src/main/resources/database/Announcement.db";
     public static final String ANNOUNCEMENT_URL = "jdbc:sqlite:" + AnnouncementDatabaseLocation;
 
+    public static final String courseDatabaseLocation = "src/main/resources/database/Course.db";
+    public static final String COURSE_URL = "jdbc:sqlite:" + courseDatabaseLocation;
+
     public static final String TABLE_TEACHERS = "teachers";
     public static final String TABLE_STUDENTS = "students";
     public static final String COLUMN_NAME = "name";

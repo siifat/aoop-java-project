@@ -83,7 +83,8 @@
     -fx-border-radius: 16;
 }
 
-#deleteAccountBtn{
+#deleteAccountBtn,
+#addComplaintBtn{
     -fx-text-fill: red;
 }
 
