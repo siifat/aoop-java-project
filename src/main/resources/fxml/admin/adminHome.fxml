@@ -28,7 +28,7 @@
 
 <AnchorPane fx:id="root" prefHeight="765.0" prefWidth="1540.0" stylesheets="@../../css/admin/adminHome.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lms.controller.admin.AdminHome">
     <children>
-        <Pane fx:id="sidePane" layoutX="14.0" layoutY="14.0" prefHeight="736.0" prefWidth="224.0">
+        <Pane fx:id="sidePane" layoutX="14.0" layoutY="14.0" prefHeight="736.0" prefWidth="224.0" visible="false">
             <children>
                 <MFXButton fx:id="homeButton" alignment="CENTER_RIGHT" layoutX="3.0" layoutY="186.0" onAction="#homeClicked" prefHeight="68.0" prefWidth="218.0" text="Home" textAlignment="CENTER" textFill="#2f2929" wrapText="true">
                     <cursor>
@@ -84,7 +84,7 @@
                 </Label>
             </children>
         </Pane>
-        <Pane fx:id="upperpane" layoutX="248.0" layoutY="14.0" prefHeight="91.0" prefWidth="1283.0">
+        <Pane fx:id="upperpane" layoutX="248.0" layoutY="14.0" prefHeight="91.0" prefWidth="1283.0" visible="false">
             <children>
                 <Circle fx:id="proPicCircle" fill="DODGERBLUE" layoutX="1240.0" layoutY="46.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
             <Label layoutX="1066.0" layoutY="21.0" text="Hassan Bin Abedin">
@@ -116,9 +116,9 @@
             <Separator focusTraversable="false" layoutX="1010.0" layoutY="17.0" opacity="0.68" orientation="VERTICAL" prefHeight="58.0" prefWidth="14.0" />
             </children>
         </Pane>
-        <StackPane fx:id="stackPane" layoutX="248.0" layoutY="115.0" prefHeight="635.0" prefWidth="1283.0">
+        <StackPane fx:id="stackPane" layoutX="248.0" layoutY="115.0" prefHeight="635.0" prefWidth="1283.0" visible="false">
             <children>
-                <Pane fx:id="homep1Pane" prefHeight="600.0" prefWidth="200.0">
+                <Pane fx:id="homep1Pane" prefHeight="600.0" prefWidth="200.0" visible="false">
                <children>
                   <MFXComboBox fx:id="programComboBox" floatingText="Program" layoutX="100.0" layoutY="41.0" onAction="#programComboBoxClicked" prefHeight="39.0" prefWidth="200.0" />
                   <Pane fx:id="graphPane" layoutX="70.0" layoutY="118.0" prefHeight="478.0" prefWidth="506.0" />
@@ -310,5 +310,6 @@
                </children></Pane>
             </children>
         </StackPane>
+      <AnchorPane fx:id="adminLoginPane" prefHeight="765.0" prefWidth="1540.0" style="-fx-background-color: red;" />
     </children>
 </AnchorPane>
