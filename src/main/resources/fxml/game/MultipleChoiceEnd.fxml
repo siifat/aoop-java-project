@@ -1,13 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="mcAnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.retardict.MultipleChoiceEndController">
-   <children>
-      <Button id="functionButton" layoutX="516.0" layoutY="342.0" mnemonicParsing="false" onAction="#switchToGameScene" prefHeight="50.0" prefWidth="200.0" text="Game Menu" />
-      <Label fx:id="scoreBox" contentDisplay="CENTER" layoutX="324.0" layoutY="34.0" prefHeight="122.0" prefWidth="606.0" text="Label" />
-      <Button id="functionButton" layoutX="516.0" layoutY="404.0" mnemonicParsing="false" onAction="#replay" prefHeight="50.0" prefWidth="200.0" text="Replay" />
-   </children>
+<AnchorPane id="mcAnchorPane" fx:id="root" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../css/game/multipleChoiceEnd.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.MultipleChoiceEndController">
+    <children>
+        <Label fx:id="scoreBox" alignment="CENTER" contentDisplay="CENTER" layoutY="42.0" prefHeight="122.0" prefWidth="1280.0" text="Label" textAlignment="CENTER">
+         <font>
+            <Font name="Comic Sans MS Bold" size="24.0" />
+         </font></Label>
+      <MFXButton fx:id="gobcktomain" layoutX="457.0" layoutY="406.0" onAction="#switchToGameScene" prefHeight="80.0" prefWidth="366.0" rippleAnimateShadow="true" text="  Go Back To Main Menu">
+         <graphic>
+            <ImageView>
+               <image>
+                  <Image url="@../../images/game/joystick.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MFXButton>
+      <MFXButton fx:id="retyr" layoutX="457.0" layoutY="520.0" onAction="#replay" prefHeight="80.0" prefWidth="366.0" rippleAnimateShadow="true" text="  Retry">
+         <graphic>
+            <ImageView>
+               <image>
+                  <Image url="@../../images/game/reload.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MFXButton>
+      <ImageView fx:id="sad" layoutX="576.0" layoutY="201.0">
+         <image>
+            <Image url="@../../images/game/sad.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="hppy" layoutX="576.0" layoutY="201.0">
+         <image>
+            <Image url="@../../images/game/happy.png" />
+         </image>
+      </ImageView>
+    </children>
 </AnchorPane>

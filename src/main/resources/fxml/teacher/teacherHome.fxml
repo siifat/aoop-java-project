@@ -29,17 +29,17 @@
     <children>
         <Pane fx:id="sidePane" layoutX="14.0" layoutY="14.0" prefHeight="741.0" prefWidth="250.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="12.0">
             <children>
-                <Label layoutX="56.0" layoutY="29.0" text="Advanced" textFill="#51a841">
+                <Label layoutX="56.0" layoutY="55.0" text="Advanced" textFill="#51a841">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
-                <Label layoutX="140.0" layoutY="29.0" text="-eLMS" textFill="#3e8ffe">
+                <Label layoutX="140.0" layoutY="55.0" text="-eLMS" textFill="#3e8ffe">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
-                <Label fx:id="dashboardLabel" layoutX="14.0" layoutY="90.0" onMouseClicked="#dashboardClicked" prefHeight="52.0" prefWidth="222.0" text="  Dashboard">
+                <Label fx:id="dashboardLabel" layoutX="14.0" layoutY="154.0" onMouseClicked="#dashboardClicked" prefHeight="52.0" prefWidth="222.0" text="  Dashboard">
                     <padding>
                         <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                     </padding>
@@ -57,7 +57,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Label>
-                <Label fx:id="editClassesLabel" layoutX="14.0" layoutY="154.0" onMouseClicked="#editClassClicked" prefHeight="52.0" prefWidth="222.0" text="  Edit Classes">
+                <Label fx:id="editClassesLabel" layoutX="14.0" layoutY="218.0" onMouseClicked="#editClassClicked" prefHeight="52.0" prefWidth="222.0" text="  Edit Classes">
                     <padding>
                         <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                     </padding>
@@ -75,7 +75,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Label>
-                <Label fx:id="manageStudsLabel" layoutX="14.0" layoutY="218.0" onMouseClicked="#manageStudsClicked" prefHeight="52.0" prefWidth="222.0" text="  Manage Students">
+                <Label fx:id="manageStudsLabel" layoutX="14.0" layoutY="90.0" onMouseClicked="#manageStudsClicked" prefHeight="52.0" prefWidth="222.0" text="  Manage Students" visible="false">
                     <padding>
                         <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                     </padding>
@@ -195,15 +195,7 @@
                                 <Image url="@../../images/general/search.png" />
                             </image>
                         </ImageView>
-                        <ImageView layoutX="971.0" layoutY="28.0">
-                            <image>
-                                <Image url="@../../images/general/notification.png" />
-                            </image>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                        </ImageView>
-                        <ImageView fx:id="chatIcon" layoutX="927.0" layoutY="28.0" onMouseClicked="#chatIconClicked">
+                        <ImageView fx:id="chatIcon" layoutX="975.0" layoutY="27.0" onMouseClicked="#chatIconClicked">
                             <image>
                                 <Image url="@../../images/general/chat.png" />
                             </image>
@@ -211,8 +203,7 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </ImageView>
-                        <Circle fx:id="notiDot" fill="#ff1f1f" layoutX="990.0" layoutY="32.0" radius="4.0" stroke="#8d8080" strokeType="INSIDE" />
-                        <Circle fx:id="messageDot" fill="#ff1f1f" layoutX="950.0" layoutY="33.0" radius="4.0" stroke="#8d8080" strokeType="INSIDE" />
+                        <Circle fx:id="messageDot" fill="#ff1f1f" layoutX="998.0" layoutY="32.0" radius="4.0" stroke="#8d8080" strokeType="INSIDE" />
                         <Label layoutX="27.0" layoutY="79.0" text="Dashboard">
                             <font>
                                 <Font name="System Bold" size="22.0" />
@@ -240,20 +231,29 @@
                                         <Image url="@../../images/teacher/winner.png" />
                                     </image>
                                 </ImageView>
-                                <Label layoutX="41.0" layoutY="176.0" text="Total Students" />
-                                <Label layoutX="222.0" layoutY="172.0" text="Struggling" />
-                                <Label layoutX="393.0" layoutY="176.0" text="Excelling" />
-                                <Label layoutX="60.0" layoutY="136.0" text="100">
+                                <Label layoutX="35.0" layoutY="176.0" text="Total Students">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                                <Label layoutX="216.0" layoutY="172.0" text="Struggling">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                                <Label layoutX="387.0" layoutY="176.0" text="Excelling">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                                <Label fx:id="totalStu" layoutX="60.0" layoutY="136.0" text="100">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="240.0" layoutY="136.0" text="40">
+                                <Label fx:id="strug" layoutX="240.0" layoutY="136.0" text="40">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="406.0" layoutY="136.0" text="60">
+                                <Label fx:id="ex" layoutX="406.0" layoutY="136.0" text="60">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
                                     </font>
@@ -272,18 +272,18 @@
                                         <Font size="13.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="16.0" layoutY="62.0" text="Bottom 3 Stuggling">
+                                <Label layoutX="16.0" layoutY="62.0" text="Top 3 Excelling">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="16.0" layoutY="214.0" text="Top 3 Excelling">
+                                <Label layoutX="16.0" layoutY="214.0" text="Bottom 3 Stuggling">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <ListView layoutX="14.0" layoutY="92.0" prefHeight="99.0" prefWidth="470.0" />
-                                <ListView layoutX="16.0" layoutY="240.0" prefHeight="99.0" prefWidth="470.0" />
+                                <ListView fx:id="topView" layoutX="14.0" layoutY="92.0" prefHeight="99.0" prefWidth="470.0" />
+                                <ListView fx:id="botView" layoutX="16.0" layoutY="240.0" prefHeight="99.0" prefWidth="470.0" />
                             </children>
                         </AnchorPane>
                         <AnchorPane layoutX="548.0" layoutY="508.0" prefHeight="242.0" prefWidth="685.0" styleClass="all-inner-panes">
@@ -293,7 +293,7 @@
                                         <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
-                                <ListView layoutX="14.0" layoutY="54.0" prefHeight="180.0" prefWidth="659.0" />
+                                <ListView fx:id="myListView" layoutX="14.0" layoutY="54.0" prefHeight="180.0" prefWidth="659.0" />
                             </children>
                         </AnchorPane>
                         <AnchorPane layoutX="548.0" layoutY="128.0" prefHeight="320.0" prefWidth="685.0" styleClass="all-inner-panes">
@@ -303,13 +303,8 @@
                                         <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="578.0" layoutY="14.0" styleClass="view-all-labels" text="View Details &gt;">
-                                    <font>
-                                        <Font size="13.0" />
-                                    </font>
-                                </Label>
                                 <Label layoutX="14.0" layoutY="47.0" text="Skill Profeciency" />
-                                <PieChart layoutX="27.0" layoutY="87.0" prefHeight="206.0" prefWidth="250.0" />
+                                <PieChart fx:id="pieChart" layoutX="14.0" layoutY="61.0" prefHeight="256.0" prefWidth="394.0" />
                                 <Label layoutX="453.0" layoutY="79.0" text="Advanced" />
                                 <Label layoutX="564.0" layoutY="79.0" text="Intermediate" />
                                 <Label layoutX="453.0" layoutY="153.0" text="Basic" />
@@ -318,64 +313,80 @@
                                 <Circle fill="#eb6bd1" layoutX="548.0" layoutY="103.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
                                 <Circle fill="#fc8924" layoutX="436.0" layoutY="177.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
                                 <Circle fill="#3193ee" layoutX="548.0" layoutY="177.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-                                <Label layoutX="454.0" layoutY="102.0" text="50%">
+                                <Label fx:id="ad" layoutX="454.0" layoutY="102.0" text="50%">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="564.0" layoutY="102.0" text="50%">
+                                <Label fx:id="in" layoutX="564.0" layoutY="102.0" text="50%">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="452.0" layoutY="176.0" text="50%">
+                                <Label fx:id="ba" layoutX="452.0" layoutY="176.0" text="50%">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="564.0" layoutY="176.0" text="50%">
+                                <Label fx:id="pro" layoutX="564.0" layoutY="176.0" text="50%">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
                             </children>
                         </AnchorPane>
-                        <MFXComboBox layoutX="1088.0" layoutY="459.0" prefHeight="40.0" prefWidth="145.0" />
+                        <MFXComboBox fx:id="firstScreenCB" layoutX="1088.0" layoutY="459.0" prefHeight="40.0" prefWidth="145.0" />
                     </children>
                 </AnchorPane>
-            <AnchorPane fx:id="editClassesPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                <AnchorPane fx:id="editClassesPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                    <children>
+                        <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes">
+                            <children>
+                                <MFXComboBox fx:id="sectionSelectionCB" floatMode="BORDER" floatingText="Select Section" layoutX="60.0" layoutY="22.0" prefHeight="40.0" prefWidth="176.0" />
+                                <MFXButton fx:id="newAssBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="944.0" layoutY="566.0" onAction="#addNewAssignmentClicked" prefHeight="40.0" prefWidth="176.0" rippleAnimateShadow="true" text="Add New Assignment" />
+                                <TableView fx:id="assignmentTableView" layoutX="60.0" layoutY="452.0" prefHeight="267.0" prefWidth="755.0">
+                                    <columns>
+                                        <TableColumn fx:id="aTitle" prefWidth="283.0" text="Title" />
+                                        <TableColumn fx:id="aDesc" prefWidth="255.0" text="Description" />
+                                        <TableColumn fx:id="aDueDate" prefWidth="127.0" text="Due Date" />
+                                        <TableColumn fx:id="aSec" prefWidth="89.0" text="Section" />
+                                    </columns>
+                                </TableView>
+                                <Label layoutX="63.0" layoutY="417.0" text="All Assignments">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <TableView fx:id="courseMaterialTableView" layoutX="60.0" layoutY="130.0" prefHeight="267.0" prefWidth="755.0">
+                                    <columns>
+                                        <TableColumn fx:id="cTitle" prefWidth="278.0" text="Title" />
+                                        <TableColumn fx:id="cDesc" prefWidth="258.0" text="Description" />
+                                        <TableColumn fx:id="cUploadDate" prefWidth="129.0" text="Upload Date" />
+                                        <TableColumn fx:id="cSec" prefWidth="89.0" text="Section" />
+                                    </columns>
+                                </TableView>
+                                <Label layoutX="60.0" layoutY="96.0" text="Course Materials">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <MFXButton fx:id="newCrsBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="944.0" layoutY="244.0" onAction="#addCourseElementClicked" prefHeight="40.0" prefWidth="176.0" rippleAnimateShadow="true" text="Add Course Element" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
+            <AnchorPane fx:id="manageStudPane" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes">
                      <children>
-                        <MFXComboBox fx:id="sectionSelectionCB" floatMode="BORDER" floatingText="Select Section" layoutX="60.0" layoutY="22.0" prefHeight="40.0" prefWidth="176.0" />
-                        <MFXButton buttonType="RAISED" depthLevel="LEVEL5" layoutX="944.0" layoutY="566.0" onAction="#addNewAssignmentClicked" prefHeight="40.0" prefWidth="176.0" rippleAnimateShadow="true" text="Add New Assignment" />
-                        <TableView fx:id="assignmentTableView" layoutX="60.0" layoutY="452.0" prefHeight="267.0" prefWidth="755.0">
-                          <columns>
-                            <TableColumn fx:id="aTitle" prefWidth="283.0" text="Title" />
-                            <TableColumn fx:id="aDesc" prefWidth="255.0" text="Description" />
-                              <TableColumn fx:id="aDueDate" prefWidth="127.0" text="Due Date" />
-                              <TableColumn fx:id="aSec" prefWidth="89.0" text="Section" />
-                          </columns>
+                        <TableView fx:id="studentTable" layoutX="27.0" layoutY="14.0" prefHeight="714.0" prefWidth="1197.0">
+                           <columns>
+                              <TableColumn fx:id="nnameCol" prefWidth="333.0" text="Student name" />
+                              <TableColumn fx:id="iidCol" prefWidth="265.0" text="ID" />
+                              <TableColumn fx:id="probationCol" prefWidth="268.0" text="Probation" />
+                              <TableColumn fx:id="reasonCol" prefWidth="330.0" text="Reason" />
+                           </columns>
                         </TableView>
-                        <Label layoutX="63.0" layoutY="417.0" text="All Assignments">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <TableView fx:id="courseMaterialTableView" layoutX="60.0" layoutY="130.0" prefHeight="267.0" prefWidth="755.0">
-                          <columns>
-                            <TableColumn fx:id="cTitle" prefWidth="278.0" text="Title" />
-                            <TableColumn fx:id="cDesc" prefWidth="258.0" text="Description" />
-                              <TableColumn fx:id="cUploadDate" prefWidth="129.0" text="Upload Date" />
-                              <TableColumn fx:id="cSec" prefWidth="89.0" text="Section" />
-                          </columns>
-                        </TableView>
-                        <Label layoutX="60.0" layoutY="96.0" text="Course Materials">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <MFXButton buttonType="RAISED" depthLevel="LEVEL5" layoutX="944.0" layoutY="244.0" onAction="#addCourseElementClicked" prefHeight="40.0" prefWidth="176.0" rippleAnimateShadow="true" text="Add Course Element" />
                      </children>
                   </AnchorPane>
                </children>
@@ -410,7 +421,11 @@
                 </AnchorPane>
                 <AnchorPane fx:id="privateFilesPane" prefHeight="200.0" prefWidth="200.0" visible="false">
                     <children>
-                        <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes" />
+                        <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="741.0" prefWidth="1250.0" styleClass="all-inner-panes">
+                     <children>
+                        <ListView fx:id="l" layoutX="14.0" layoutY="11.0" prefHeight="720.0" prefWidth="905.0" />
+                        <MFXButton fx:id="b" buttonType="RAISED" depthLevel="LEVEL5" layoutX="1016.0" layoutY="330.0" onAction="#bClicked" prefHeight="64.0" prefWidth="176.0" rippleAnimateShadow="true" text="Add a new File" />
+                     </children></AnchorPane>
                     </children>
                 </AnchorPane>
                 <AnchorPane fx:id="myProfilePane" prefHeight="200.0" prefWidth="200.0" visible="false">
@@ -468,16 +483,16 @@
                                     </cursor>
                                 </Rating>
                                 <Label fx:id="ratingLabel" layoutX="18.0" layoutY="599.0" text="User Rating:" />
-                        <Circle fx:id="cameraCircle" fill="WHITE" layoutX="93.0" layoutY="150.0" onMouseClicked="#editProfilePictureClicked" radius="12.0" stroke="BLACK" strokeType="INSIDE">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Circle>
-                        <TextField fx:id="pNameField" layoutX="185.0" layoutY="177.0" prefHeight="30.0" prefWidth="221.0" />
-                        <TextField fx:id="pIDField" layoutX="185.0" layoutY="219.0" prefHeight="30.0" prefWidth="221.0" />
-                        <TextField fx:id="pEmailField" layoutX="185.0" layoutY="261.0" prefHeight="30.0" prefWidth="221.0" />
-                        <TextField fx:id="pInitialField" layoutX="185.0" layoutY="303.0" prefHeight="30.0" prefWidth="221.0" />
-                        <TextField fx:id="pMobileField" layoutX="185.0" layoutY="345.0" prefHeight="30.0" prefWidth="221.0" />
+                                <Circle fx:id="cameraCircle" fill="WHITE" layoutX="93.0" layoutY="150.0" onMouseClicked="#editProfilePictureClicked" radius="12.0" stroke="BLACK" strokeType="INSIDE">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Circle>
+                                <TextField fx:id="pNameField" layoutX="185.0" layoutY="177.0" prefHeight="30.0" prefWidth="221.0" />
+                                <TextField fx:id="pIDField" layoutX="185.0" layoutY="219.0" prefHeight="30.0" prefWidth="221.0" />
+                                <TextField fx:id="pEmailField" layoutX="185.0" layoutY="261.0" prefHeight="30.0" prefWidth="221.0" />
+                                <TextField fx:id="pInitialField" layoutX="185.0" layoutY="303.0" prefHeight="30.0" prefWidth="221.0" />
+                                <TextField fx:id="pMobileField" layoutX="185.0" layoutY="345.0" prefHeight="30.0" prefWidth="221.0" />
                             </children>
                         </AnchorPane>
                     </children>

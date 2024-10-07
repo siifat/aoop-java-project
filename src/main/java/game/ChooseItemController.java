@@ -1,5 +1,6 @@
 package game;
 
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +11,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lms.controller.dictionary.Controller;
+import lms.controller.dictionary.DictionaryHomepage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -44,6 +47,13 @@ public class ChooseItemController extends Controller {
         correctLabel.setText("Correct!");
         chooseItem.increaseHighscore();
         scoreBox.setText("Score: " + chooseItem.getScore());
+
+        // Call setQuestion() after a short delay to allow the user to see the "Correct!" message
+        PauseTransition pause = new PauseTransition(Duration.seconds(0.3)); // 1-second delay
+        pause.setOnFinished(e -> {
+            setQuestionByAction();  // Calling setQuestion() to load the next question
+        });
+        pause.play();
     }
 
     private boolean checkIfArrayIsNotFull(Item[] items) {
@@ -148,8 +158,20 @@ public class ChooseItemController extends Controller {
 
     @FXML
     public void switchToGameScene(ActionEvent event) throws IOException {
-        FXMLLoader gameScene = new FXMLLoader(getClass().getResource("gameScene.fxml"));
-        root = gameScene.load();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dictionary/dictionaryHomepage.fxml"));
+        root = loader.load();
+
+        // Load the DialogPane from the FXML file
+        DictionaryHomepage controller = loader.getController();
+
+        Label l = controller.gameLabel;
+        controller.setSelectedLabel(l);
+        controller.homepagePane.setVisible(false);
+        controller.addNewWordPane.setVisible(false);
+        controller.onlineModePane.setVisible(false);
+        controller.translatorPane.setVisible(false);
+        controller.homepagePane.setVisible(false);
+        controller.gamePane.setVisible(true);
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -160,7 +182,7 @@ public class ChooseItemController extends Controller {
 
     @FXML
     public void end(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ChooseItemEnd.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/game/ChooseItemEnd.fxml"));
         root = loader.load();
 
         ChooseItemEndController chooseItemEndController = loader.getController();

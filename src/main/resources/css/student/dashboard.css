@@ -1,6 +1,5 @@
-#root{
-    /*-fx-background-color: radial-gradient(center 50% 100%, radius 50%, #0f0c29, #302b63, #24243e);*/
-    -fx-background-color: #f5f6fa;
+.root{
+
 }
 
 .selected-label {
@@ -11,18 +10,74 @@
     -fx-border-radius: 12;
 }
 
+.table-view{
+    /*-fx-border-color: transparent;*/
+    -fx-background-color:transparent;
+    -fx-border-color:linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    -fx-border-radius:8px;
+    -fx-padding:0px;
+}
+
+.table-view .table-row-cell {
+    -fx-border-color: white; /* Removes border from rows */
+}
+
+.table-view .table-column{
+    -fx-alignment:CENTER;
+}
+
+.table-view .column-header-background{
+    -fx-background-color:linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-radius:8px 8px 0px 0px;
+}
+
+.table-view .column-header, .filter{
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+}
+
+.table-view .column-header .label{
+    -fx-text-fill:#fff;
+}
+
+
 #leftPane{
     -fx-background-color: white;
     -fx-background-radius: 18px;
-    /*-fx-background-color: linear-gradient(to bottom, #00b09b, #96c93d);*/
+    -fx-border-width: 1px;
+    -fx-border-radius: 18px;
+}
 
+#dashBoardLabel,
+#enrollCourseLabel,
+#myProgressLabel,
+#studentToolboxLabel {
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
 
+#dashBoardLabel:hover,
+#enrollCourseLabel:hover,
+#myProgressLabel:hover,
+#studentToolboxLabel:hover,
+#dashBoardLabel:focused,
+#enrollCourseLabel:focused,
+#myProgressLabel:focused,
+#studentToolboxLabel:focused {
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-background-color: e5f1ff;
+    -fx-cursor: hand;
+    -fx-font-smoothing-type: lcd;
 }
 
 #topPane,
 #basePane{
-    -fx-background-color: #e9eff7;
+
 }
+
+
 #pane1,
 #pane2,
 #pane3 {
@@ -138,4 +193,22 @@
 #enButton{
     -fx-cursor: hand;
     -fx-font-smoothing-type: lcd;
+    -fx-border-radius: 16px;
+}
+
+.all-inner-pane{
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+
+
+#tdBtn,
+#DcBtn,
+#calBtn{
+    -fx-background-color: #b3d6ff;
+    -fx-font-weight: bold;
+    -fx-font-size: 19px;
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
 }

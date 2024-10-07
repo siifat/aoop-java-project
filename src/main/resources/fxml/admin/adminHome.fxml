@@ -5,6 +5,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import io.github.palexdev.materialfx.controls.MFXRadioButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -16,7 +17,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -28,132 +28,196 @@
 
 <AnchorPane fx:id="root" prefHeight="765.0" prefWidth="1540.0" stylesheets="@../../css/admin/adminHome.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lms.controller.admin.AdminHome">
     <children>
-        <Pane fx:id="sidePane" layoutX="14.0" layoutY="14.0" prefHeight="736.0" prefWidth="224.0" visible="false">
+        <AnchorPane fx:id="adminLoginPane" prefHeight="765.0" prefWidth="1540.0" style="-fx-background-color: f2d5d1;">
             <children>
-                <MFXButton fx:id="homeButton" alignment="CENTER_RIGHT" layoutX="3.0" layoutY="186.0" onAction="#homeClicked" prefHeight="68.0" prefWidth="218.0" text="Home" textAlignment="CENTER" textFill="#2f2929" wrapText="true">
-                    <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                    </cursor>
-                    <effect>
-                        <Blend />
-                    </effect>
-                </MFXButton>
-                <MFXButton fx:id="manageButton" alignment="CENTER_RIGHT" layoutX="3.0" layoutY="277.0" onAction="#manageClicked" prefHeight="68.0" prefWidth="218.0" text="User Management">
-                    <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                    </cursor>
-                    <effect>
-                        <Blend />
-                    </effect>
-                </MFXButton>
-                <MFXButton fx:id="logButton" alignment="CENTER_RIGHT" layoutX="3.0" layoutY="368.0" onAction="#reportClicked" prefHeight="68.0" prefWidth="218.0" text="Reports and Logs">
-                    <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                    </cursor>
-                    <effect>
-                        <Blend />
-                    </effect>
-                </MFXButton>
-                <MFXButton fx:id="configButton" alignment="CENTER_RIGHT" layoutX="3.0" layoutY="459.0" onAction="#configClicked" prefHeight="68.0" prefWidth="218.0" text="System Configuration">
-                    <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                    </cursor>
-                    <effect>
-                        <Blend />
-                    </effect>
-                </MFXButton>
-                <FontIcon fx:id="icon1" iconLiteral="fas-house-user" iconSize="25" layoutX="18.0" layoutY="227.0" wrappingWidth="22.5" />
-                <FontIcon fx:id="icon2" iconLiteral="fas-briefcase" iconSize="25" layoutX="19.0" layoutY="318.0" />
-                <FontIcon fx:id="icon3" iconLiteral="far-file-archive" iconSize="25" layoutX="20.0" layoutY="409.0" text="" wrappingWidth="14.0" />
-                <FontIcon fx:id="icon4" iconLiteral="fas-cog" iconSize="25" layoutX="17.0" layoutY="502.0" />
-                <FontIcon fx:id="icon5" iconColor="WHITE" iconLiteral="fas-sign-out-alt" iconSize="25" layoutX="87.0" layoutY="684.0" onDragDetected="#signoutClicked" />
-                <Label fx:id="label1" layoutX="66.0" layoutY="687.0" onMouseClicked="#signoutClicked" prefHeight="27.0" prefWidth="73.0" text="Sign out" textFill="WHITE">
+                <ImageView fitHeight="765.0" fitWidth="1540.0" layoutX="196.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/admin/loginbackground.jpg" />
+                    </image>
+                </ImageView>
+                <Pane fx:id="adnminLoginPane" layoutX="566.0" layoutY="158.0" prefHeight="404.0" prefWidth="408.0" style="-fx-background-color: #F5F5F5;">
+                    <children>
+                        <ImageView fitHeight="79.0" fitWidth="82.0" layoutX="165.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/admin/adminpic.png" />
+                            </image>
+                        </ImageView>
+                        <MFXButton fx:id="adminLoginButton" buttonType="RAISED" depthLevel="LEVEL5" layoutX="152.0" layoutY="293.0" onAction="#adminLoginClicked" prefHeight="35.0" prefWidth="105.0" rippleAnimateShadow="true" text="Login" />
+                        <Label fx:id="aloginLabel" layoutX="156.0" layoutY="142.0" text="Admin Login" />
+                        <MFXPasswordField fx:id="privateFilePassField" floatMode="BORDER" floatingText="Enter secrete password" layoutX="42.0" layoutY="202.0" prefHeight="49.0" prefWidth="325.0">
+                            <cursor>
+                                <Cursor fx:constant="TEXT" />
+                            </cursor>
+                        </MFXPasswordField>
+                    </children>
+                </Pane>
+            </children>
+        </AnchorPane>
+        <Pane fx:id="sidePane" layoutX="14.0" layoutY="14.0" prefHeight="741.0" prefWidth="250.0" visible="false">
+            <children>
+                <FontIcon fx:id="icon5" iconLiteral="fas-sign-out-alt" iconSize="25" layoutX="100.0" layoutY="664.0" onDragDetected="#signoutClicked" />
+                <Label fx:id="label1" layoutX="76.0" layoutY="667.0" onMouseClicked="#signoutClicked" prefHeight="27.0" prefWidth="73.0" text="Sign out" textFill="WHITE">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </Label>
-                <Label layoutX="43.0" layoutY="49.0" text="Advanced" textFill="#51a841">
+                <Label layoutX="56.0" layoutY="55.0" text="Advanced" textFill="#51a841">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
-                <Label layoutX="127.0" layoutY="49.0" text="-eLMS" textFill="#3e8ffe">
+                <Label layoutX="140.0" layoutY="55.0" text="-eLMS" textFill="#3e8ffe">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
+                <Label fx:id="homeLabel" layoutX="14.0" layoutY="221.0" onMouseClicked="#homeLabelClicked" prefHeight="52.0" prefWidth="222.0" text="  Home">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@../../images/admin/home.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                    </padding>
+                </Label>
+                <Label fx:id="manageLabel" layoutX="14.0" layoutY="285.0" onMouseClicked="#manageLabelClicked" prefHeight="52.0" prefWidth="222.0" text="  User management">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@../../images/admin/briefcase.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                    </padding>
+                </Label>
+                <Label fx:id="logLabel" layoutX="14.0" layoutY="349.0" onMouseClicked="#reportLabelClicked" prefHeight="52.0" prefWidth="222.0" text="  Reports and Logs">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@../../images/admin/file.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                    </padding>
+                </Label>
+                <Label fx:id="configLabel" layoutX="14.0" layoutY="413.0" onMouseClicked="#configLabelClicked" prefHeight="52.0" prefWidth="222.0" text="  System Configuration">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@../../images/admin/settings.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                    </padding>
+                </Label>
             </children>
         </Pane>
-        <Pane fx:id="upperpane" layoutX="248.0" layoutY="14.0" prefHeight="91.0" prefWidth="1283.0" visible="false">
+        <Pane fx:id="upperpane" layoutX="275.0" layoutY="14.0" prefHeight="91.0" prefWidth="1234.0" visible="false">
             <children>
-                <Circle fx:id="proPicCircle" fill="DODGERBLUE" layoutX="1240.0" layoutY="46.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="1066.0" layoutY="21.0" text="Hassan Bin Abedin">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="1105.0" layoutY="46.0" text="Admin, CITS">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            <ImageView layoutX="952.0" layoutY="35.0">
-               <image>
-                  <Image url="@../../images/general/notification.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <ImageView fx:id="chatIcon" layoutX="908.0" layoutY="35.0" onMouseClicked="#chatIconClicked">
-               <image>
-                  <Image url="@../../images/general/chat.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <Separator focusTraversable="false" layoutX="1010.0" layoutY="17.0" opacity="0.68" orientation="VERTICAL" prefHeight="58.0" prefWidth="14.0" />
+                <Circle fx:id="proPicCircle" fill="DODGERBLUE" layoutX="1178.0" layoutY="46.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
+                <Label layoutX="1004.0" layoutY="21.0" text="Hassan Bin Abedin">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <Label layoutX="1043.0" layoutY="46.0" text="Admin, CITS">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Label>
+                <ImageView layoutX="890.0" layoutY="35.0">
+                    <image>
+                        <Image url="@../../images/general/notification.png" />
+                    </image>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </ImageView>
+                <ImageView fx:id="chatIcon" layoutX="846.0" layoutY="35.0" onMouseClicked="#chatIconClicked">
+                    <image>
+                        <Image url="@../../images/general/chat.png" />
+                    </image>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </ImageView>
+                <Separator focusTraversable="false" layoutX="948.0" layoutY="17.0" opacity="0.68" orientation="VERTICAL" prefHeight="58.0" prefWidth="14.0" />
             </children>
         </Pane>
-        <StackPane fx:id="stackPane" layoutX="248.0" layoutY="115.0" prefHeight="635.0" prefWidth="1283.0" visible="false">
+        <StackPane fx:id="stackPane" layoutX="275.0" layoutY="115.0" prefHeight="635.0" prefWidth="1234.0" visible="false">
             <children>
-                <Pane fx:id="homep1Pane" prefHeight="600.0" prefWidth="200.0" visible="false">
-               <children>
-                  <MFXComboBox fx:id="programComboBox" floatingText="Program" layoutX="100.0" layoutY="41.0" onAction="#programComboBoxClicked" prefHeight="39.0" prefWidth="200.0" />
-                  <Pane fx:id="graphPane" layoutX="70.0" layoutY="118.0" prefHeight="478.0" prefWidth="506.0" />
-                  <Pane fx:id="overViewPane" layoutX="715.0" layoutY="40.0" prefHeight="295.0" prefWidth="506.0" />
-                  <Pane fx:id="overViewPane1" layoutX="642.0" layoutY="352.0" prefHeight="243.0" prefWidth="579.0" />
-                  <Button fx:id="calendarButton" layoutX="616.0" layoutY="285.0" mnemonicParsing="false" onAction="#calendarButtonClicked" text="Calender" />
-               </children></Pane>
+                <Pane fx:id="homep1Pane" prefHeight="600.0" prefWidth="200.0">
+                    <children>
+                        <MFXComboBox fx:id="programComboBox" floatingText="Program" layoutX="89.0" layoutY="41.0" onAction="#programComboBoxClicked" prefHeight="39.0" prefWidth="211.0" />
+                        <Pane fx:id="graphPane" layoutX="60.0" layoutY="114.0" prefHeight="478.0" prefWidth="506.0" />
+                        <Pane fx:id="overViewPane" layoutX="617.0" layoutY="112.0" prefHeight="478.0" prefWidth="579.0">
+                            <children>
+                                <TableView fx:id="announcementTV" layoutX="14.0" layoutY="14.0" prefHeight="450.0" prefWidth="552.0">
+                                    <columns>
+                                        <TableColumn fx:id="aNoCol" prefWidth="43.0" text="SL" />
+                                        <TableColumn fx:id="aDateCol" prefWidth="89.0" text="Date" />
+                                        <TableColumn fx:id="aTitleCol" prefWidth="110.0" text="Title" />
+                                        <TableColumn fx:id="aAnnouncementCol" prefWidth="316.0" text="Announcement" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </Pane>
+                    </children>
+                </Pane>
                 <Pane fx:id="ump1Pane" prefHeight="462.0" prefWidth="1283.0" visible="false">
                     <children>
                         <MFXButton fx:id="s1Button" layoutX="191.0" layoutY="123.0" onAction="#studButtonClicked" text="Student" />
                         <MFXButton fx:id="t1Button" layoutX="344.0" layoutY="123.0" onAction="#teachButtonClicked" text="Teacher" textFill="WHITE" />
-                        <Label fx:id="st1Label" layoutX="685.0" layoutY="34.0" text="Recent updates" />
-                  <MFXTextField fx:id="aTitleField" floatMode="BORDER" floatingText="Announcement title" layoutX="77.0" layoutY="250.0" prefHeight="48.0" prefWidth="289.0">
-                     <cursor>
-                        <Cursor fx:constant="TEXT" />
-                     </cursor></MFXTextField>
-                  <MFXButton fx:id="publishButton" layoutX="270.0" layoutY="575.0" onAction="#publishClicked" text="Publish" />
-                  <TextArea fx:id="aField" layoutX="77.0" layoutY="314.0" prefHeight="229.0" prefWidth="506.0" promptText="Announcement">
-                     <cursor>
-                        <Cursor fx:constant="TEXT" />
-                     </cursor>
-                  </TextArea>
-                  <Label layoutX="77.0" layoutY="204.0" text="Send Notice">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="77.0" layoutY="60.0" text="Edit Informations">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Label>
-                  <MFXRadioButton fx:id="tAnnounceRB" layoutX="383.0" layoutY="262.0" text="Teacher" />
-                  <MFXRadioButton fx:id="sAnnounceRB" layoutX="497.0" layoutY="262.0" text="Student" />
-                  <ListView fx:id="updateLogLV" layoutX="685.0" layoutY="78.0" prefHeight="524.0" prefWidth="560.0" />
+                        <Label fx:id="rUpdateLabel" layoutX="685.0" layoutY="34.0" text="Recent updates">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <MFXTextField fx:id="aTitleField" floatMode="BORDER" floatingText="Announcement title" layoutX="77.0" layoutY="250.0" prefHeight="48.0" prefWidth="289.0">
+                            <cursor>
+                                <Cursor fx:constant="TEXT" />
+                            </cursor>
+                        </MFXTextField>
+                        <MFXButton fx:id="publishButton" layoutX="270.0" layoutY="575.0" onAction="#publishClicked" text="Publish" />
+                        <TextArea fx:id="aField" layoutX="77.0" layoutY="314.0" prefHeight="229.0" prefWidth="506.0" promptText="Announcement">
+                            <cursor>
+                                <Cursor fx:constant="TEXT" />
+                            </cursor>
+                        </TextArea>
+                        <Label fx:id="sNoticeLabel" layoutX="77.0" layoutY="204.0" text="Send Announcement">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="editLabel" layoutX="77.0" layoutY="60.0" text="Edit Informations">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <MFXRadioButton fx:id="tAnnounceRB" layoutX="383.0" layoutY="262.0" text="Teacher" />
+                        <MFXRadioButton fx:id="sAnnounceRB" layoutX="497.0" layoutY="262.0" text="Student" />
+                        <ListView fx:id="updateLogLV" layoutX="685.0" layoutY="78.0" prefHeight="524.0" prefWidth="532.0" />
                     </children>
                 </Pane>
                 <Pane fx:id="ump2Pane" prefHeight="200.0" prefWidth="200.0" visible="false">
@@ -163,17 +227,17 @@
                                 <ToggleGroup fx:id="home2" />
                             </toggleGroup>
                         </MFXRadioButton>
-                        <MFXRadioButton fx:id="registrationRB" layoutX="292.0" layoutY="63.0" onMouseClicked="#sregRBClicked" text="Registration" toggleGroup="$home2" />
-                        <MFXRadioButton fx:id="courseRB" layoutX="735.0" layoutY="63.0" onMouseClicked="#scourseRBClicked" text="Course Assign/Expultion" toggleGroup="$home2" />
-                        <MFXRadioButton fx:id="infoRB" layoutX="1034.0" layoutY="63.0" onMouseClicked="#sinfoRBClicked" text="Information update" toggleGroup="$home2" />
-                        <MFXRadioButton fx:id="roleRB" layoutX="532.0" layoutY="63.0" onMouseClicked="#sroleRBClicked" text="Role Assign" toggleGroup="$home2" />
+                        <MFXRadioButton fx:id="registrationRB" layoutX="281.0" layoutY="63.0" onMouseClicked="#sregRBClicked" text="Registration" toggleGroup="$home2" />
+                        <MFXRadioButton fx:id="courseRB" layoutX="705.0" layoutY="63.0" onMouseClicked="#scourseRBClicked" text="Course Assign/Expultion" toggleGroup="$home2" />
+                        <MFXRadioButton fx:id="infoRB" layoutX="1009.0" layoutY="63.0" onMouseClicked="#sinfoRBClicked" text="Information update" toggleGroup="$home2" />
+                        <MFXRadioButton fx:id="roleRB" layoutX="500.0" layoutY="63.0" onMouseClicked="#sroleRBClicked" text="Role Assign" toggleGroup="$home2" />
                         <MFXButton fx:id="save2Button" layoutX="614.0" layoutY="579.0" onAction="#stSaveCngClicked" text="Save Changes" />
                         <MFXButton contentDisplay="GRAPHIC_ONLY" layoutX="32.0" layoutY="30.0" onAction="#p2backClicked">
                             <graphic>
                                 <FontIcon fx:id="icon6" iconLiteral="fas-chevron-left" iconSize="25" text="" />
                             </graphic>
                         </MFXButton>
-                        <TableView fx:id="sapprovalTable" layoutX="64.0" layoutY="123.0" onMouseClicked="#sapprovalTableClicked" prefHeight="425.0" prefWidth="868.0">
+                        <TableView fx:id="sapprovalTable" layoutX="48.0" layoutY="123.0" onMouseClicked="#sapprovalTableClicked" prefHeight="425.0" prefWidth="868.0">
                             <columns>
                                 <TableColumn fx:id="sidCol" prefWidth="102.0" text="ID" />
                                 <TableColumn fx:id="snameCol" prefWidth="230.0" text="Name" />
@@ -184,7 +248,7 @@
                                 <TableColumn fx:id="sappCol" prefWidth="68.0" text="Approve" />
                             </columns>
                         </TableView>
-                        <Pane layoutX="952.0" layoutY="123.0" prefHeight="425.0" prefWidth="278.0" style="-fx-background-color: grey;">
+                        <Pane layoutX="930.0" layoutY="123.0" prefHeight="425.0" prefWidth="278.0" style="-fx-background-color: grey;">
                             <children>
                                 <TextField fx:id="stf1" editable="false" layoutX="115.0" layoutY="35.0" />
                                 <TextField fx:id="stf2" layoutX="115.0" layoutY="86.0" />
@@ -198,7 +262,7 @@
                                 <Label fx:id="umLabel4" layoutX="20.0" layoutY="188.0" text="Mobile" />
                                 <Label fx:id="umLabel5" layoutX="24.0" layoutY="239.0" text="Role" />
                                 <Label fx:id="umLabel6" layoutX="17.0" layoutY="290.0" text="Registration" />
-                                <Button fx:id="approveButton" layoutX="108.0" layoutY="348.0" mnemonicParsing="false" onAction="#approveClicked" text="Approve" />
+                                <Button fx:id="sapproveButton" layoutX="53.0" layoutY="353.0" mnemonicParsing="false" onAction="#approveClicked" text="Approve/ Disapprove" />
                             </children>
                         </Pane>
                     </children>
@@ -219,36 +283,36 @@
                                 <FontIcon fx:id="icon61" iconLiteral="fas-chevron-left" iconSize="25" text="" />
                             </graphic>
                         </MFXButton>
-                        <TableView fx:id="tapprovalTable" layoutX="64.0" layoutY="123.0" onMouseClicked="#tapprovalTableClicked" prefHeight="425.0" prefWidth="868.0">
+                        <TableView fx:id="tapprovalTable" layoutX="54.0" layoutY="123.0" onMouseClicked="#tapprovalTableClicked" prefHeight="425.0" prefWidth="817.0">
                             <columns>
                                 <TableColumn fx:id="tinitialCol" prefWidth="102.0" text="Faculty Initial" />
                                 <TableColumn fx:id="tnameCol" prefWidth="230.0" text="Faculty Name" />
                                 <TableColumn fx:id="temailCol" prefWidth="195.0" text="Email" />
                                 <TableColumn fx:id="tmobileCol" prefWidth="104.0" text="Mobile" />
-                                <TableColumn fx:id="troleCol" prefWidth="155.0" text="Role" />
-                                <TableColumn fx:id="tappCol" prefWidth="81.0" text="Approve" />
+                                <TableColumn fx:id="troleCol" prefWidth="112.0" text="Role" />
+                                <TableColumn fx:id="tappCol" prefWidth="71.0" text="Approve" />
                             </columns>
                         </TableView>
-                        <Pane layoutX="952.0" layoutY="123.0" prefHeight="425.0" prefWidth="278.0" style="-fx-background-color: grey;">
+                        <Pane layoutX="919.0" layoutY="123.0" prefHeight="425.0" prefWidth="296.0" style="-fx-background-color: grey;">
                             <children>
-                                <TextField fx:id="ttf1" editable="false" layoutX="113.0" layoutY="57.0" />
-                                <TextField fx:id="ttf2" layoutX="113.0" layoutY="108.0" />
-                                <TextField fx:id="ttf3" layoutX="113.0" layoutY="159.0" />
-                                <TextField fx:id="ttf4" layoutX="113.0" layoutY="210.0" />
-                                <ComboBox fx:id="tcb1" layoutX="112.0" layoutY="261.0" prefWidth="150.0" />
+                                <TextField fx:id="ttf1" editable="false" layoutX="130.0" layoutY="57.0" prefHeight="25.0" prefWidth="142.0" />
+                                <TextField fx:id="ttf2" layoutX="130.0" layoutY="108.0" prefHeight="25.0" prefWidth="142.0" />
+                                <TextField fx:id="ttf3" layoutX="132.0" layoutY="159.0" prefHeight="25.0" prefWidth="142.0" />
+                                <TextField fx:id="ttf4" layoutX="132.0" layoutY="210.0" prefHeight="25.0" prefWidth="142.0" />
+                                <ComboBox fx:id="tcb1" layoutX="132.0" layoutY="261.0" prefHeight="25.0" prefWidth="142.0" />
                                 <Label fx:id="umLabel11" layoutX="15.0" layoutY="57.0" text="Faculty Initial" />
                                 <Label fx:id="umLabel21" layoutX="17.0" layoutY="108.0" text="Faculty Name" />
                                 <Label fx:id="umLabel31" layoutX="18.0" layoutY="159.0" text="Email" />
                                 <Label fx:id="umLabel41" layoutX="18.0" layoutY="210.0" text="Mobile" />
                                 <Label fx:id="umLabel51" layoutX="22.0" layoutY="261.0" text="Role" />
-                                <Button fx:id="tapproveButton1" layoutX="108.0" layoutY="348.0" mnemonicParsing="false" onAction="#tapproveClicked" text="Approve" />
+                                <Button fx:id="tapproveButton" layoutX="62.0" layoutY="340.0" mnemonicParsing="false" onAction="#tapproveClicked" text="Approve/ Disapprove" />
                             </children>
                         </Pane>
                     </children>
                 </Pane>
                 <Pane fx:id="rlp1Pane" prefHeight="200.0" prefWidth="200.0" visible="false">
                     <children>
-                        <TableView fx:id="complainTV" layoutX="47.0" layoutY="167.0" prefHeight="404.0" prefWidth="1169.0">
+                        <TableView fx:id="complainTV" layoutX="47.0" layoutY="146.0" prefHeight="425.0" prefWidth="1169.0">
                             <columns>
                                 <TableColumn fx:id="cNameCol" prefWidth="197.0" text="Name" />
                                 <TableColumn fx:id="cIDCol" minWidth="0.0" prefWidth="75.0" text="ID" />
@@ -259,57 +323,63 @@
                                 <TableColumn prefWidth="102.0" text="Issue solved" />
                             </columns>
                         </TableView>
-                        <MFXTextField fx:id="searchField2" floatingText="Search for Complain" layoutX="179.0" layoutY="96.0" prefHeight="48.0" prefWidth="857.0" />
-                  <FontIcon iconLiteral="fab-searchengin" iconSize="25" layoutX="141.0" layoutY="129.0" text="" />
-                  <MFXButton fx:id="searchButton" layoutX="1060.0" layoutY="104.0" onAction="#tSaveCngClicked" text="Search" />
+                        <MFXTextField fx:id="searchField2" floatingText="Search for Complain" layoutX="174.0" layoutY="56.0" prefHeight="48.0" prefWidth="857.0" />
+                        <FontIcon iconLiteral="fab-searchengin" iconSize="25" layoutX="136.0" layoutY="89.0" text="" />
+                        <MFXButton fx:id="searchButton" layoutX="1055.0" layoutY="64.0" onAction="#tSaveCngClicked" text="Search" />
                     </children>
                 </Pane>
                 <Pane fx:id="sconfigp1Pane" prefHeight="200.0" prefWidth="200.0" visible="false">
-               <children>
-                  <Label layoutX="58.0" layoutY="49.0" text="Profile Settings">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Separator layoutX="58.0" layoutY="83.0" prefWidth="200.0" />
-                  <Label layoutX="58.0" layoutY="120.0" text="Name:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <MFXTextField layoutX="158.0" layoutY="106.0" prefHeight="49.0" prefWidth="442.0" />
-                  <Label layoutX="60.0" layoutY="191.0" text="Email:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="58.0" layoutY="256.0" text="Bio:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <MFXTextField layoutX="158.0" layoutY="176.0" prefHeight="49.0" prefWidth="442.0" />
-                  <MFXTextField layoutX="158.0" layoutY="241.0" prefHeight="49.0" prefWidth="442.0" />
-                  <Label layoutX="60.0" layoutY="341.0" text="Security Settings">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Separator layoutX="58.0" layoutY="374.0" prefWidth="200.0" />
-                  <MFXButton fx:id="saveChangesBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="596.0" layoutY="573.0" prefHeight="40.0" prefWidth="113.0" rippleAnimateShadow="true" rippleColor="#4b53e8" text="Save Changes">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </MFXButton>
-                  <Label layoutX="60.0" layoutY="403.0" text="Password">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <MFXPasswordField layoutX="158.0" layoutY="389.0" prefHeight="49.0" prefWidth="442.0" />
-               </children></Pane>
+                    <children>
+                        <Label layoutX="58.0" layoutY="49.0" text="Profile Settings">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <Separator layoutX="58.0" layoutY="83.0" prefWidth="200.0" />
+                        <Label fx:id="nLabel" layoutX="58.0" layoutY="219.0" text="Name:">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <MFXTextField floatMode="DISABLED" layoutX="158.0" layoutY="211.0" prefHeight="40.0" prefWidth="442.0" text="Hassan Bin Abedin" />
+                        <Label fx:id="eLabel" layoutX="59.0" layoutY="290.0" text="Email:">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="bLabel" layoutX="58.0" layoutY="355.0" text="Bio:">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <MFXTextField floatMode="DISABLED" layoutX="158.0" layoutY="282.0" prefHeight="40.0" prefWidth="442.0" text="admin.dev@gmail.com" />
+                        <MFXTextField floatMode="DISABLED" layoutX="158.0" layoutY="347.0" prefHeight="40.0" prefWidth="442.0" text="Debugging life, one error at a time 🔍✨" />
+                        <Label layoutX="60.0" layoutY="442.0" text="Security Settings">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <Separator layoutX="58.0" layoutY="475.0" prefWidth="200.0" />
+                        <MFXButton fx:id="saveChangesBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="551.0" layoutY="564.0" prefHeight="40.0" prefWidth="132.0" rippleAnimateShadow="true" rippleColor="WHITE" text="Save Changes">
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </MFXButton>
+                        <Label fx:id="pLabel" layoutX="60.0" layoutY="498.0" text="Password:">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <MFXPasswordField floatMode="DISABLED" layoutX="158.0" layoutY="490.0" prefHeight="40.0" prefWidth="442.0" text="admin1234" />
+                        <Circle fx:id="myProfileCircle" fill="DODGERBLUE" layoutX="104.0" layoutY="148.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="cameraCircle" fill="WHITE" layoutX="143.0" layoutY="177.0" onMouseClicked="#editProPictureClicked" radius="12.0" stroke="BLACK" strokeType="INSIDE">
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Circle>
+                    </children>
+                </Pane>
             </children>
         </StackPane>
-      <AnchorPane fx:id="adminLoginPane" prefHeight="765.0" prefWidth="1540.0" style="-fx-background-color: red;" />
     </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 package game;
 
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lms.controller.dictionary.Controller;
+import lms.controller.dictionary.DictionaryHomepage;
 
 import java.io.IOException;
 
@@ -36,7 +39,7 @@ public class MultipleChoiceController extends Controller {
     @FXML
     public void setQuestion(ActionEvent event) throws IOException {
         if (numberOfQuestionsUsed == multipleChoice.getNumberOfQuestions()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MultipleChoiceEnd.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/game/MultipleChoiceEnd.fxml"));
             root = loader.load();
 
             MultipleChoiceEndController multipleChoiceEndController = loader.getController();
@@ -60,21 +63,32 @@ public class MultipleChoiceController extends Controller {
 
         resultBox.setText("Choose your answer!");
         numberOfQuestionsUsed++;
-
-//        //repeat questions
-//        if (numberOfQuestionsUsed == multipleChoice.getNumberOfQuestions()) {
-//            for (int i = 0; i < multipleChoice.getNumberOfQuestions(); ++i) {
-//                multipleChoice.getQuestions().get(i).setChosen(false);
-//            }
-//            numberOfQuestionsUsed = 0;
-//        }
     }
+
+//    public void correct() {
+//        resultBox.setText("Correct!");
+//        multipleChoice.increaseHighscore();
+//        scoreBox.setText(multipleChoice.getScore() + "");
+//    }
+
 
     public void correct() {
         resultBox.setText("Correct!");
         multipleChoice.increaseHighscore();
         scoreBox.setText(multipleChoice.getScore() + "");
+
+        // Call setQuestion() after a short delay to allow the user to see the "Correct!" message
+        PauseTransition pause = new PauseTransition(Duration.seconds(0.3)); // 1-second delay
+        pause.setOnFinished(e -> {
+            try {
+                setQuestion(null);  // Calling setQuestion() to load the next question
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        pause.play();
     }
+
 
     @FXML
     public void choseA() {
@@ -114,8 +128,20 @@ public class MultipleChoiceController extends Controller {
 
     @FXML
     public void switchBackToGameScene(ActionEvent event) throws IOException {
-        FXMLLoader gameScene = new FXMLLoader(getClass().getResource("gameScene.fxml"));
-        root = gameScene.load();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dictionary/dictionaryHomepage.fxml"));
+        root = loader.load();
+
+        // Load the DialogPane from the FXML file
+        DictionaryHomepage controller = loader.getController();
+
+        Label l = controller.gameLabel;
+        controller.setSelectedLabel(l);
+        controller.homepagePane.setVisible(false);
+        controller.addNewWordPane.setVisible(false);
+        controller.onlineModePane.setVisible(false);
+        controller.translatorPane.setVisible(false);
+        controller.homepagePane.setVisible(false);
+        controller.gamePane.setVisible(true);
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

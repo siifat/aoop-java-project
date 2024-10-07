@@ -1,0 +1,37 @@
+.root{
+    -fx-background-color: linear-gradient(to right, #2980B9, #6DD5FA)
+}
+
+#AButton,
+#BButton,
+#CButton,
+#DButton{
+    -fx-background-color: linear-gradient(to right, #C9D6FF, #E2E2E2);
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 30px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}
+
+
+#AButton:hover,
+#BButton:hover,
+#CButton:hover,
+#DButton:hover{
+    -fx-background-color: linear-gradient(to right, #2980B9, #6DD5FA);
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 30px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}
+
+
+#bb {
+    -fx-background-color: transparent;
+}
+
+#nxtBtn{
+    -fx-background-color: transparent;
+}

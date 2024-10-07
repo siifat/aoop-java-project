@@ -12,19 +12,25 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import lms.controller.general.Login;
+import lms.controller.student.Course;
 import lms.util.ChangeScene;
 import lms.util.ShowAlert;
 import lms.util.UserService;
 
+import java.io.File;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
@@ -34,16 +40,28 @@ import static lms.util.EmailService.sendEmail;
 
 public class AdminHome extends Application {
 
+    @FXML private Pane adminLoginPane;
+    @FXML private Pane stackPane;
+    @FXML private Pane upperpane;
+    @FXML private Pane sidePane;
 
-    public Pane homep1Pane;
-    public Pane graphPane;
-    public Pane ump1Pane;
-    public Pane ump2Pane;
-    public Pane ump3Pane;
-    public Pane rlp1Pane;
+    @FXML private MFXPasswordField privateFilePassField;
 
-    public Pane sconfigp1Pane;
+    @FXML private Pane homep1Pane;
+    @FXML private Pane graphPane;
+    @FXML private Pane ump1Pane;
+    @FXML private Pane ump2Pane;
+    @FXML private Pane ump3Pane;
+    @FXML private Pane rlp1Pane;
+    @FXML private Label selectedLabel;
+
+    @FXML private Pane sconfigp1Pane;
     public Circle proPicCircle;
+
+    @FXML private Label homeLabel;
+    @FXML private Label manageLabel;
+    @FXML private Label logLabel;
+    @FXML private Label configLabel;
 
     public TextField stf1;
     public TextField stf2;
@@ -58,92 +76,74 @@ public class AdminHome extends Application {
     public TextField ttf4;
     public ComboBox tcb1;
 
-    @FXML
-    private MFXRadioButton tAnnounceRB;
-    @FXML
-    private MFXRadioButton sAnnounceRB;
+    @FXML private MFXRadioButton tAnnounceRB;
+    @FXML private MFXRadioButton sAnnounceRB;
 
     private VBox calendarPane;
     private LocalDate currentDate;
     private Label monthYearLabel;
 
-//    public TextField aTitleField;
-//    public TextField aField;
+    @FXML private MFXComboBox<String> programComboBox;
+    @FXML private TableView<TeachApproveData> tapprovalTable;
+    @FXML private TableColumn<TeachApproveData, String> tinitialCol;
+    @FXML private TableColumn<TeachApproveData, String> tnameCol;
+    @FXML private TableColumn<TeachApproveData, String> temailCol;
+    @FXML private TableColumn<TeachApproveData, String> tmobileCol;
+    @FXML private TableColumn<TeachApproveData, String> troleCol;
+    @FXML private TableColumn<TeachApproveData, String> tappCol;
 
-    @FXML
-    private MFXComboBox<String> programComboBox;
-    @FXML
-    private TableView<TeachApproveData> tapprovalTable;
-    @FXML
-    private TableColumn<TeachApproveData, String> tinitialCol;
-    @FXML
-    private TableColumn<TeachApproveData, String> tnameCol;
-    @FXML
-    private TableColumn<TeachApproveData, String> temailCol;
-    @FXML
-    private TableColumn<TeachApproveData, String> tmobileCol;
-    @FXML
-    private TableColumn<TeachApproveData, String> troleCol;
-    @FXML
-    private TableColumn<TeachApproveData, String> tappCol;
+    @FXML private TableView<StApproveData> sapprovalTable;
+    @FXML private TableColumn<StApproveData, String> sidCol;
+    @FXML private TableColumn<StApproveData, String> snameCol;
+    @FXML private TableColumn<StApproveData, String> semailCol;
+    @FXML private TableColumn<StApproveData, String> smobileCol;
+    @FXML private TableColumn<StApproveData, String> sroleCol;
+    @FXML private TableColumn<StApproveData, String> sregCol;
+    @FXML private TableColumn<StApproveData, String> sappCol;
 
-    @FXML
-    private TableView<StApproveData> sapprovalTable;
-    @FXML
-    private TableColumn<StApproveData, String> sidCol;
-    @FXML
-    private TableColumn<StApproveData, String> snameCol;
-    @FXML
-    private TableColumn<StApproveData, String> semailCol;
-    @FXML
-    private TableColumn<StApproveData, String> smobileCol;
-    @FXML
-    private TableColumn<StApproveData, String> sroleCol;
-    @FXML
-    private TableColumn<StApproveData, String> sregCol;
-    @FXML
-    private TableColumn<StApproveData, String> sappCol;
+    @FXML private Pane chartContainer;
 
-    @FXML
-    private Pane chartContainer;
-
-    @FXML
-    private ListView<String> updateLogLV;
+    @FXML private ListView<String> updateLogLV;
 
     private ObservableList<TeachApproveData> adt1 = FXCollections.observableArrayList();
     private ObservableList<StApproveData> adt = FXCollections.observableArrayList();
 
-    @FXML
-    private TableView<ComplainData> complainTV;
+    @FXML private TableView<ComplainData> complainTV;
 
-    @FXML
-    private TableColumn<ComplainData, String> cNameCol;
+    @FXML private TableColumn<ComplainData, String> cNameCol;
 
-    @FXML
-    private TableColumn<ComplainData, String> cIDCol;
+    @FXML private TableColumn<ComplainData, String> cIDCol;
 
-    @FXML
-    private TableColumn<ComplainData, String> cEmailCol;
+    @FXML private TableColumn<ComplainData, String> cEmailCol;
 
-    @FXML
-    private TableColumn<ComplainData, String> cRoleCol;
+    @FXML private TableColumn<ComplainData, String> cRoleCol;
 
-    @FXML
-    private TableColumn<ComplainData, String> cComTitleCol;
+    @FXML private TableColumn<ComplainData, String> cComTitleCol;
 
-    @FXML
-    private TableColumn<ComplainData, String> cDescripCol;
+    @FXML private TableColumn<ComplainData, String> cDescripCol;
 
-    @FXML
-    private MFXTextField searchField2;
+    @FXML private MFXTextField searchField2;
 
     private ObservableList<ComplainData> complains = FXCollections.observableArrayList();
 
     //announcement
-    @FXML
-    private MFXTextField aTitleField;
-    @FXML
-    private TextArea aField;
+    @FXML private MFXTextField aTitleField;
+    @FXML private TextArea aField;
+
+    @FXML private TableView<AnnouncementData> announcementTV;
+
+    private ObservableList<AnnouncementData> notice = FXCollections.observableArrayList();
+
+    @FXML private TableColumn<AnnouncementData, String> aNoCol;
+
+    @FXML private TableColumn<AnnouncementData, String> aDateCol;
+
+    @FXML private TableColumn<AnnouncementData, String> aTitleCol;
+
+    @FXML private TableColumn<AnnouncementData, String> aAnnouncementCol;
+
+    @FXML private Circle cameraCircle;
+    @FXML private Circle myProfileCircle;
 
 
     public void initialize() {
@@ -151,11 +151,15 @@ public class AdminHome extends Application {
 //        Image proPic = new Image(getClass().getResource("/images/admin.jpg").toExternalForm());
 //        proPicCircle.setFill(new ImagePattern(proPic));
 
+        setSelectedLabel(homeLabel);
+
         //HOMEPAGE
 
         programComboBox.getItems().addAll("Science and Engineering", "Business and Economics", "Humanities and Social Sciences");
         programComboBox.setOnAction(event -> programComboBoxClicked());
         programComboBox.selectFirst();
+
+        loadAnnouncementTableView();
 
 
         //USER_MANAGEMENT
@@ -169,7 +173,7 @@ public class AdminHome extends Application {
         sappCol.setCellValueFactory(new PropertyValueFactory<StApproveData, String>("approved"));
 
         scb1.getItems().addAll("Student", "Undergraduate Assistant", "Student & Undergraduate Assistant");
-        scb2.getItems().addAll(" ", "Enrolled", "Not Enrolled");
+        scb2.getItems().addAll("Enrolled", "Not Enrolled");
 
         sapprovalTable.getItems().clear();
         loadItemsIntoTable();
@@ -230,11 +234,48 @@ public class AdminHome extends Application {
 
 
         //SYSTEM_CONFIGURATION
+        String camLoc = "/images/teacher/photo.png";
+        Image cam = new Image(getClass().getResource(camLoc).toExternalForm());
+        cameraCircle.setFill(new ImagePattern(cam));
+    }
 
+    private void setSelectedLabel(Label label) {
+        // Remove the 'selected-label' class from all labels
+        homeLabel.getStyleClass().remove("selected-label");
+        manageLabel.getStyleClass().remove("selected-label");
+        logLabel.getStyleClass().remove("selected-label");
+        configLabel.getStyleClass().remove("selected-label");
+
+        // Add the 'selected-label' class to the clicked label
+        label.getStyleClass().add("selected-label");
+        // Store this label inside a variable so that we can access it later using this
+        selectedLabel = label;
+    }
+
+    //ADMIN_LOGIN
+    public void adminLoginClicked(ActionEvent actionEvent) {
+        String a = privateFilePassField.getText();
+
+        if(a.isBlank()){
+            ShowAlert.show("Login","Password field cannot be empty.", Alert.AlertType.WARNING);
+            return;
+        }
+        else if(!a.equals("admin123")){
+            ShowAlert.show("Login","Password did not match!\nPlease try again.", Alert.AlertType.WARNING);
+            privateFilePassField.clear();
+            return;
+        }
+
+        adminLoginPane.setVisible(false);
+        upperpane.setVisible(true);
+        sidePane.setVisible(true);
+        stackPane.setVisible(true);
     }
 
     //PANE_SHIFT
-    public void homeClicked(ActionEvent actionEvent) {
+    public void homeLabelClicked(MouseEvent mouseEvent) {
+        setSelectedLabel(homeLabel);
+
         homep1Pane.setVisible(true);
         ump1Pane.setVisible(false);
         ump2Pane.setVisible(false);
@@ -243,21 +284,9 @@ public class AdminHome extends Application {
         sconfigp1Pane.setVisible(false);
     }
 
-    public void studButtonClicked() {
-        homep1Pane.setVisible(false);
-        ump1Pane.setVisible(false);
-        ump2Pane.setVisible(true);
-        ump3Pane.setVisible(false);
-    }
+    public void manageLabelClicked(MouseEvent mouseEvent) {
+        setSelectedLabel(manageLabel);
 
-    public void teachButtonClicked() {
-        homep1Pane.setVisible(false);
-        ump1Pane.setVisible(false);
-        ump2Pane.setVisible(false);
-        ump3Pane.setVisible(true);
-    }
-
-    public void p2backClicked() {
         homep1Pane.setVisible(false);
         ump1Pane.setVisible(true);
         ump2Pane.setVisible(false);
@@ -266,16 +295,9 @@ public class AdminHome extends Application {
         sconfigp1Pane.setVisible(false);
     }
 
-    public void manageClicked(ActionEvent actionEvent) {
-        homep1Pane.setVisible(false);
-        ump1Pane.setVisible(true);
-        ump2Pane.setVisible(false);
-        ump3Pane.setVisible(false);
-        rlp1Pane.setVisible(false);
-        sconfigp1Pane.setVisible(false);
-    }
+    public void reportLabelClicked(MouseEvent mouseEvent) {
+        setSelectedLabel(logLabel);
 
-    public void reportClicked(ActionEvent actionEvent) {
         homep1Pane.setVisible(false);
         ump1Pane.setVisible(false);
         ump2Pane.setVisible(false);
@@ -284,7 +306,9 @@ public class AdminHome extends Application {
         sconfigp1Pane.setVisible(false);
     }
 
-    public void configClicked(ActionEvent actionEvent) {
+    public void configLabelClicked(MouseEvent mouseEvent) {
+        setSelectedLabel(configLabel);
+
         homep1Pane.setVisible(false);
         ump1Pane.setVisible(false);
         ump2Pane.setVisible(false);
@@ -292,6 +316,12 @@ public class AdminHome extends Application {
         rlp1Pane.setVisible(false);
         sconfigp1Pane.setVisible(true);
     }
+
+    //UPPER_PANE
+    public void chatIconClicked(MouseEvent mouseEvent) {
+
+    }
+
 
     //HOME
     public void programComboBoxClicked() {
@@ -337,6 +367,86 @@ public class AdminHome extends Application {
 
     public void showChartButtonClicked(ActionEvent event) {
         displayBarGraph();
+    }
+
+    private void loadAnnouncements() {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        ObservableList<AnnouncementData> announcementData = FXCollections.observableArrayList(); // Create a new list for announcements
+
+        try {
+            conn = DriverManager.getConnection(UserService.ANNOUNCEMENT_URL);
+            stmt = conn.createStatement();
+            String query = "SELECT * FROM notice"; // Adjust the table name as needed
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                String aNo = rs.getString("No");
+                String aDate = rs.getString("Date");
+                String title = rs.getString("Title");
+                String description = rs.getString("Announcement");
+                announcementData.add(new AnnouncementData(aNo, aDate, title, description));
+            }
+
+            // Assuming you have a TableView for announcements
+            // Make sure to declare it in your class
+            // Example: @FXML private TableView<AnnouncementData> announcementTable;
+            // And set it like this:
+            // announcementTable.setItems(announcementData);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void loadAnnouncementTableView() {
+        announcementTV.getItems().clear();
+
+        aNoCol.setCellValueFactory(new PropertyValueFactory<AnnouncementData, String>("aNo"));
+        aDateCol.setCellValueFactory(new PropertyValueFactory<AnnouncementData, String>("aData"));
+        aTitleCol.setCellValueFactory(new PropertyValueFactory<AnnouncementData, String>("aTitle"));
+        aAnnouncementCol.setCellValueFactory(new PropertyValueFactory<AnnouncementData, String>("aDescription"));
+
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection(UserService.ANNOUNCEMENT_URL);
+            stmt = conn.createStatement();
+
+            String query = "select * from notice";
+
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                String no = rs.getString("No");
+                String date = rs.getString("Date");
+                String title = rs.getString("Title");
+                String announcement = rs.getString("Announcement");
+
+//                System.out.println(date + " " + title + " " + announcement);
+
+                notice.add(new AnnouncementData(no, date, title, announcement));
+            }
+
+            announcementTV.setItems(notice);
+
+            conn.close();
+            stmt.close();
+            rs.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void calendarButtonClicked(ActionEvent actionEvent) {
@@ -535,6 +645,122 @@ public class AdminHome extends Application {
 
 
     //USER_MANAGEMENT
+    public void studButtonClicked() {
+        homep1Pane.setVisible(false);
+        ump1Pane.setVisible(false);
+        ump2Pane.setVisible(true);
+        ump3Pane.setVisible(false);
+    }
+
+    public void teachButtonClicked() {
+        homep1Pane.setVisible(false);
+        ump1Pane.setVisible(false);
+        ump2Pane.setVisible(false);
+        ump3Pane.setVisible(true);
+    }
+
+    public void publishClicked(ActionEvent actionEvent) {
+        String title = aTitleField.getText().trim();
+        String description = aField.getText().trim();
+
+        if (title.isEmpty() || description.isEmpty()) {
+            ShowAlert.show("Announcement","Title and description cannot be empty", Alert.AlertType.WARNING);
+            return;
+        }
+
+        Connection conn = null;
+        Connection conn1 = null;
+        PreparedStatement pstmt = null;
+        PreparedStatement pstmt1 = null;
+
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection(UserService.ANNOUNCEMENT_URL);
+            String sql = "INSERT INTO notice (Date, Title, Announcement) VALUES (?, ?, ?)";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, "07/10/2024");
+            pstmt.setString(2, title);
+            pstmt.setString(3, description);
+            pstmt.executeUpdate();
+
+            if(sAnnounceRB.isSelected()){
+                conn1 = DriverManager.getConnection(UserService.URL);
+                String emailQuery = "SELECT email FROM students";  // Adjust table and column names as necessary
+                stmt = conn1.createStatement();
+                rs = stmt.executeQuery(emailQuery);
+
+                // Send the email to all retrieved addresses
+                while (rs.next()) {
+                    String email = rs.getString("email");
+
+                    new Thread(() -> {
+                        // Assuming sendEmail is a static method in EmailService that returns a boolean
+                        if (sendEmail(email, title, description)) {
+                            System.out.println("Email sent successfully to: " + email);
+                        } else {
+                            System.out.println("Failed to send email to: " + email);
+                        }
+                    }).start();
+                }
+                // Showing a success message
+                ShowAlert.show("Announcement","Announcement published successfully!", Alert.AlertType.CONFIRMATION);
+            }
+            if(tAnnounceRB.isSelected()){
+                conn1 = DriverManager.getConnection(UserService.URL);
+                String emailQuery = "SELECT email FROM teachers";  // Adjust table and column names as necessary
+                stmt = conn1.createStatement();
+                rs = stmt.executeQuery(emailQuery);
+
+                // Send the email to all retrieved addresses
+                while (rs.next()) {
+                    String email = rs.getString("email");
+
+                    new Thread(() -> {
+                        // Assuming sendEmail is a static method in EmailService that returns a boolean
+                        if (sendEmail(email, title, description)) {
+                            System.out.println("Email sent successfully to: " + email);
+                        } else {
+                            System.out.println("Failed to send email to: " + email);
+                        }
+                    }).start();
+                }
+                // Showing a success message
+                ShowAlert.show("Announcement","Announcement published successfully!", Alert.AlertType.CONFIRMATION);
+            }
+
+            // Clear the input fields
+            aTitleField.clear();
+            aField.clear();
+
+            // Reload announcements to reflect the new entry
+            loadAnnouncements();
+            loadAnnouncementTableView();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            ShowAlert.show("Announcement","Error while publishing announcement!", Alert.AlertType.ERROR);
+//                new Alert(Alert.AlertType.ERROR, "Error while publishing announcement: " + e.getMessage()).showAndWait();
+
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void p2backClicked() {
+        homep1Pane.setVisible(false);
+        ump1Pane.setVisible(true);
+        ump2Pane.setVisible(false);
+        ump3Pane.setVisible(false);
+        rlp1Pane.setVisible(false);
+        sconfigp1Pane.setVisible(false);
+    }
 
     public void sadmiitRBClicked(MouseEvent mouseEvent) {
     }
@@ -841,14 +1067,8 @@ public class AdminHome extends Application {
         }
     }
 
-    public void signoutClicked(MouseEvent mouseEvent) {
-
-        ChangeScene.change("/general/login.fxml", mouseEvent);
-    }
-
 
     //REPORT_&_LOGS
-
     public void loadComplainTableView() {
         Connection conn = null;
         Statement stmt = null;
@@ -886,137 +1106,35 @@ public class AdminHome extends Application {
         }
     }
 
-    private void loadAnnouncements() {
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        ObservableList<AnnouncementData> announcementData = FXCollections.observableArrayList(); // Create a new list for announcements
 
-        try {
-            conn = DriverManager.getConnection(UserService.ANNOUNCEMENT_URL);
-            stmt = conn.createStatement();
-            String query = "SELECT * FROM notice"; // Adjust the table name as needed
-            rs = stmt.executeQuery(query);
+    //SETTINGS
+    @FXML
+    public void editProPictureClicked() {
+        // Open the file chooser to select a new profile picture
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Profile Picture");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
 
-            while (rs.next()) {
-                String title = rs.getString("Title");
-                String description = rs.getString("Announcement");
-                announcementData.add(new AnnouncementData(title, description));
-            }
+        File selectedFile = fileChooser.showOpenDialog(null);
 
-            // Assuming you have a TableView for announcements
-            // Make sure to declare it in your class
-            // Example: @FXML private TableView<AnnouncementData> announcementTable;
-            // And set it like this:
-            // announcementTable.setItems(announcementData);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        if (selectedFile != null) {
+            // Load the selected image
+            Image profileImage = new Image(selectedFile.toURI().toString());
+
+            // Set the image as the fill for myProfileCircle
+            myProfileCircle.setFill(new ImagePattern(profileImage));
+            proPicCircle.setFill(new ImagePattern(profileImage));
+
         }
     }
 
-    public void publishClicked(ActionEvent actionEvent) {
-            String title = aTitleField.getText().trim();
-            String description = aField.getText().trim();
+    //LOGOUT
+    public void signoutClicked(MouseEvent mouseEvent) {
 
-            if (title.isEmpty() || description.isEmpty()) {
-                ShowAlert.show("Announcement","Title and description cannot be empty", Alert.AlertType.WARNING);
-                return;
-            }
-
-            Connection conn = null;
-            Connection conn1 = null;
-            PreparedStatement pstmt = null;
-            PreparedStatement pstmt1 = null;
-
-            Statement stmt = null;
-            ResultSet rs = null;
-
-            try {
-                conn = DriverManager.getConnection(UserService.ANNOUNCEMENT_URL);
-                String sql = "INSERT INTO notice (Title, Announcement) VALUES (?, ?)";
-                pstmt = conn.prepareStatement(sql);
-                pstmt.setString(1, title);
-                pstmt.setString(2, description);
-                pstmt.executeUpdate();
-
-                //-------------------------------------------------------------------------------------------
-                if(sAnnounceRB.isSelected()){
-                    conn1 = DriverManager.getConnection(UserService.URL);
-                    String emailQuery = "SELECT email FROM students";  // Adjust table and column names as necessary
-                    stmt = conn1.createStatement();
-                    rs = stmt.executeQuery(emailQuery);
-
-                    // Send the email to all retrieved addresses
-                    while (rs.next()) {
-                        String email = rs.getString("email");
-
-                        new Thread(() -> {
-                            // Assuming sendEmail is a static method in EmailService that returns a boolean
-                            if (sendEmail(email, title, description)) {
-                                System.out.println("Email sent successfully to: " + email);
-                            } else {
-                                System.out.println("Failed to send email to: " + email);
-                            }
-                        }).start();
-                    }
-                    // Showing a success message
-                    ShowAlert.show("Announcement","Announcement published successfully!", Alert.AlertType.CONFIRMATION);
-                }
-                if(tAnnounceRB.isSelected()){
-                    conn1 = DriverManager.getConnection(UserService.URL);
-                    String emailQuery = "SELECT email FROM teachers";  // Adjust table and column names as necessary
-                    stmt = conn1.createStatement();
-                    rs = stmt.executeQuery(emailQuery);
-
-                    // Send the email to all retrieved addresses
-                    while (rs.next()) {
-                        String email = rs.getString("email");
-
-                        new Thread(() -> {
-                            // Assuming sendEmail is a static method in EmailService that returns a boolean
-                            if (sendEmail(email, title, description)) {
-                                System.out.println("Email sent successfully to: " + email);
-                            } else {
-                                System.out.println("Failed to send email to: " + email);
-                            }
-                        }).start();
-                    }
-                    // Showing a success message
-                    ShowAlert.show("Announcement","Announcement published successfully!", Alert.AlertType.CONFIRMATION);
-                }
-                //----------------------------------------------------------------------------------------------------------------------------------------------
-
-                // Clear the input fields
-                aTitleField.clear();
-                aField.clear();
-
-                // Reload announcements to reflect the new entry
-                loadAnnouncements();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                ShowAlert.show("Announcement","Error while publishing announcement!", Alert.AlertType.ERROR);
-//                new Alert(Alert.AlertType.ERROR, "Error while publishing announcement: " + e.getMessage()).showAndWait();
-
-            } finally {
-                try {
-                    if (pstmt != null) pstmt.close();
-                    if (conn != null) conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    public void chatIconClicked(MouseEvent mouseEvent) {
+        ChangeScene.change("/general/login.fxml", mouseEvent);
     }
+
 }
 

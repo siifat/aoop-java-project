@@ -1,3 +1,11 @@
+.root{
+    -main-color: #f1f1f1;
+    -secondary-color: #e8e8e8;
+    /*-accent-color: #df8c52;*/
+    -accent-color: #b3d6ff;
+    -text-color: #1a1a1a;
+}
+
 .selected-label {
     /*-fx-background-color: #b3d1ff; !* or any color to indicate selection *!*/
     -fx-background-color: #e5f1ff; /* or any color to indicate selection */
@@ -104,5 +112,77 @@
 
 .view-all-labels{
     -fx-text-fill: grey;
+}
+
+/*list view*/
+.list-view {
+    -fx-background-color: -secondary-color;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.list-view:focused {
+    -fx-background-color: -main-color;
+    -fx-border-color: -accent-color;
+}
+
+.list-cell {
+    -fx-background-color: -secondary-color;
+    -fx-background-radius: 10;
+    -fx-text-fill: -text-color;
+}
+
+.list-cell:odd {
+    -fx-background-color: -main-color;
+}
+
+.list-cell:focused {
+    -fx-background-color: -accent-color;
+}
+
+.table-view{
+    /*-fx-border-color: transparent;*/
+    -fx-background-color:transparent;
+    -fx-border-color:linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    -fx-border-radius:8px;
+    -fx-padding:0px;
+}
+
+.table-view .table-row-cell {
+    -fx-border-color: white; /* Removes border from rows */
+}
+
+.table-view .table-column{
+    -fx-alignment:CENTER;
+}
+
+.table-view .column-header-background{
+    -fx-background-color:linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-radius:8px 8px 0px 0px;
+}
+
+.table-view .column-header, .filter{
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+}
+
+.table-view .column-header .label{
+    -fx-text-fill:#fff;
+}
+
+
+/*tooltip*/
+.tooltip {
+    -fx-show-delay: 0ms;
+}
+
+#newAssBtn,
+#newCrsBtn,
+#b{
+    -fx-background-color: #b3d6ff;
+    -fx-background-radius: 27;
+    -fx-border-radius: 27;
+    -fx-cursor: hand;
 }
 

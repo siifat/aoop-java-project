@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -19,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
@@ -34,16 +36,20 @@ import org.controlsfx.control.Rating;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Optional;
 
 public class TeacherHome {
+
+    @FXML private Label totalStu;
+    @FXML private Label ex;
+    @FXML private Label strug;
 
     public Label dashboardLabel;
     public Label editClassesLabel;
@@ -53,6 +59,7 @@ public class TeacherHome {
     public Label privateFilesLabel;
     public Circle profilePicCircle;
 
+    @FXML private MFXComboBox<String> firstScreenCB;
 
     @FXML private MFXPasswordField privateFilePassField;
 
@@ -106,10 +113,119 @@ public class TeacherHome {
     @FXML
     private AnchorPane root;
 
+    @FXML private PieChart pieChart;
+
     private Label selectedLabel;
+
+    @FXML private ListView<File> l;
+
+    // Method to open the file using the system's default application
+    private void openFile(File file) {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().open(file);
+            } catch (IOException e) {
+                System.err.println("Unable to open file: " + e.getMessage());
+            }
+        } else {
+            System.err.println("Desktop is not supported on this platform.");
+        }
+    }
+
+    private ObservableList<File> fileList = FXCollections.observableArrayList();
+
+    private void updateFileList(File folder) {
+        fileList.clear(); // Clear the old list
+        if (folder.exists() && folder.isDirectory()) {
+            File[] files = folder.listFiles();
+            if (files != null) {
+                fileList.addAll(Arrays.asList(files)); // Add new files to the list
+            }
+        }
+        l.setItems(fileList); // Set the updated file list to the ListView
+    }
+
+    private void watchDirectory(Path path) {
+        Thread watcherThread = new Thread(() -> {
+            try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
+                path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE,
+                        StandardWatchEventKinds.ENTRY_DELETE);
+                while (true) {
+                    WatchKey key;
+                    try {
+                        key = watchService.take(); // Wait for a key to be available
+                    } catch (InterruptedException e) {
+                        return; // Exit if interrupted
+                    }
+
+                    for (WatchEvent<?> event : key.pollEvents()) {
+                        WatchEvent.Kind<?> kind = event.kind();
+                        if (kind == StandardWatchEventKinds.OVERFLOW) {
+                            continue; // Skip if there was an overflow
+                        }
+
+                        // Update the ListView on the JavaFX Application Thread
+                        Platform.runLater(() -> updateFileList(new File(path.toString())));
+                    }
+
+                    boolean valid = key.reset(); // Reset the key and exit if it's no longer valid
+                    if (!valid) {
+                        break;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        watcherThread.setDaemon(true); // Allow the thread to exit when the application closes
+        watcherThread.start(); // Start watching the directory
+    }
 
 
     public void initialize() {
+
+        String folderPath = "C:\\Users\\sifat\\Documents\\aoop-java-project\\src\\main\\resources\\privateFiles\\0112320247";
+        File folder = new File(folderPath);
+
+        // Get list of files from the folder
+        ObservableList<File> fileList = FXCollections.observableArrayList();
+
+        // Get list of files from the folder
+        updateFileList(folder);
+
+        // Set how file names will appear in the ListView
+        l.setCellFactory(param -> new ListCell<>() {
+            @Override
+            protected void updateItem(File file, boolean empty) {
+                super.updateItem(file, empty);
+                if (empty || file == null) {
+                    setText(null);
+                } else {
+                    setText(file.getName());
+                }
+            }
+        });
+
+        /// Handle double-click to open file
+        l.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+                File selectedFile = l.getSelectionModel().getSelectedItem();
+                if (selectedFile != null) {
+                    openFile(selectedFile);
+                }
+            }
+        });
+
+        // Watch for changes in the directory
+        watchDirectory(folder.toPath());
+
+        calculateAndPrintStudentStats();
+
+        loadPieChart();
+
+        loadTopAndBottomStudents();
+
+        loadAssignmentListView();
 
         sNameField.setText(Login.currentLoggedInTeacher.getName());
         sEmailField.setText(Login.currentLoggedInTeacher.getEmail());
@@ -216,6 +332,134 @@ public class TeacherHome {
             return row;
         });
     }
+
+    @FXML private Label ad;
+    @FXML private Label in;
+    @FXML private Label ba;
+    @FXML private Label pro;
+
+    private void loadPieChart() {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection(DB_URL);
+            stmt = conn.createStatement();
+
+            // Get the total number of students
+            String totalStudentsQuery = "SELECT COUNT(*) as total FROM marks";
+            rs = stmt.executeQuery(totalStudentsQuery);
+            int totalStudents = rs.getInt("total");
+
+            // Initialize count for each category
+            int above90 = 0, above80 = 0, above60 = 0, above50 = 0;
+
+            // Get the number of students for each mark range
+            String marksQuery = "SELECT `TotalMarks` FROM marks";
+            rs = stmt.executeQuery(marksQuery);
+
+            while (rs.next()) {
+                int totalMarks = rs.getInt("TotalMarks");
+
+                if (totalMarks > 90) {
+                    above90++;
+                } else if (totalMarks > 80) {
+                    above80++;
+                } else if (totalMarks > 60) {
+                    above60++;
+                } else if (totalMarks > 50) {
+                    above50++;
+                }
+            }
+
+            // Calculate percentages
+            double percentAbove90 = ((double) above90 / totalStudents) * 100;
+            double percentAbove80 = ((double) above80 / totalStudents) * 100;
+            double percentAbove60 = ((double) above60 / totalStudents) * 100;
+            double percentAbove50 = ((double) above50 / totalStudents) * 100;
+
+            ad.setText(String.format("%.1f", percentAbove90));
+            in.setText(String.format("%.1f", percentAbove80));
+            ba.setText(String.format("%.1f", percentAbove60));
+            pro.setText(String.format("%.1f", percentAbove50));
+            // Create PieChart data
+            ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                    new PieChart.Data("Above 90%", percentAbove90),
+                    new PieChart.Data("Above 80%", percentAbove80),
+                    new PieChart.Data("Above 60%", percentAbove60),
+                    new PieChart.Data("Above 50%", percentAbove50)
+            );
+
+
+            // Set the data to the PieChart
+            pieChart.setData(pieChartData);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+    public void calculateAndPrintStudentStats() {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection(DB_URL);
+            stmt = conn.createStatement();
+
+            // Get the total number of students
+            String totalStudentsQuery = "SELECT COUNT(*) as total FROM marks";
+            rs = stmt.executeQuery(totalStudentsQuery);
+            int totalStudents = rs.getInt("total");
+
+            // Variables to count students above and below/equal to 70 marks
+            int above70 = 0, belowOrEqual70 = 0;
+
+            // Get all the total marks for students
+            String marksQuery = "SELECT TotalMarks FROM marks";
+            rs = stmt.executeQuery(marksQuery);
+
+            while (rs.next()) {
+                double totalMarks = Double.parseDouble(rs.getString("TotalMarks"));
+
+                if (totalMarks > 70) {
+                    above70++;
+                } else {
+                    belowOrEqual70++;
+                }
+            }
+
+            totalStu.setText(String.valueOf(totalStudents));
+            ex.setText(String.valueOf(above70));
+            strug.setText(String.valueOf(belowOrEqual70));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
 
     public void setProfilePic(String picLocation) {
         try {
@@ -383,6 +627,10 @@ public class TeacherHome {
         sectionSelectionCB.selectFirst();
 
         System.out.println(sectionSelectionCB.getValue());
+
+//        AND ALSO Another combo box
+        firstScreenCB.setItems(sections);
+        firstScreenCB.selectFirst();
     }
 
 
@@ -642,6 +890,57 @@ public class TeacherHome {
         }
     }
 
+    @FXML private ListView<String> myListView;
+
+    private void loadAssignmentListView() {
+        assignments.clear();
+        myListView.getItems().clear();
+
+        Connection conn = null;
+        Statement statement = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection(UserService.COURSE_URL);
+            statement = conn.createStatement();
+
+            String query = "SELECT * FROM assignments WHERE teacherID = '" + Login.currentLoggedInTeacher.getId() + "'";
+
+            rs = statement.executeQuery(query);
+
+            while (rs.next()) {
+                Assignment assignment = new Assignment(
+                        rs.getString("title"),
+                        rs.getString("description"),
+                        rs.getString("dueDate"),
+                        rs.getString("section"),
+                        rs.getString("pathToFile")
+                );
+                assignments.add(assignment);
+            }
+
+            // Populate ListView with assignment titles
+            for (Assignment assignment : assignments) {
+                myListView.getItems().add(assignment.getTitle());
+            }
+
+            // Add event handler for double-click
+            myListView.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2) { // Double click detected
+                    int selectedIndex = myListView.getSelectionModel().getSelectedIndex();
+                    if (selectedIndex >= 0) {
+                        Assignment selectedAssignment = assignments.get(selectedIndex);
+                        openFile(selectedAssignment.getPath());
+                    }
+                }
+            });
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     private void openFile(String filePath) {
         // Convert the file path into a File object
         File file = new File(filePath);
@@ -747,35 +1046,84 @@ public class TeacherHome {
         }
     }
 
-//    public void addFilesClicked(Stage stage) {
-//        // Open FileChooser
-//        FileChooser fileChooser = new FileChooser();
-//        fileChooser.setTitle("Choose a File");
-//
-//        // Let the user pick a file
-//        File selectedFile = fileChooser.showOpenDialog(stage);
-//
-//        // If a file is chosen, proceed with copying
-//        if (selectedFile != null) {
-//            try {
-//                // Get the file name
-//                String fileName = selectedFile.getName();
-//
-//                // Define the destination path for the copied file
-//                Path destinationPath = Paths.get(DESTINATION_FOLDER, fileName);
-//
-//                // Copy the file to the destination folder
-//                Files.copy(selectedFile.toPath(), destinationPath);
-//
-//                // Print the new absolute path of the copied file
-//                System.out.println("File copied to: " + destinationPath.toAbsolutePath().toString());
-//
-//            } catch (IOException e) {
-//                // Handle errors during file copying
-//                System.out.println("Error copying the file: " + e.getMessage());
-//            }
-//        } else {
-//            System.out.println("No file was selected.");
-//        }
-//    }
+
+    // Path to your SQLite database file
+    private static final String DB_URL = "jdbc:sqlite:src/main/resources/database/Marksheet.db";
+
+    @FXML
+    private ListView<String> topView;
+
+    @FXML
+    private ListView<String> botView;
+
+    public void loadTopAndBottomStudents() {
+        ObservableList<String> topStudents = FXCollections.observableArrayList();
+        ObservableList<String> botStudents = FXCollections.observableArrayList();
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement()) {
+
+            // Query to get top 3 students with the highest total marks
+            String topQuery = "SELECT Name FROM marks ORDER BY `TotalMarks` DESC LIMIT 3";
+
+            // Query to get bottom 3 students with the lowest total marks
+            String bottomQuery = "SELECT Name FROM marks ORDER BY `TotalMarks` ASC LIMIT 3";
+
+            // Fetch top 3 students
+            ResultSet rsTop = stmt.executeQuery(topQuery);
+            while (rsTop.next()) {
+                topStudents.add(rsTop.getString("Name"));
+            }
+
+            // Fetch bottom 3 students
+            ResultSet rsBottom = stmt.executeQuery(bottomQuery);
+            while (rsBottom.next()) {
+                botStudents.add(rsBottom.getString("Name"));
+            }
+
+            // Set the data into the ListViews
+            topView.setItems(topStudents);
+            botView.setItems(botStudents);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String DESTINATION_FOLDER = "C:\\Users\\sifat\\Documents\\aoop-java-project\\src\\main\\resources\\privateFiles\\0112320247";
+
+    @FXML
+    private void bClicked(ActionEvent event) {
+        // Open FileChooser
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose a File");
+
+        // Let the user pick a file
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        // If a file is chosen, proceed with copying
+        if (selectedFile != null) {
+            try {
+                // Get the file name
+                String fileName = selectedFile.getName();
+
+                // Define the destination path for the copied file
+                Path destinationPath = Paths.get(DESTINATION_FOLDER, fileName);
+
+                // Copy the file to the destination folder
+                Files.copy(selectedFile.toPath(), destinationPath);
+
+                // Print the new absolute path of the copied file
+                System.out.println("File copied to: " + destinationPath.toAbsolutePath().toString());
+
+
+
+            } catch (IOException e) {
+                // Handle errors during file copying
+                System.out.println("Error copying the file: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No file was selected.");
+        }
+    }
 }

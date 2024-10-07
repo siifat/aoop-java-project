@@ -41,7 +41,7 @@ public class Calendar extends Application {
         calendarPane.getChildren().addAll(header, calendarGrid);
 
         Scene scene = new Scene(calendarPane, 600, 400);
-        primaryStage.setTitle("Custom 5x7 Calendar");
+        primaryStage.setTitle("Calender");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

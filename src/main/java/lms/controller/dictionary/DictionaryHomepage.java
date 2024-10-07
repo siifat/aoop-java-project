@@ -1,14 +1,21 @@
 package lms.controller.dictionary;
 
+import game.ChooseItemController;
+import game.MultipleChoiceController;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import lms.controller.api.TranslateAPI;
 import lms.util.TextToSpeech;
 import lms.util.dictionary.InternetConnection;
@@ -16,9 +23,10 @@ import org.fxmisc.richtext.InlineCssTextArea;
 import org.fxmisc.richtext.model.StyleSpan;
 import org.fxmisc.richtext.model.StyleSpans;
 
+import java.io.IOException;
 import java.sql.*;
 
-public class DictionaryHomepage {
+public class DictionaryHomepage extends Controller{
 
     private static final String databaseLocation = "src/main/resources/database/dictionary.db";
     public static final String URL = "jdbc:sqlite:" + databaseLocation;
@@ -75,6 +83,8 @@ public class DictionaryHomepage {
     public Label meaningLabel2;
     public AnchorPane onlineModePane;
     public AnchorPane translatorPane;
+    @FXML
+    public AnchorPane gamePane;
 
     private Label selectedLabel;
 
@@ -158,7 +168,7 @@ public class DictionaryHomepage {
     // Translation part
 
     @FXML
-    public void translate() throws InterruptedException {
+    public void translate() {
         if (inputArea.getText().isEmpty()) {
             outputArea.setText("Please enter text to translate");
             return;
@@ -295,6 +305,7 @@ public class DictionaryHomepage {
         addNewWordPane.setVisible(false);
         onlineModePane.setVisible(false);
         translatorPane.setVisible(false);
+        gamePane.setVisible(false);
         homepagePane.setVisible(true);
     }
 
@@ -303,6 +314,7 @@ public class DictionaryHomepage {
         homepagePane.setVisible(false);
         onlineModePane.setVisible(false);
         translatorPane.setVisible(false);
+        gamePane.setVisible(false);
         addNewWordPane.setVisible(true);
         loadUserDefinedWords();
     }
@@ -312,27 +324,44 @@ public class DictionaryHomepage {
         homepagePane.setVisible(false);
         translatorPane.setVisible(false);
         addNewWordPane.setVisible(false);
+        gamePane.setVisible(false);
         onlineModePane.setVisible(true);
     }
 
-    public void gameClicked() {
+
+
+    public void gameClicked() throws Exception {
         setSelectedLabel(gameLabel);
+
+        addNewWordPane.setVisible(false);
+        onlineModePane.setVisible(false);
+        translatorPane.setVisible(false);
+        homepagePane.setVisible(false);
+        gamePane.setVisible(true);
+
+//        Stage primaryStage = (Stage) gameLabel.getScene().getWindow(); // Get the current stage
+//        SceneChanger.switchScene(primaryStage, "/fxml/game/gameScene.fxml");
     }
+
+
 
     public void settingsClicked() {
         setSelectedLabel(settingsLabel);
     }
+
+
 
     public void translatorClicked(MouseEvent mouseEvent) {
         setSelectedLabel(translatorLabel);
         homepagePane.setVisible(false);
         addNewWordPane.setVisible(false);
         onlineModePane.setVisible(false);
+        gamePane.setVisible(false);
         translatorPane.setVisible(true);
 
     }
 
-    private void setSelectedLabel(Label label) {
+    public void setSelectedLabel(Label label) {
         // Remove the 'selected-label' class from all labels
         homeLabel.getStyleClass().remove("selected-label");
         addNewWordLabel.getStyleClass().remove("selected-label");
@@ -508,7 +537,33 @@ public class DictionaryHomepage {
         TextToSpeech.read(selectedUserWord.getWord());
     }
 
-    public void hahaClicked() {
+    @FXML
+    private void switchToMultipleChoiceScene(ActionEvent actionEvent) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/game/multipleChoiceScene.fxml"));
+        root = loader.load();
+
+        MultipleChoiceController multipleChoiceController = loader.getController();
+        multipleChoiceController.setQuestion(actionEvent);
+
+        stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
+    @FXML
+    private void switchToChooseItemGameScene(ActionEvent actionEvent) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/game/ChooseItem.fxml"));
+        root = loader.load();
+
+        ChooseItemController chooseItemController = loader.getController();
+        chooseItemController.initializeQuestion(actionEvent);
+
+        stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

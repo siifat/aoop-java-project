@@ -4,21 +4,116 @@
 }
 
 .selected-label {
-    /*-fx-background-color: #b3d1ff; !* or any color to indicate selection *!*/
     -fx-background-color: #e5f1ff; /* or any color to indicate selection */
     -fx-border-color: #056efe;
     -fx-border-width: 2;
     -fx-border-radius: 12;
 }
 
-#sidePane{
-    /*-fx-background-color: #161b22;*/
-    -fx-background-color: #d3d3d3;
+.inner-pane{
+    -fx-background-color: white;
+}
+
+.table-view{
+    /*-fx-border-color: transparent;*/
+    -fx-background-color:transparent;
+    -fx-border-color:linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    -fx-border-radius:8px;
+    -fx-padding:0px;
+}
+
+.table-view .table-row-cell {
+    -fx-border-color: white; /* Removes border from rows */
+}
+
+.table-view .table-column{
+    -fx-alignment:CENTER;
+}
+
+.table-view .column-header-background{
+    -fx-background-color:linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-radius:8px 8px 0px 0px;
+}
+
+.table-view .column-header, .filter{
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+}
+
+.table-view .column-header .label{
+    -fx-text-fill:#fff;
+}
+
+.text-area {
+    -fx-background-color: #f9f9f9; /* Light background color */
+    -fx-text-fill: #333; /* Dark text color */
+    -fx-border-color: #ccc; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-padding: 10px; /* Inner padding */
+    -fx-font-family: 'Arial'; /* Font family */
+    -fx-font-size: 14px; /* Font size */
+}
+
+.text-area:focused {
+    -fx-border-color: #007bff; /* Border color on focus */
+    -fx-background-color: #ffffff; /* Change background on focus */
+}
+
+.text-area .content {
+    -fx-background-color: transparent; /* Transparent background for the text content */
+}
+
+.text-area .scroll-bar:vertical {
+    -fx-background-color: #f0f0f0; /* Scroll bar background */
+    -fx-background-radius: 5px; /* Rounded scroll bar */
+}
+
+.text-area .scroll-bar:horizontal {
+    -fx-background-color: #f0f0f0; /* Scroll bar background */
+    -fx-background-radius: 5px; /* Rounded scroll bar */
+}
+
+.text-area .scroll-bar:vertical .thumb {
+    -fx-background-color: #007bff; /* Scroll bar thumb color */
+    -fx-background-radius: 5px; /* Rounded thumb */
+}
+
+.text-area .scroll-bar:horizontal .thumb {
+    -fx-background-color: #007bff; /* Scroll bar thumb color */
+    -fx-background-radius: 5px; /* Rounded thumb */
+}
+
+
+
+#adnminLoginPane{
+    -fx-background-color: linear-gradient(to right, #D3CCE3, #E9E4F0);
     -fx-background-radius: 18px;
     -fx-border-width: 1px;
     -fx-border-radius: 18px;
-    -fx-border-color: white;
+    -fx-border-color: BLACK;
     -fx-border-style: solid; /* Optional: you can use dotted, dashed, etc. */
+}
+
+#privateFilePassField{
+    -fx-border-color: black;
+}
+
+#adminLoginButton{
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+    -fx-background-color: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    -fx-cursor: hand;
+    -fx-border-radius: 33px;
+    -fx-background-radius: 33px;
+}
+
+#sidePane{
+    -fx-background-color: white;
+    -fx-background-radius: 18px;
+    -fx-border-width: 1px;
+    -fx-border-radius: 18px;
 }
 
 #upperpane{
@@ -40,25 +135,36 @@
     -fx-border-radius: 18px;
 }
 
-#homeButton,
-#manageButton,
-#logButton,
-#configButton{
-    /*-fx-background-color: linear-gradient(to right, #302b63, #24243e);*/
-    -fx-background-radius: 12;
-    -fx-border-radius: 12;
+#homep1Pane,
+#ump1Pane,
+#ump2Pane,
+#ump3Pane,
+#rlp1Pane,
+#sconfigp1Pane {
     -fx-background-color: white;
-    -fx-alignment: CENTER_LEFT;-fx-padding: 0 0 0 50; /* Add padding to the left */
-    -fx-text-alignment: right;
-    -fx-font-size: 16;
-    -fx-text-fill: black;
+    -fx-background-radius: 18px;
+    -fx-border-width: 1px;
+    -fx-border-radius: 18px;
 }
 
-#homeButton:hover,
-#manageButton:hover,
-#logButton:hover,
-#configButton:hover{
-    /*-fx-background-color: linear-gradient(to right, #0f0c29, #302b63, #24243e);*/
+
+#homeLabel,
+#manageLabel,
+#logLabel,
+#configLabel{
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+
+}
+
+#homeLabel:hover,
+#manageLabel:hover,
+#logLabel:hover,
+#configLabel:hover,
+#homeLabel:focused,
+#manageLabel:focused,
+#logLabel:focused,
+#configLabel:focused {
     -fx-background-radius: 12;
     -fx-border-radius: 12;
     -fx-background-color: e5f1ff;
@@ -93,16 +199,13 @@
     -fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.9), 20, 0.3, 2, 2);
 }
 
-#stackPane{
-    -fx-background-color: white;
-}
-
 #s1Button,
 #t1Button,
 #save2Button,
 #save2Button1,
 #publishButton,
-#searchButton {
+#searchButton,
+#saveChangesBtn {
     -fx-font-size: 16;
     -fx-text-fill: white;
     -fx-background-color: linear-gradient(to right, #24243e, #302b63, #0f0c29);
@@ -111,9 +214,30 @@
     -fx-background-radius: 33px;
 }
 
+#aTitleField{
+    -fx-border-color: #439eff;
+}
+
+#sapproveButton,
+#tapproveButton {
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+    -fx-background-color: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    -fx-cursor: hand;
+    -fx-border-radius: 33px;
+    -fx-background-radius: 33px;
+}
+
+#editLabel,
+#sNoticeLabel,
+#rUpdateLabel,
+#aloginLabel {
+}
+
 #st1Label,
-#stLabel1{
+#stLabel1 {
     -fx-text-alignment: right;
+    -fx-font-weight: bold;
     -fx-font-size: 16;
 }
 
@@ -133,9 +257,13 @@
 #umLabel3,
 #umLabel4,
 #umLabel5,
-#umLabel6 {
+#umLabel6,
+#umLabel11,
+#umLabel21,
+#umLabel31,
+#umLabel41,
+#umLabel51 {
     -fx-font-size: 16px;
-    -fx-font-family: "Poppins Medium";
     -fx-font-weight: bold;
 
 }

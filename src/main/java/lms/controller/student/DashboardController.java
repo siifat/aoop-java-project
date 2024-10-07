@@ -2,31 +2,35 @@ package lms.controller.student;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
+import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.PieChart;
-import javafx.scene.control.*;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import lms.controller.admin.Calendar;
 import lms.controller.api.CatAPI;
 import lms.controller.cat.CatImage;
 import lms.controller.dictionary.Controller;
-import lms.util.ChangeScene;
-import lms.util.ShowDesktopNotification;
+import lms.controller.general.Login;
+import lms.controller.teacher.Assignment;
+import lms.util.*;
 
 import java.awt.*;
-import java.awt.Button;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -34,106 +38,171 @@ import java.sql.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
 
 
 public class DashboardController extends Controller implements Initializable {
     public MFXCheckbox check2;
     public MFXCheckbox check3;
     public MFXCheckbox check4;
-    @FXML
-    private MFXCheckbox check1;
-    @FXML
-    private AnchorPane catPane;
 
-    @FXML
-    private AnchorPane basePane;
+    @FXML private MFXCheckbox check1;
+    @FXML private AnchorPane catPane;
 
-    @FXML
-    private AnchorPane bgbasePane;
+    @FXML private AnchorPane basePane;
 
-    @FXML
-    private AnchorPane progressPane;
+    @FXML private AnchorPane bgbasePane;
+
+    @FXML private AnchorPane progressPane;
+
+    @FXML private AnchorPane studentToolboxPane;
 
     public Label IDlabel;
+
+    @FXML private TableView<Assignment> myAssTableView;
+    @FXML private TableColumn<Assignment, String> titleCol;
+    @FXML private TableColumn<Assignment, String> desCol;
+    @FXML private TableColumn<Assignment, String> dueCol;
+    @FXML private TableColumn<Assignment, String> secCol;
 
     public static Connection connection;
     public static Statement statement;
     public static ResultSet resultSet;
 
-    public void dashboardClicked() {
-        bgbasePane.setVisible(false);
-        catPane.setVisible(false);
-        progressPane.setVisible(false);
+    @FXML private Label dashBoardLabel;
+    @FXML private Label enrollCourseLabel;
+    @FXML private Label myProgressLabel;
+    @FXML private Label studentToolboxLabel;
+
+    @FXML private Label selectedLabel;
+
+    private void setSelectedLabel(Label label) {
+        // Remove the 'selected-label' class from all labels
+        dashBoardLabel.getStyleClass().remove("selected-label");
+        enrollCourseLabel.getStyleClass().remove("selected-label");
+        myProgressLabel.getStyleClass().remove("selected-label");
+        studentToolboxLabel.getStyleClass().remove("selected-label");
+
+        // Add the 'selected-label' class to the clicked label
+        label.getStyleClass().add("selected-label");
+        // Store this label inside a variable so that we can access it later using this
+        selectedLabel = label;
+    }
+
+    public void dashBoardClicked(MouseEvent mouseEvent) {
         basePane.setVisible(true);
+        bgbasePane.setVisible(false);
+        progressPane.setVisible(false);
+        studentToolboxPane.setVisible(false);
+        catPane.setVisible(false);
+        allCoursePane.setVisible(false);
+
         phyPane.setVisible(false);
         ecPane.setVisible(false);
-        vectorPane.setVisible(false);
         dldPane.setVisible(false);
-        allCoursePane.setVisible(false);
         blogs.setVisible(false);
+        blog1.setVisible(false);
+        vectorPane.setVisible(false);
         complainPane.setVisible(false);
     }
 
-    public void enrollButtonClicked() {
+    public void enrollCourseClicked(MouseEvent mouseEvent) {
         basePane.setVisible(false);
-        catPane.setVisible(false);
-        progressPane.setVisible(false);
         bgbasePane.setVisible(true);
+        progressPane.setVisible(false);
+        studentToolboxPane.setVisible(false);
+        catPane.setVisible(false);
+        allCoursePane.setVisible(false);
+
+
         phyPane.setVisible(false);
         ecPane.setVisible(false);
-        vectorPane.setVisible(false);
         dldPane.setVisible(false);
-        allCoursePane.setVisible(false);
         blogs.setVisible(false);
+        blog1.setVisible(false);
+        vectorPane.setVisible(false);
         complainPane.setVisible(false);
     }
-@FXML
-private Label totalcourse;
-    @FXML
-    private Label pendingtest;
-    @FXML
-    private Label label3;
+
+    public void myProgressClicked(MouseEvent mouseEvent) {
+        basePane.setVisible(false);
+        bgbasePane.setVisible(false);
+        progressPane.setVisible(true);
+        studentToolboxPane.setVisible(false);
+        catPane.setVisible(false);
+        allCoursePane.setVisible(false);
+
+
+        phyPane.setVisible(false);
+        ecPane.setVisible(false);
+        dldPane.setVisible(false);
+        blogs.setVisible(false);
+        blog1.setVisible(false);
+
+        vectorPane.setVisible(false);
+        complainPane.setVisible(false);
+    }
+
+    public void studentToolboxClicked(MouseEvent mouseEvent) {
+        basePane.setVisible(false);
+        bgbasePane.setVisible(false);
+        progressPane.setVisible(false);
+        studentToolboxPane.setVisible(true);
+        catPane.setVisible(false);
+        allCoursePane.setVisible(false);
+
+        phyPane.setVisible(false);
+        ecPane.setVisible(false);
+        dldPane.setVisible(false);
+        vectorPane.setVisible(false);
+        blogs.setVisible(false);
+        blog1.setVisible(false);
+
+        complainPane.setVisible(false);
+    }
+
+    @FXML private Label totalcourse;
+    @FXML private Label pendingtest;
+    @FXML private Label label3;
+
     public void enrollNowClicked() {
+        int n=0;
+        String num;
         if (check1.isSelected()) {
             addToDatabase("EC", IDlabel.getText());
-            totalcourse.setText("1");
+            n++;
+            num = String.valueOf(n);
+            totalcourse.setText(num);
             pendingtest.setText("1");
+
+
         }
+
         if (check2.isSelected()) {
             addToDatabase("Physics", IDlabel.getText());
-            totalcourse.setText("2");
+            n++;
+            num = String.valueOf(n);
+            totalcourse.setText(num);
             pendingtest.setText("1");
         }
         if (check3.isSelected()) {
             addToDatabase("Vector", IDlabel.getText());
-            totalcourse.setText("3");
+            n++;
+            num = String.valueOf(n);
+            totalcourse.setText(num);
             pendingtest.setText("1");
         }
         if (check4.isSelected()) {
             addToDatabase("DLD", IDlabel.getText());
-            totalcourse.setText("4");
+            n++;
+            num = String.valueOf(n);
+            totalcourse.setText(num);
             pendingtest.setText("1");
         }
     label3.setText("40");
     }
     public void progressbarClicked() {
-        progressPane.setVisible(true);
-        bgbasePane.setVisible(false);
-        catPane.setVisible(false);
-        basePane.setVisible(false);
-        phyPane.setVisible(false);
-        ecPane.setVisible(false);
-        vectorPane.setVisible(false);
-        dldPane.setVisible(false);
-        allCoursePane.setVisible(false);
-        blogs.setVisible(false);
-        complainPane.setVisible(false);
+
     }
 
     public void addToDatabase(String tableName, String IDText) {
@@ -244,15 +313,92 @@ private TableView<PDFFile> phyTable;
     @FXML
     private WebView webView3;
     private  WebEngine webEngine,webEngine1,webEngine2,webEngine3;
+    @FXML
+    private MFXToggleButton anonymousTB;
+
+    private ObservableList<Assignment> assignments = FXCollections.observableArrayList();
+
+    private void loadMyAssTabView(){
+
+        assignments.clear();
+        myAssTableView.getItems().clear();
+
+        Connection conn = null;
+        Statement statement = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection(UserService.COURSE_URL);
+            statement = conn.createStatement();
+
+            String query = "SELECT * FROM assignments WHERE section='Section A'";
+
+            rs = statement.executeQuery(query);
+
+            while(rs.next()){
+                System.out.println("inside loo[");
+                Assignment assignment = new Assignment(rs.getString("title"),
+                        rs.getString("description"), rs.getString("dueDate"),
+                        rs.getString("section"), rs.getString("pathToFile"));
+                assignments.add(assignment);
+            }
+
+            myAssTableView.setItems(assignments);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 //       final WebEngine webEngine = webView.getEngine();
 //       String urlweb = "https://www.facebook.com/home.php?paipv=0&eav=Afb93kx16l3kQl6e37IzFLIwknvjDaM1FoGzEhsprIGBC9b2S0Ilfq_mI8CXTmLJnlk&_rdr";
 //        webEngine.load(urlweb);
+
+            titleCol.setCellValueFactory(new PropertyValueFactory<Assignment, String>("title"));
+            desCol.setCellValueFactory(new PropertyValueFactory<Assignment, String>("description"));
+            dueCol.setCellValueFactory(new PropertyValueFactory<Assignment, String>("dueDate"));
+            secCol.setCellValueFactory(new PropertyValueFactory<Assignment, String>("section"));
+
+
+            loadMyAssTabView();
+
+        cNameTF.setEditable(false);
+        cNameTF.setText(Login.currentLoggedInStudent.getName());
+        cIDTF.setEditable(false);
+        cIDTF.setText(Login.currentLoggedInStudent.getId());
+        cEmailTF.setEditable(false);
+        cEmailTF.setText(Login.currentLoggedInStudent.getEmail());
+
+        anonymousTB.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                cNameTF.setEditable(false);
+                cNameTF.setText("Annonymous");
+                cIDTF.setEditable(false);
+                cIDTF.setText("Annonymous");
+                cEmailTF.setEditable(false);
+                cEmailTF.setText("Annonymous");
+
+                anonymousTB.setText("Keep my identity hidden");
+            } else {
+                cNameTF.setEditable(false);
+                cNameTF.setText(Login.currentLoggedInStudent.getName());
+                cIDTF.setEditable(false);
+                cIDTF.setText(Login.currentLoggedInStudent.getId());
+                cEmailTF.setEditable(false);
+                cEmailTF.setText(Login.currentLoggedInStudent.getEmail());
+
+                anonymousTB.setText("Keep my identity disclosed");
+            }
+        });
+
             webEngine = webView.getEngine();
             webEngine1 = webView1.getEngine();
             webEngine2 = webView2.getEngine();
             webEngine3 = webView3.getEngine();
+
         String source = "https://http.cat/200";
         Image catImage = new Image(source);
         catView.setImage(catImage);
@@ -270,9 +416,9 @@ private TableView<PDFFile> phyTable;
         sectionCol.setCellValueFactory(new PropertyValueFactory<>("section"));
 
         phyTable.getColumns().addAll(titleCol, descCol, uploadDateCol, sectionCol);
-        ecTable.getColumns().addAll(titleCol, descCol, uploadDateCol, sectionCol);
-        vectorTable.getColumns().addAll(titleCol, descCol, uploadDateCol, sectionCol);
-        dldTable.getColumns().addAll(titleCol, descCol, uploadDateCol, sectionCol);
+//        ecTable.getColumns().addAll(titleCol, descCol, uploadDateCol, sectionCol);
+//        vectorTable.getColumns().addAll(titleCol, descCol, uploadDateCol, sectionCol);
+//        dldTable.getColumns().addAll(titleCol, descCol, uploadDateCol, sectionCol);
 
         // Load data from folder
         ObservableList<PDFFile> pdfFiles = loadPDFFilesFromFolder("C:/Users/samiu/Documents/Test"); // Adjust path to your folder
@@ -286,7 +432,7 @@ private TableView<PDFFile> phyTable;
                 if (selectedFile != null) {
                     File pdfFile = new File("C:/Users/samiu/Documents/Test/" + selectedFile.getTitle() + ".pdf");
                     if (pdfFile.exists()) {
-
+                        System.out.println("Hello");
                         try {
                             Desktop desktop = Desktop.getDesktop();
                             if (desktop.isSupported(Desktop.Action.OPEN)) {desktop.open(pdfFile);}
@@ -298,9 +444,39 @@ private TableView<PDFFile> phyTable;
                 }
             }
         });
+        dldTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {  // Double-click to open
+                PDFFile selectedFile = dldTable.getSelectionModel().getSelectedItem();
+                if (selectedFile != null) {
+                    File pdfFile = new File("C:/Users/samiu/Documents/Test/" + selectedFile.getTitle() + ".pdf");
+                    if (pdfFile.exists()) {
+                        try {
+                            Desktop.getDesktop().open(pdfFile);  // Open with system's PDF viewer
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
         ecTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {  // Double-click to open
                 PDFFile selectedFile = ecTable.getSelectionModel().getSelectedItem();
+                if (selectedFile != null) {
+                    File pdfFile = new File("C:/Users/samiu/Documents/Test/" + selectedFile.getTitle() + ".pdf");
+                    if (pdfFile.exists()) {
+                        try {
+                            Desktop.getDesktop().open(pdfFile);  // Open with system's PDF viewer
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+        vectorTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {  // Double-click to open
+                PDFFile selectedFile = vectorTable.getSelectionModel().getSelectedItem();
                 if (selectedFile != null) {
                     File pdfFile = new File("C:/Users/samiu/Documents/Test/" + selectedFile.getTitle() + ".pdf");
                     if (pdfFile.exists()) {
@@ -351,11 +527,16 @@ private TableView<PDFFile> phyTable;
             throw new RuntimeException(e);
         }
 
-
+        anonymousTB.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                anonymousTB.setText("Keep my identity hidden");
+            } else {
+                anonymousTB.setText("Keep my identity disclosed");
+            }
+        });
     }
-//    import java.time.Instant;
-//import java.time.LocalDateTime;
-//import java.time.ZoneId;
+
+
 
     private ObservableList<PDFFile> loadPDFFilesFromFolder(String folderPath) {
         ObservableList<PDFFile> pdfFiles = FXCollections.observableArrayList();
@@ -580,10 +761,66 @@ private MFXButton rewind4;
     public void complainBClicked(){
         complainPane.setVisible(true);
         basePane.setVisible(false);
+        bgbasePane.setVisible(false);
+        catPane.setVisible(false);
+        progressPane.setVisible(false);
+
+        phyPane.setVisible(false);
+        ecPane.setVisible(false);
+        vectorPane.setVisible(false);
+        dldPane.setVisible(false);
+        allCoursePane.setVisible(false);
+        blogs.setVisible(false);
+        blog1.setVisible(false);
+        blog2.setVisible(false);
     }
 
+@FXML
+private MFXTextField titleField;
+    @FXML
+    private MFXTextField detailArea;
 
     public void submitClicked(MouseEvent mouseEvent) {
+        String complaintTitle = titleField.getText();
+        String complaintDetail = detailArea.getText();
+
+
+        Connection conn = null;
+
+        try {
+
+            conn = DriverManager.getConnection(UserService.COMPLAINT_URL);
+
+            String query = "INSERT INTO complain VALUES(?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            if(anonymousTB.isSelected()){
+
+                ps.setString(1, "Anonymous");
+                ps.setString(2, "Anonymous");
+                ps.setString(3, "Anonymous");
+                ps.setString(4, "Student");
+                ps.setString(5, complaintTitle);
+                ps.setString(6, complaintDetail);
+            } else {
+                ps.setString(1, Login.currentLoggedInStudent.getName());
+                ps.setString(2, Login.currentLoggedInStudent.getId());
+                ps.setString(3, Login.currentLoggedInStudent.getEmail());
+                ps.setString(4, "Teacher");
+                ps.setString(5, complaintTitle);
+                ps.setString(6, complaintDetail);
+            }
+
+            ps.executeUpdate();
+
+            conn.close();
+            ShowAlert.show("Complaint", "We've received your complaint.", Alert.AlertType.CONFIRMATION);
+
+        } catch (SQLException e) {
+            ShowAlert.show("Error", "Error sending complaint to Admin", Alert.AlertType.ERROR);
+            throw new RuntimeException(e);
+        }
     }
     @FXML
     private AnchorPane blogs;
@@ -607,8 +844,10 @@ private MFXButton rewind4;
         blogs.setVisible(true);
     }
 
-    public void toggleClicked(MouseEvent mouseEvent) {
-    }
+    @FXML private MFXTextField cNameTF;
+    @FXML private MFXTextField cIDTF;
+    @FXML private MFXTextField cEmailTF;
+
     @FXML
     private void logoutClicked(ActionEvent event) {
         ChangeScene.change("/general/login.fxml", event);
@@ -633,7 +872,30 @@ private MFXButton rewind4;
     }
 
     public void dldreturnClicked(MouseEvent mouseEvent) {
+        progressPane.setVisible(false);
+        rewind4.setVisible(false);
+        dldPane.setVisible(true);
     }
+    @FXML
+    private TextArea blogpostField;
+
+    @FXML
+    private Label blogpostTitle;
+    @FXML
+    private TextField blogTitle;
+    @FXML
+    private TextArea blogField;
+
+    public void blogClicked(MouseEvent mouseEvent) {
+        blogs.setVisible(false);
+        String s1 = blogTitle.getText();
+        String s2 = blogField.getText();
+        blog1.setVisible(true);
+        blogpostTitle.setText(s1);
+        blogpostField.setText(s2);
+
+    }
+
     public void settingsClicked(){
 //        setSelectedLabel(settingsLabel);
 //
@@ -644,5 +906,28 @@ private MFXButton rewind4;
 //        dashboardPane.setVisible(false);
 //        settingsPane.setVisible(true);
     }
+
+    public void toDoListClicked(ActionEvent actionEvent) throws IOException {
+        LoadFXMLApp.load("/todolist/main-window-view.fxml");
+    }
+
+    public void dcClicked(ActionEvent actionEvent) {
+        LoadFXMLApp.load("/dictionary/dictionaryHomepage.fxml");
+    }
+
+    public void calClicked(ActionEvent actionEvent) {
+        openCalendarWindow();
+    }
+
+    private void openCalendarWindow() {
+        Stage calendarStage = new Stage(); // Create a new Stage for the Calendar
+        Calendar calendarApp = new Calendar(); // Create an instance of Calendar class
+        try {
+            calendarApp.start(calendarStage); // Start the Calendar app in the new Stage
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

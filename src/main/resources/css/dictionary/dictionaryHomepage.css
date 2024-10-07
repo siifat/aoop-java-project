@@ -48,9 +48,48 @@
     -fx-background-color: -accent-color;
 }
 
+.table-view{
+     /*-fx-border-color: transparent;*/
+     -fx-background-color:transparent;
+     -fx-border-color:linear-gradient(to right, #24243e, #302b63, #0f0c29);
+     -fx-border-radius:8px;
+     -fx-padding:0px;
+ }
+
+.table-view .table-row-cell {
+    -fx-border-color: white; /* Removes border from rows */
+}
+
+.table-view .table-column{
+    -fx-alignment:CENTER;
+}
+
+.table-view .column-header-background{
+    -fx-background-color:linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-radius:8px 8px 0px 0px;
+}
+
+.table-view .column-header, .filter{
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+}
+
+.table-view .column-header .label{
+    -fx-text-fill:#fff;
+}
+
+
 /*tooltip*/
 .tooltip {
     -fx-show-delay: 0ms;
+}
+
+
+.all-inner-panes {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
 }
 
 
@@ -73,6 +112,8 @@
 #meaningField{
     -fx-border-radius: 22px;
     -fx-background-radius: 22px;
+    -fx-border-color: #056efe;
+    -fx-border-width: 2;
 }
 
 #infoPane,
@@ -94,9 +135,72 @@
     -fx-border-radius: 16;
 }
 
+/* Stylish TextArea */
+.text-area {
+    -fx-background-color: white;           /* White background */
+    -fx-border-color: #cccccc;             /* Light gray border */
+    -fx-border-width: 2px;                 /* Border thickness */
+    -fx-border-radius: 10px;               /* Rounded corners */
+    -fx-background-radius: 10px;           /* Background corner rounding */
+
+    /* Text styling */
+    -fx-font-family: "Segoe UI", sans-serif; /* Classy font */
+    -fx-font-size: 14px;                    /* Font size */
+    -fx-text-fill: #333333;                 /* Dark gray text color */
+
+    /* Shadow effect */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 10, 0, 0, 5);
+}
+
+/* Focused TextArea: border becomes stylish blue when focused */
+.text-area:focused {
+    -fx-border-color: #4A90E2;            /* Light blue border when focused */
+    -fx-effect: dropshadow(three-pass-box, rgba(74,144,226,0.5), 10, 0, 0, 5);
+}
+
+/* Placeholder text (prompt text) styling */
+.text-area .text {
+    -fx-prompt-text-fill: #999999;        /* Light gray prompt text */
+}
+
 /*buttons*/
 #addButton,
-#deleteButton{
+#deleteButton,
+#swapLanguagesBtn,
+#translateButton,
+#clearHisBtn{
+    -fx-background-color: #b3d6ff;
+    -fx-background-radius: 27;
+    -fx-border-radius: 27;
+}
+
+#gammerGeniusBtn,
+#picturePuzzleBtn{
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-size: 24px;
     -fx-background-radius: 16;
     -fx-border-radius: 16;
+}
+
+#result{
+    -fx-background-color: linear-gradient(to bottom, #f7f7f7, #e9e9e9);
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}
+
+#searchBtn{
+    /*-fx-background-color: linear-gradient(to right, #0f0c29, #302b63, #24243e);*/
+    -fx-background-color: #b3d6ff;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 19px;
+    -fx-cursor: hand;
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
+}
+
+#searchBox{
+    -fx-border-radius: 22px;
+    -fx-background-radius: 22px;
+    -fx-border-width: 2;
+    -fx-border-color: #056efe;
 }
