@@ -242,7 +242,10 @@ public class TeacherHome {
         Image cam = new Image(getClass().getResource(camLoc).toExternalForm());
         cameraCircle.setFill(new ImagePattern(cam));
 
-        setProfilePic(Login.currentLoggedInTeacher.getProfilePicture());
+
+        // SET PRO PIC When APP Launch
+
+//        setProfilePic(Login.currentLoggedInTeacher.getProfilePicture());
 
         if(Login.currentLoggedInTeacher.getWantEmail().equalsIgnoreCase("yes")){
             wantEmailTB.setSelected(true);
