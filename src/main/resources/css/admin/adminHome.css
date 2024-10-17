@@ -123,6 +123,10 @@
     -fx-border-radius: 18px;
     -fx-border-color: white;
     -fx-border-style: solid;
+    -fx-background-image: url('C:/Users/Hassan Bin Abedin/Documents/aoop-java-project/src/main/resources/images/admin/Cover/Cover3.png');
+    -fx-background-size: cover; /* Ensure the image covers the pane */
+    -fx-background-position: center; /* Center the image */
+    -fx-background-repeat: no-repeat;
 }
 
 #graphPane,

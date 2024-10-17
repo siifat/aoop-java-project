@@ -1,0 +1,122 @@
+/* Global styles */
+* {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 14px;
+    -fx-base: #ffffff; /* Background color */
+}
+
+/* BorderPane styling */
+#mainBorderPane {
+    -fx-background-color: #ffffff; /* Main background */
+    -fx-border-color: #b3d6ff; /* Light blue border */
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, #056efe, 10, 0, 0, 0); /* Subtle shadow effect */
+}
+
+/* ListView styling */
+#toDoListView {
+    -fx-background-color: white; /* Light blue background */
+    -fx-border-color: #056efe; /* Dark blue border */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px; /* Rounding corners */
+    -fx-padding: 5; /* Padding for inner elements */
+    -fx-font-size: 14px;
+    -fx-selection-bar-color: #056efe; /* Selection color */
+    -fx-text-fill: #000; /* Black text for contrast */
+    -fx-focusable: false; /* Remove focusability */
+}
+
+/* ListView item styling */
+#toDoListView .list-cell {
+    -fx-background-color: transparent; /* Transparent background for items */
+    -fx-text-fill: #333; /* Dark gray text */
+}
+
+#toDoListView .list-cell:selected {
+    -fx-background-color: #b3d6ff; /* Dark blue for selected item */
+    -fx-text-fill: white; /* White text for selected item */
+}
+
+/* TextArea styling */
+#itemDescriptionTextArea {
+    -fx-background-color: #f9f9f9; /* Slightly darker background for text area */
+    -fx-border-color: #b3d6ff; /* Light blue border */
+    -fx-border-radius: 5px;
+    -fx-effect: dropshadow(gaussian, #056efe, 5, 0, 0, 0); /* Subtle shadow effect */
+}
+
+/* HBox styling */
+HBox {
+    -fx-spacing: 10px; /* Space between children */
+}
+
+/* Label styling */
+Label {
+    -fx-text-fill: #056efe; /* Dark blue text */
+    -fx-font-weight: bold;
+}
+
+/* MenuBar styling */
+.menu-bar {
+    -fx-background-color: #b3d6ff; /* Dark blue background for menu */
+}
+
+/* MenuItem styling */
+.menu-item {
+    -fx-text-fill: white; /* White text for menu items */
+}
+
+.menu-item:hover {
+    -fx-background-color: #b3d6ff; /* Light blue hover effect */
+    -fx-text-fill: #056efe; /* Dark blue text on hover */
+}
+
+/* Menu styling */
+.menu {
+    -fx-text-fill: white; /* White text for menus */
+}
+
+/* VBox styling */
+VBox {
+    -fx-spacing: 12px; /* Space between children */
+}
+
+/* HBox for deadline label */
+#deadlineLabel {
+    -fx-text-fill: #056efe; /* Dark blue for deadline label */
+    -fx-font-weight: bold;
+}
+
+/* TextArea styling */
+#itemDescriptionTextArea {
+    -fx-background-color: #f0f4ff; /* Light background */
+    -fx-border-color: #056efe; /* Dark blue border */
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-background-radius: 10px; /* Ensures the background also has rounded corners */
+    -fx-border-width: 2px; /* Slightly thicker border for emphasis */
+    -fx-effect: dropshadow(gaussian, #056efe, 5, 0, 0, 0); /* Subtle shadow for depth */
+    -fx-focus-color: transparent; /* No focus effect */
+    -fx-faint-focus-color: transparent; /* Avoid faint focus highlight */
+}
+
+/* Focused state styling */
+#itemDescriptionTextArea:focused {
+    -fx-background-color: #ffffff; /* Slight change on focus */
+    -fx-border-color: #b3d6ff; /* Lighter blue when focused */
+}
+
+.text-area .text {
+    -fx-prompt-text-fill: #b3b3b3; /* Light gray prompt text */
+    -fx-font-style: italic; /* Make it italic for a hint-style look */
+}
+
+#characterCountLabel {
+    -fx-text-fill: #056efe;
+    -fx-font-size: 12px;
+}
+
+/* Focus on the TextArea when typing */
+#itemDescriptionTextArea:focused {
+    -fx-background-color: #ffffff; /* White background when focused */
+    -fx-border-color: #056efe; /* Highlight border when focused */
+}

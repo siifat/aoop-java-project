@@ -133,7 +133,7 @@
                 </Label>
             </children>
         </Pane>
-        <Pane fx:id="upperpane" layoutX="275.0" layoutY="14.0" prefHeight="91.0" prefWidth="1234.0" visible="false">
+        <Pane fx:id="upperPane" layoutX="275.0" layoutY="14.0" prefHeight="91.0" prefWidth="1234.0" visible="false">
             <children>
                 <Circle fx:id="proPicCircle" fill="DODGERBLUE" layoutX="1178.0" layoutY="46.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
                 <Label layoutX="1004.0" layoutY="21.0" text="Hassan Bin Abedin">
@@ -187,8 +187,8 @@
                 </Pane>
                 <Pane fx:id="ump1Pane" prefHeight="462.0" prefWidth="1283.0" visible="false">
                     <children>
-                        <MFXButton fx:id="s1Button" layoutX="191.0" layoutY="123.0" onAction="#studButtonClicked" text="Student" />
-                        <MFXButton fx:id="t1Button" layoutX="344.0" layoutY="123.0" onAction="#teachButtonClicked" text="Teacher" textFill="WHITE" />
+                        <MFXButton fx:id="s1Button" layoutX="130.0" layoutY="123.0" onAction="#studButtonClicked" prefHeight="32.0" prefWidth="160.0" text="Student" />
+                        <MFXButton fx:id="t1Button" layoutX="366.0" layoutY="123.0" onAction="#teachButtonClicked" prefHeight="32.0" prefWidth="160.0" text="Teacher" textFill="WHITE" />
                         <Label fx:id="rUpdateLabel" layoutX="685.0" layoutY="34.0" text="Recent updates">
                             <font>
                                 <Font name="System Bold" size="18.0" />
@@ -341,7 +341,7 @@
                                 <Font name="System Bold" size="16.0" />
                             </font>
                         </Label>
-                        <MFXTextField floatMode="DISABLED" layoutX="158.0" layoutY="211.0" prefHeight="40.0" prefWidth="442.0" text="Hassan Bin Abedin" />
+                        <MFXTextField allowEdit="false" floatMode="DISABLED" layoutX="158.0" layoutY="211.0" prefHeight="40.0" prefWidth="442.0" selectable="false" text="Hassan Bin Abedin" />
                         <Label fx:id="eLabel" layoutX="59.0" layoutY="290.0" text="Email:">
                             <font>
                                 <Font name="System Bold" size="16.0" />
@@ -352,7 +352,7 @@
                                 <Font name="System Bold" size="16.0" />
                             </font>
                         </Label>
-                        <MFXTextField floatMode="DISABLED" layoutX="158.0" layoutY="282.0" prefHeight="40.0" prefWidth="442.0" text="admin.dev@gmail.com" />
+                        <MFXTextField allowEdit="false" floatMode="DISABLED" layoutX="158.0" layoutY="282.0" prefHeight="40.0" prefWidth="442.0" selectable="false" text="admin.dev@gmail.com" />
                         <MFXTextField floatMode="DISABLED" layoutX="158.0" layoutY="347.0" prefHeight="40.0" prefWidth="442.0" text="Debugging life, one error at a time 🔍✨" />
                         <Label layoutX="60.0" layoutY="442.0" text="Security Settings">
                             <font>
@@ -360,7 +360,7 @@
                             </font>
                         </Label>
                         <Separator layoutX="58.0" layoutY="475.0" prefWidth="200.0" />
-                        <MFXButton fx:id="saveChangesBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="551.0" layoutY="564.0" prefHeight="40.0" prefWidth="132.0" rippleAnimateShadow="true" rippleColor="WHITE" text="Save Changes">
+                        <MFXButton fx:id="saveChangesBtn" buttonType="RAISED" depthLevel="LEVEL5" layoutX="551.0" layoutY="564.0" onAction="#saveChangesBtnClicked" prefHeight="40.0" prefWidth="132.0" rippleAnimateShadow="true" rippleColor="WHITE" text="Save Changes">
                             <cursor>
                                 <Cursor fx:constant="HAND" />
                             </cursor>
@@ -377,6 +377,7 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Circle>
+                  <MFXComboBox fx:id="backgroundSelector" floatMode="BORDER" floatingText="Select Background Image" layoutX="408.0" layoutY="93.0" onAction="#backgroundSelectorChanged" />
                     </children>
                 </Pane>
             </children>

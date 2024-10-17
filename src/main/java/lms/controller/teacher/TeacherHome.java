@@ -249,8 +249,10 @@ public class TeacherHome {
 
         if(Login.currentLoggedInTeacher.getWantEmail().equalsIgnoreCase("yes")){
             wantEmailTB.setSelected(true);
+            wantEmailTB.setText("I want email notifications");
         } else {
             wantEmailTB.setSelected(false);
+            wantEmailTB.setText("I don't want any email notifications");
         }
 
         setSelectedLabel(dashboardLabel);

@@ -42,8 +42,21 @@ public class MainWindowController {
     private ArrayList<String> date;
     ArrayList<String> description;
 
-    public void initialize() throws IOException
-    {
+    public void initialize() throws IOException {
+
+        // NEW ADDED FOR "URGENT" TEXT
+        itemDescriptionTextArea.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.contains("Urgent".toLowerCase())) {
+                itemDescriptionTextArea.setStyle("-fx-text-fill: red;");
+            } else {
+                itemDescriptionTextArea.setStyle("-fx-text-fill: black;");
+            }
+        });
+        // SET LIST ITEMS NOT FOCUSABLE
+        toDoListView.setFocusTraversable(false);
+        itemDescriptionTextArea.setFocusTraversable(false);
+
+
         BufferedReader myReader = null;
         description = new ArrayList<>();
         details = new ArrayList<>();
@@ -59,44 +72,30 @@ public class MainWindowController {
             Files.createFile(filePath);
         }
 
-        try
-        {
+        try {
             String line;
             myReader = new BufferedReader(new FileReader(filePathString));
 
-            while((line = myReader.readLine()) != null)
-            {
+            while ((line = myReader.readLine()) != null) {
                 String[] data = line.split(",");
                 description.add(data[0]);
                 details.add(data[1]);
                 date.add(data[2]);
             }
 
-        }
-        catch(FileNotFoundException e)
-        {
-            System.err.println("File not exist "+e.getMessage());
+        } catch (FileNotFoundException e) {
+            System.err.println("File not exist " + e.getMessage());
             throw e;
-        }
-        catch (Exception e)
-        {
-            System.err.println("Error "+e.getMessage());
-        }
-        finally
-        {
-            if(myReader != null)
-            {
-                try
-                {
+        } catch (Exception e) {
+            System.err.println("Error " + e.getMessage());
+        } finally {
+            if (myReader != null) {
+                try {
                     myReader.close();
-                }
-                catch(IOException e)
-                {
+                } catch (IOException e) {
                     System.err.println("Error closing BufferedReader: " + e.getMessage());
-                }
-                catch (Exception e)
-                {
-                    System.err.println("Error "+e.getMessage());
+                } catch (Exception e) {
+                    System.err.println("Error " + e.getMessage());
                 }
             }
         }
@@ -148,10 +147,8 @@ public class MainWindowController {
         }
     }
 
-    private void updateDataFile()
-    {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(filePathString)))
-        {
+    private void updateDataFile() {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePathString))) {
             for (int i = 0; i < description.size(); i++) {
                 writer.println(description.get(i) + "," + details.get(i) + "," + date.get(i));
             }
@@ -190,21 +187,17 @@ public class MainWindowController {
     }
 
 
-    public void OnExitClicked(ActionEvent actionEvent)
-    {
+    public void OnExitClicked(ActionEvent actionEvent) {
         Platform.exit();
     }
 
-    public void handleClickListView(MouseEvent mouseEvent)
-    {
+    public void handleClickListView(MouseEvent mouseEvent) {
         int selectedIndex = toDoListView.getSelectionModel().getSelectedIndex();
-        if (selectedIndex >= 0 && selectedIndex < date.size() && selectedIndex < details.size())
-        {
+        if (selectedIndex >= 0 && selectedIndex < date.size() && selectedIndex < details.size()) {
             String selectedDateString = date.get(selectedIndex);
             String detailsString = details.get(selectedIndex);
 
-            try
-            {
+            try {
                 // Assuming the date format is "yyyy-MM-dd", adjust it based on your actual format
                 DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate selectedDate = LocalDate.parse(selectedDateString, inputFormatter);
@@ -215,16 +208,12 @@ public class MainWindowController {
 
                 deadlineLabel.setText(formattedDate);
                 itemDescriptionTextArea.setText(detailsString);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 // Handle parsing exception
                 System.err.println("Error parsing date: " + e.getMessage());
                 deadlineLabel.setText("Invalid date format");
             }
-        }
-        else
-        {
+        } else {
             // Handling the case when no item is selected or the selected index is out of bounds
             deadlineLabel.setText("No date available");
         }

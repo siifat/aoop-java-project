@@ -3,7 +3,6 @@
 }
 
 .selected-label {
-    /*-fx-background-color: #b3d1ff; !* or any color to indicate selection *!*/
     -fx-background-color: #e5f1ff; /* or any color to indicate selection */
     -fx-border-color: #056efe;
     -fx-border-width: 2;
@@ -13,13 +12,14 @@
 .table-view{
     /*-fx-border-color: transparent;*/
     -fx-background-color:transparent;
-    -fx-border-color:linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    -fx-border-color: #439eff;
+    /*-fx-border-color:linear-gradient(to right, #24243e, #302b63, #0f0c29);*/
     -fx-border-radius:8px;
     -fx-padding:0px;
 }
 
 .table-view .table-row-cell {
-    -fx-border-color: white; /* Removes border from rows */
+    -fx-border-color: white /* Removes border from rows */
 }
 
 .table-view .table-column{
@@ -27,7 +27,8 @@
 }
 
 .table-view .column-header-background{
-    -fx-background-color:linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    -fx-background-color: #439eff;
+    /*-fx-background-color:linear-gradient(to right, #24243e, #302b63, #0f0c29);*/
     -fx-background-insets: 0 0 0 0;
     -fx-background-radius:8px 8px 0px 0px;
 }
@@ -41,6 +42,10 @@
     -fx-text-fill:#fff;
 }
 
+.samiulLabel:hover{
+    -fx-text-fill: #1175fe;
+    -fx-cursor: hand;
+}
 
 #leftPane{
     -fx-background-color: white;
@@ -81,11 +86,23 @@
 #pane1,
 #pane2,
 #pane3 {
-    -fx-background-color: white;
     -fx-background-radius: 30px;
     -fx-font-size: 25px;
     -fx-font-family: "Poppins Medium";
 }
+
+#pane1{
+    -fx-background-color: #ceceee;
+}
+
+#pane2{
+    -fx-background-color: #d2f8d7;
+}
+
+#pane3{
+    -fx-background-color: #d2f0ed;
+}
+
 #label3{
     -fx-text-alignment: center;
 }

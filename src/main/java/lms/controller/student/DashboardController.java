@@ -76,6 +76,8 @@ public class DashboardController extends Controller implements Initializable {
 
     @FXML private Label selectedLabel;
 
+    @FXML private Label nameLabel;
+
     private void setSelectedLabel(Label label) {
         // Remove the 'selected-label' class from all labels
         dashBoardLabel.getStyleClass().remove("selected-label");
@@ -90,6 +92,8 @@ public class DashboardController extends Controller implements Initializable {
     }
 
     public void dashBoardClicked(MouseEvent mouseEvent) {
+        setSelectedLabel(dashBoardLabel);
+
         basePane.setVisible(true);
         bgbasePane.setVisible(false);
         progressPane.setVisible(false);
@@ -107,6 +111,8 @@ public class DashboardController extends Controller implements Initializable {
     }
 
     public void enrollCourseClicked(MouseEvent mouseEvent) {
+        setSelectedLabel(enrollCourseLabel);
+
         basePane.setVisible(false);
         bgbasePane.setVisible(true);
         progressPane.setVisible(false);
@@ -125,6 +131,8 @@ public class DashboardController extends Controller implements Initializable {
     }
 
     public void myProgressClicked(MouseEvent mouseEvent) {
+        setSelectedLabel(myProgressLabel);
+
         basePane.setVisible(false);
         bgbasePane.setVisible(false);
         progressPane.setVisible(true);
@@ -144,6 +152,8 @@ public class DashboardController extends Controller implements Initializable {
     }
 
     public void studentToolboxClicked(MouseEvent mouseEvent) {
+        setSelectedLabel(studentToolboxLabel);
+
         basePane.setVisible(false);
         bgbasePane.setVisible(false);
         progressPane.setVisible(false);
@@ -174,8 +184,6 @@ public class DashboardController extends Controller implements Initializable {
             num = String.valueOf(n);
             totalcourse.setText(num);
             pendingtest.setText("1");
-
-
         }
 
         if (check2.isSelected()) {
@@ -201,9 +209,6 @@ public class DashboardController extends Controller implements Initializable {
         }
     label3.setText("40");
     }
-    public void progressbarClicked() {
-
-    }
 
     public void addToDatabase(String tableName, String IDText) {
         try {
@@ -224,13 +229,13 @@ public class DashboardController extends Controller implements Initializable {
         IDlabel.setText(id);
     }
 
-    @FXML
-    void notificationClicked(MouseEvent event) {
+    @FXML void notificationClicked(MouseEvent event) {
         ShowDesktopNotification.show("Notification","Your teacher called");
 
     }
-    @FXML
-    private AnchorPane allCoursePane;
+
+    @FXML private AnchorPane allCoursePane;
+
     public void seeallClicked1(MouseEvent mouseEvent) {
         allCoursePane.setVisible(true);
         basePane.setVisible(false);
@@ -247,29 +252,17 @@ public class DashboardController extends Controller implements Initializable {
         basePane.setVisible(false);
         blogs.setVisible(true);
 
-
-
     }
 
-    @FXML
-    private TableColumn<Course, String> subCol;
-    @FXML
-    private TableColumn<Course, String> midCol;
-    @FXML
-    private TableColumn<Course, String> finCol;
-    @FXML
-    private TableColumn<Course, String> ct1Col;
+    @FXML private TableColumn<Course, String> subCol;
+    @FXML private TableColumn<Course, String> midCol;
+    @FXML private TableColumn<Course, String> finCol;
+    @FXML private TableColumn<Course, String> ct1Col;
+    @FXML private TableColumn<Course, String> ct2Col;
+    @FXML private TableColumn<Course, String> ct3Col;
+    @FXML private TableColumn<Course, String> ass1Col;
+    @FXML private TableColumn<Course, String> ass2Col;
 
-    @FXML
-    private TableColumn<Course, String> ct2Col;
-
-    @FXML
-    private TableColumn<Course, String> ct3Col;
-    @FXML
-    private TableColumn<Course, String> ass1Col;
-
-    @FXML
-    private TableColumn<Course, String> ass2Col;
 //    @FXML
 //    private TableColumn<PDFFile,String> phyC1;
 //    @FXML
@@ -280,41 +273,30 @@ public class DashboardController extends Controller implements Initializable {
 //    private TableColumn phyC4;
 
     // CAT API
-    @FXML
-    private ImageView catView;
-    @FXML
-    private Label catGeneratorLabel;
+    @FXML private ImageView catView;
+    @FXML private Label catGeneratorLabel;
 
     private CatAPI catAPI;
 
     private CatImage catImage;
-    @FXML
-    private TableView<Course>courseTable;
-    @FXML
-    private ObservableList<Course> courseObservableList = FXCollections.observableArrayList();
+    @FXML private TableView<Course>courseTable;
+    @FXML private ObservableList<Course> courseObservableList = FXCollections.observableArrayList();
+
 //    @FXML
 //    private ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
 //    @FXML
 //    private PieChart pieChart;
-    @FXML
-private TableView<PDFFile> phyTable;
-    @FXML
-    private TableView<PDFFile> ecTable;
-    @FXML
-    private TableView<PDFFile> vectorTable;
-    @FXML
-    private TableView<PDFFile> dldTable;
-    @FXML
-    private WebView webView;
-    @FXML
-    private WebView webView1;
-    @FXML
-    private WebView webView2;
-    @FXML
-    private WebView webView3;
+
+    @FXML private TableView<PDFFile> phyTable;
+    @FXML private TableView<PDFFile> ecTable;
+    @FXML private TableView<PDFFile> vectorTable;
+    @FXML private TableView<PDFFile> dldTable;
+    @FXML private WebView webView;
+    @FXML private WebView webView1;
+    @FXML private WebView webView2;
+    @FXML private WebView webView3;
     private  WebEngine webEngine,webEngine1,webEngine2,webEngine3;
-    @FXML
-    private MFXToggleButton anonymousTB;
+    @FXML private MFXToggleButton anonymousTB;
 
     private ObservableList<Assignment> assignments = FXCollections.observableArrayList();
 
@@ -350,7 +332,6 @@ private TableView<PDFFile> phyTable;
         }
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 //       final WebEngine webEngine = webView.getEngine();
@@ -365,12 +346,16 @@ private TableView<PDFFile> phyTable;
 
             loadMyAssTabView();
 
+        setSelectedLabel(dashBoardLabel);
+
         cNameTF.setEditable(false);
         cNameTF.setText(Login.currentLoggedInStudent.getName());
         cIDTF.setEditable(false);
         cIDTF.setText(Login.currentLoggedInStudent.getId());
         cEmailTF.setEditable(false);
         cEmailTF.setText(Login.currentLoggedInStudent.getEmail());
+
+        nameLabel.setText(Login.currentLoggedInStudent.getName());
 
         anonymousTB.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
@@ -536,8 +521,6 @@ private TableView<PDFFile> phyTable;
         });
     }
 
-
-
     private ObservableList<PDFFile> loadPDFFilesFromFolder(String folderPath) {
         ObservableList<PDFFile> pdfFiles = FXCollections.observableArrayList();
 
@@ -565,14 +548,10 @@ private TableView<PDFFile> phyTable;
         return pdfFiles;
     }
 
-    @FXML
-    private Pane webPane;
-    @FXML
-    private Pane webPane1;
-    @FXML
-    private Pane webPane2;
-    @FXML
-    private Pane webPane3;
+    @FXML private Pane webPane;
+    @FXML private Pane webPane1;
+    @FXML private Pane webPane2;
+    @FXML private Pane webPane3;
 
     public void cm1Clicked() {
 //        final WebEngine webEngine = webView.getEngine();
@@ -613,10 +592,12 @@ private TableView<PDFFile> phyTable;
     }
 
     public void catIconClicked(MouseEvent mouseEvent) {
+        catPane.setVisible(true);
+        complainPane.setVisible(false);
+
         basePane.setVisible(false);
         bgbasePane.setVisible(false);
         progressPane.setVisible(false);
-        catPane.setVisible(true);
         phyPane.setVisible(false);
         ecPane.setVisible(false);
         vectorPane.setVisible(false);
@@ -624,31 +605,19 @@ private TableView<PDFFile> phyTable;
         allCoursePane.setVisible(false);
     }
 
-    @FXML
-    private Pane course41;
-    @FXML
-    private Pane course31;
-    @FXML
-    private Pane course21;
-    @FXML
-    private Pane course11;
-    @FXML
-    private AnchorPane vectorPane;
-    @FXML
-    private AnchorPane dldPane;
+    @FXML private Pane course41;
+    @FXML private Pane course31;
+    @FXML private Pane course21;
+    @FXML private Pane course11;
+    @FXML private AnchorPane vectorPane;
+    @FXML private AnchorPane dldPane;
 
-    @FXML
-    private AnchorPane ecPane;
-    @FXML
-    private AnchorPane phyPane;
-@FXML
-private MFXButton rewind1;
-@FXML
-private MFXButton rewind2;
-@FXML
-private MFXButton rewind3;
-@FXML
-private MFXButton rewind4;
+    @FXML private AnchorPane ecPane;
+    @FXML private AnchorPane phyPane;
+    @FXML private MFXButton rewind1;
+    @FXML private MFXButton rewind2;
+    @FXML private MFXButton rewind3;
+    @FXML private MFXButton rewind4;
 
     public void physicsClicked(MouseEvent mouseEvent) {
         basePane.setVisible(false);
@@ -684,31 +653,38 @@ private MFXButton rewind4;
         dldPane.setVisible(true);
         allCoursePane.setVisible(false);
     }
+
     public void back1Clicked(){
         phyPane.setVisible(false);
         allCoursePane.setVisible(true);
     }
+
     public void back2Clicked(){
         ecPane.setVisible(false);
         allCoursePane.setVisible(true);
     }
+
     public void back3Clicked(){
         vectorPane.setVisible(false);
         allCoursePane.setVisible(true);
     }
+
     public void back4Clicked(){
         dldPane.setVisible(false);
         allCoursePane.setVisible(true);
     }
+
     public void pl1Clicked(MouseEvent mouseEvent) {
         webPane.setVisible(true);
         webEngine.load("https://drive.google.com/drive/u/0/folders/10ooKurT1W6BPc1deRw22k6sAVmGWmKiT");
     }
+
     public void marksClicked(MouseEvent mouseEvent) {
         phyPane.setVisible(false);
         progressPane.setVisible(true);
         rewind1.setVisible(true);
     }
+
     public void ecClicked(MouseEvent mouseEvent) {
         basePane.setVisible(false);
         bgbasePane.setVisible(false);
@@ -726,12 +702,10 @@ private MFXButton rewind4;
         webEngine2.load("https://drive.google.com/drive/u/0/folders/1NHIusKo7QVv323qOK0w4-PRM9Y6WW1F0");
     }
 
-
     public void vecoutClicked(MouseEvent event) {
         webPane2.setVisible(true);
         webEngine2.load("https://drive.google.com/drive/u/0/folders/1ArIEWsQvWAkqw0agleIvj03FXa79urAW");
     }
-
 
     public void marks3clicked(MouseEvent event) {
         vectorPane.setVisible(false);
@@ -744,10 +718,209 @@ private MFXButton rewind4;
         webEngine1.load("https://drive.google.com/drive/u/0/folders/1ycixMofgAzgcU9w_H3T0eSxQ3tCbxbxc");
     }
 
-
     public void ecoutClicked(MouseEvent event) {
         webPane1.setVisible(true);
         webEngine1.load("https://drive.google.com/drive/u/0/folders/1gsEU6Rskngb1rHYAJqbefc_Z_fkEoDl9");
+    }
+
+    public void phyreturnClicked(MouseEvent mouseEvent) {
+        progressPane.setVisible(false);
+        rewind1.setVisible(false);
+        phyPane.setVisible(true);
+    }
+
+    public void ecreturnClicked(MouseEvent mouseEvent) {
+        progressPane.setVisible(false);
+        rewind2.setVisible(false);
+        ecPane.setVisible(true);
+    }
+
+    public void vectorreturnClicked(MouseEvent mouseEvent) {
+        progressPane.setVisible(false);
+        rewind3.setVisible(false);
+        vectorPane.setVisible(true);
+    }
+
+    public void dldreturnClicked(MouseEvent mouseEvent) {
+        progressPane.setVisible(false);
+        rewind4.setVisible(false);
+        dldPane.setVisible(true);
+    }
+
+
+    public void backCourseClicked(ActionEvent actionEvent) {
+        setSelectedLabel(dashBoardLabel);
+
+        basePane.setVisible(true);
+        bgbasePane.setVisible(false);
+        progressPane.setVisible(false);
+        studentToolboxPane.setVisible(false);
+        catPane.setVisible(false);
+        allCoursePane.setVisible(false);
+
+        phyPane.setVisible(false);
+        ecPane.setVisible(false);
+        dldPane.setVisible(false);
+        blogs.setVisible(false);
+        blog1.setVisible(false);
+        vectorPane.setVisible(false);
+        complainPane.setVisible(false);
+    }
+
+    public void backcourse1Clicked(ActionEvent actionEvent) {
+        setSelectedLabel(dashBoardLabel);
+
+        basePane.setVisible(false);
+        bgbasePane.setVisible(false);
+        progressPane.setVisible(false);
+        studentToolboxPane.setVisible(false);
+        allCoursePane.setVisible(true);
+
+        phyPane.setVisible(false);
+        ecPane.setVisible(false);
+        dldPane.setVisible(false);
+        vectorPane.setVisible(false);
+        blogs.setVisible(false);
+        blog1.setVisible(false);
+
+        catPane.setVisible(false);
+        complainPane.setVisible(false);
+    }
+
+    public void backCourse2Clicked(ActionEvent actionEvent) {
+        setSelectedLabel(dashBoardLabel);
+
+        basePane.setVisible(false);
+        bgbasePane.setVisible(false);
+        progressPane.setVisible(false);
+        studentToolboxPane.setVisible(false);
+        allCoursePane.setVisible(true);
+
+        phyPane.setVisible(false);
+        ecPane.setVisible(false);
+        dldPane.setVisible(false);
+        vectorPane.setVisible(false);
+        blogs.setVisible(false);
+        blog1.setVisible(false);
+
+        catPane.setVisible(false);
+        complainPane.setVisible(false);
+    }
+
+    public void backcourse3Clicked(ActionEvent actionEvent) {
+        setSelectedLabel(dashBoardLabel);
+
+        basePane.setVisible(false);
+        bgbasePane.setVisible(false);
+        progressPane.setVisible(false);
+        studentToolboxPane.setVisible(false);
+        allCoursePane.setVisible(true);
+
+        phyPane.setVisible(false);
+        ecPane.setVisible(false);
+        dldPane.setVisible(false);
+        vectorPane.setVisible(false);
+        blogs.setVisible(false);
+        blog1.setVisible(false);
+
+        catPane.setVisible(false);
+        complainPane.setVisible(false);
+    }
+
+    public void backcourse4Clicked(ActionEvent actionEvent) {
+        setSelectedLabel(dashBoardLabel);
+
+        basePane.setVisible(false);
+        bgbasePane.setVisible(false);
+        progressPane.setVisible(false);
+        studentToolboxPane.setVisible(false);
+        allCoursePane.setVisible(true);
+
+        phyPane.setVisible(false);
+        ecPane.setVisible(false);
+        dldPane.setVisible(false);
+        vectorPane.setVisible(false);
+        blogs.setVisible(false);
+        blog1.setVisible(false);
+
+        catPane.setVisible(false);
+        complainPane.setVisible(false);
+    }
+
+    public void backWriteBlogClicked(ActionEvent actionEvent) {
+        setSelectedLabel(dashBoardLabel);
+
+        basePane.setVisible(true);
+        bgbasePane.setVisible(false);
+        progressPane.setVisible(false);
+        studentToolboxPane.setVisible(false);
+        catPane.setVisible(false);
+        allCoursePane.setVisible(false);
+
+        phyPane.setVisible(false);
+        ecPane.setVisible(false);
+        dldPane.setVisible(false);
+        blogs.setVisible(false);
+        blog1.setVisible(false);
+        vectorPane.setVisible(false);
+        complainPane.setVisible(false);
+    }
+
+    public void backViewBlogClicked(ActionEvent actionEvent) {
+        setSelectedLabel(dashBoardLabel);
+
+        basePane.setVisible(true);
+        bgbasePane.setVisible(false);
+        progressPane.setVisible(false);
+        studentToolboxPane.setVisible(false);
+        catPane.setVisible(false);
+        allCoursePane.setVisible(false);
+
+        phyPane.setVisible(false);
+        ecPane.setVisible(false);
+        dldPane.setVisible(false);
+        blogs.setVisible(false);
+        blog1.setVisible(false);
+        vectorPane.setVisible(false);
+        complainPane.setVisible(false);
+    }
+
+    public void backReadBlogClicked(MouseEvent mouseEvent) {
+        setSelectedLabel(dashBoardLabel);
+
+        basePane.setVisible(true);
+        bgbasePane.setVisible(false);
+        progressPane.setVisible(false);
+        studentToolboxPane.setVisible(false);
+        catPane.setVisible(false);
+        allCoursePane.setVisible(false);
+
+        phyPane.setVisible(false);
+        ecPane.setVisible(false);
+        dldPane.setVisible(false);
+        blogs.setVisible(false);
+        blog1.setVisible(false);
+        vectorPane.setVisible(false);
+        complainPane.setVisible(false);
+    }
+
+    public void backComplainClicked(ActionEvent actionEvent) {
+        setSelectedLabel(dashBoardLabel);
+
+        basePane.setVisible(true);
+        bgbasePane.setVisible(false);
+        progressPane.setVisible(false);
+        studentToolboxPane.setVisible(false);
+        catPane.setVisible(false);
+        allCoursePane.setVisible(false);
+
+        phyPane.setVisible(false);
+        ecPane.setVisible(false);
+        dldPane.setVisible(false);
+        blogs.setVisible(false);
+        blog1.setVisible(false);
+        vectorPane.setVisible(false);
+        complainPane.setVisible(false);
     }
 
 
@@ -756,13 +929,15 @@ private MFXButton rewind4;
         rewind2.setVisible(true);
         progressPane.setVisible(true);
     }
-    @FXML
-    private AnchorPane complainPane;
+
+    @FXML private AnchorPane complainPane;
+
     public void complainBClicked(){
+        catPane.setVisible(false);
         complainPane.setVisible(true);
+
         basePane.setVisible(false);
         bgbasePane.setVisible(false);
-        catPane.setVisible(false);
         progressPane.setVisible(false);
 
         phyPane.setVisible(false);
@@ -775,10 +950,8 @@ private MFXButton rewind4;
         blog2.setVisible(false);
     }
 
-@FXML
-private MFXTextField titleField;
-    @FXML
-    private MFXTextField detailArea;
+    @FXML private MFXTextField titleField;
+    @FXML private MFXTextField detailArea;
 
     public void submitClicked(MouseEvent mouseEvent) {
         String complaintTitle = titleField.getText();
@@ -822,12 +995,11 @@ private MFXTextField titleField;
             throw new RuntimeException(e);
         }
     }
-    @FXML
-    private AnchorPane blogs;
-    @FXML
-    private AnchorPane blog1;
-    @FXML
-    private AnchorPane blog2;
+
+    @FXML private AnchorPane blogs;
+    @FXML private AnchorPane blog1;
+    @FXML private AnchorPane blog2;
+
     public void blog2Clicked(MouseEvent mouseEvent) {
         blogs.setVisible(false);
         blog2.setVisible(true);
@@ -838,6 +1010,7 @@ private MFXTextField titleField;
         blog1.setVisible(true);
 
     }
+
     public void return1Clicked(){
         blog1.setVisible(false);
         blog2.setVisible(false);
@@ -848,43 +1021,15 @@ private MFXTextField titleField;
     @FXML private MFXTextField cIDTF;
     @FXML private MFXTextField cEmailTF;
 
-    @FXML
-    private void logoutClicked(ActionEvent event) {
+    @FXML private void logoutClicked(ActionEvent event) {
         ChangeScene.change("/general/login.fxml", event);
     }
 
-    public void phyreturnClicked(MouseEvent mouseEvent) {
-        progressPane.setVisible(false);
-        rewind1.setVisible(false);
-        phyPane.setVisible(true);
-    }
+    @FXML private TextArea blogpostField;
 
-    public void ecreturnClicked(MouseEvent mouseEvent) {
-        progressPane.setVisible(false);
-        rewind2.setVisible(false);
-        ecPane.setVisible(true);
-    }
-
-    public void vectorreturnClicked(MouseEvent mouseEvent) {
-        progressPane.setVisible(false);
-        rewind3.setVisible(false);
-        vectorPane.setVisible(true);
-    }
-
-    public void dldreturnClicked(MouseEvent mouseEvent) {
-        progressPane.setVisible(false);
-        rewind4.setVisible(false);
-        dldPane.setVisible(true);
-    }
-    @FXML
-    private TextArea blogpostField;
-
-    @FXML
-    private Label blogpostTitle;
-    @FXML
-    private TextField blogTitle;
-    @FXML
-    private TextArea blogField;
+    @FXML private Label blogpostTitle;
+    @FXML private TextField blogTitle;
+    @FXML private TextArea blogField;
 
     public void blogClicked(MouseEvent mouseEvent) {
         blogs.setVisible(false);
@@ -893,7 +1038,6 @@ private MFXTextField titleField;
         blog1.setVisible(true);
         blogpostTitle.setText(s1);
         blogpostField.setText(s2);
-
     }
 
     public void settingsClicked(){
@@ -928,6 +1072,4 @@ private MFXTextField titleField;
             e.printStackTrace();
         }
     }
-
-
 }

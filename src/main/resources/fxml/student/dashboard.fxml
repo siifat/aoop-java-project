@@ -10,6 +10,7 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -23,6 +24,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <AnchorPane fx:id="root" prefHeight="820.0" prefWidth="1603.0" stylesheets="@../../css/student/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lms.controller.student.DashboardController">
 
@@ -34,12 +36,12 @@
                         <Image url="@../../images/student/user.png" />
                     </image>
                 </ImageView>
-                <Label alignment="CENTER" layoutX="70.0" layoutY="193.0" prefHeight="18.0" prefWidth="107.0" text="Welcome" textFill="#e4ff8d">
+                <Label alignment="CENTER" layoutX="70.0" layoutY="193.0" prefHeight="18.0" prefWidth="107.0" text="Welcome" textFill="#8fcfff">
                     <font>
-                        <Font size="19.0" />
+                        <Font name="System Bold" size="19.0" />
                     </font>
                 </Label>
-                <Label fx:id="nameLabel" alignment="CENTER" layoutX="66.0" layoutY="221.0" prefHeight="18.0" prefWidth="115.0" text="Sifat Ullah" textFill="#eaeaea">
+                <Label fx:id="nameLabel" alignment="CENTER" layoutX="66.0" layoutY="221.0" prefHeight="18.0" prefWidth="115.0" textFill="#3d8ffe">
                     <font>
                         <Font name="System Bold Italic" size="21.0" />
                     </font>
@@ -49,7 +51,7 @@
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
-                <Line endX="79.79997253417969" endY="-6.103515625E-5" layoutX="123.0" layoutY="295.0" startX="-81.30000305175781" startY="-3.0517578125E-5" />
+            <Separator layoutX="25.0" layoutY="294.0" prefHeight="16.0" prefWidth="200.0" />
                 <MFXButton alignment="TOP_RIGHT" layoutX="22.0" layoutY="630.0" onMouseClicked="#settingsClicked" prefHeight="26.0" prefWidth="86.0" text="Settings" visible="false">
                     <font>
                         <Font name="System Italic" size="13.0" />
@@ -80,7 +82,7 @@
                         </ImageView>
                     </graphic>
                 </MFXButton>
-                <Label fx:id="IDlabel" layoutX="98.0" layoutY="259.0" text="0112320240">
+                <Label fx:id="IDlabel" layoutX="98.0" layoutY="259.0">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>
@@ -187,13 +189,14 @@
         </Pane>
         <StackPane layoutX="278.0" layoutY="54.0" prefHeight="749.0" prefWidth="1347.0">
             <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false" />
                 <AnchorPane fx:id="basePane" prefHeight="760.0" prefWidth="1408.0">
                     <children>
                         <AnchorPane layoutX="2.0" layoutY="3.0" prefHeight="200.0" prefWidth="1116.0">
                             <children>
-                                <Pane fx:id="pane1" layoutX="103.0" prefHeight="200.0" prefWidth="266.0">
+                                <Pane fx:id="pane1" layoutX="59.0" layoutY="20.0" prefHeight="200.0" prefWidth="266.0">
                                     <children>
-                                        <Label layoutX="52.0" layoutY="14.0" prefHeight="96.0" prefWidth="181.0" text="Total Courses" textAlignment="CENTER" textFill="#201c1c" wrapText="true" />
+                                        <Label alignment="CENTER" layoutX="48.0" layoutY="14.0" prefHeight="75.0" prefWidth="170.0" text="Total Courses" textAlignment="CENTER" textFill="#201c1c" wrapText="true" />
                                         <Label fx:id="totalcourse" layoutX="163.0" layoutY="81.0" text="0" textAlignment="CENTER">
                                             <font>
                                                 <Font name="System Bold" size="72.0" />
@@ -206,9 +209,9 @@
                                         </ImageView>
                                     </children>
                                 </Pane>
-                                <Pane fx:id="pane2" layoutX="475.0" prefHeight="200.0" prefWidth="266.0">
+                                <Pane fx:id="pane2" layoutX="431.0" layoutY="20.0" prefHeight="200.0" prefWidth="266.0">
                                     <children>
-                                        <Label layoutX="43.0" layoutY="14.0" prefHeight="96.0" prefWidth="181.0" text="Pending Class Tests" textAlignment="CENTER" textFill="#201c1c" wrapText="true" />
+                                        <Label alignment="CENTER" layoutX="48.0" layoutY="14.0" prefHeight="75.0" prefWidth="170.0" text="Pending Class Tests" textAlignment="CENTER" textFill="#201c1c" wrapText="true" />
                                         <Label fx:id="pendingtest" layoutX="168.0" layoutY="81.0" text="0" textAlignment="CENTER">
                                             <font>
                                                 <Font name="System Bold" size="72.0" />
@@ -221,9 +224,9 @@
                                         </ImageView>
                                     </children>
                                 </Pane>
-                                <Pane fx:id="pane3" layoutX="835.0" prefHeight="200.0" prefWidth="266.0">
+                                <Pane fx:id="pane3" layoutX="791.0" layoutY="20.0" prefHeight="200.0" prefWidth="266.0">
                                     <children>
-                                        <Label layoutX="43.0" layoutY="14.0" prefHeight="96.0" prefWidth="181.0" text="Completed Credit" textAlignment="CENTER" textFill="#201c1c" wrapText="true" />
+                                        <Label alignment="CENTER" layoutX="48.0" layoutY="14.0" prefHeight="75.0" prefWidth="170.0" text="Completed Credit" textAlignment="CENTER" textFill="#201c1c" wrapText="true" />
                                         <Label fx:id="label3" alignment="CENTER" layoutX="99.0" layoutY="81.0" prefHeight="105.0" prefWidth="167.0" text="0">
                                             <font>
                                                 <Font name="System Bold" size="72.0" />
@@ -238,7 +241,7 @@
                                 </Pane>
                             </children>
                         </AnchorPane>
-                        <Pane fx:id="copyPane1" layoutX="103.0" layoutY="361.0" prefHeight="60.0" prefWidth="342.0">
+                        <Pane fx:id="copyPane1" layoutX="66.0" layoutY="348.0" prefHeight="60.0" prefWidth="342.0">
                             <children>
                                 <Label layoutX="14.0" layoutY="7.0" prefHeight="45.0" prefWidth="250.0" text="No course added">
                                     <font>
@@ -247,7 +250,7 @@
                                 </Label>
                             </children>
                         </Pane>
-                        <Pane fx:id="copyPane2" layoutX="103.0" layoutY="451.0" prefHeight="60.0" prefWidth="342.0">
+                        <Pane fx:id="copyPane2" layoutX="66.0" layoutY="438.0" prefHeight="60.0" prefWidth="342.0">
                             <children>
                                 <Label contentDisplay="CENTER" layoutX="14.0" layoutY="7.0" prefHeight="45.0" prefWidth="250.0" text="No course added">
                                     <font>
@@ -256,12 +259,12 @@
                                 </Label>
                             </children>
                         </Pane>
-                        <Label layoutX="106.0" layoutY="324.0" prefHeight="22.0" prefWidth="86.0" text="My Courses">
+                        <Label layoutX="69.0" layoutY="311.0" text="My Courses">
                             <font>
-                                <Font name="System Bold" size="14.0" />
+                                <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
-                        <Pane fx:id="copyPane3" layoutX="103.0" layoutY="579.0" prefHeight="60.0" prefWidth="342.0">
+                        <Pane fx:id="copyPane3" layoutX="66.0" layoutY="566.0" prefHeight="60.0" prefWidth="342.0">
                             <children>
                                 <Label layoutX="12.0" layoutY="9.0" prefHeight="45.0" prefWidth="250.0" text="Blog 1">
                                     <font>
@@ -270,7 +273,7 @@
                                 </Label>
                             </children>
                         </Pane>
-                        <Pane fx:id="copyPane4" layoutX="103.0" layoutY="664.0" prefHeight="60.0" prefWidth="342.0">
+                        <Pane fx:id="copyPane4" layoutX="66.0" layoutY="651.0" prefHeight="60.0" prefWidth="342.0">
                             <children>
                                 <Label layoutX="13.0" layoutY="8.0" prefHeight="45.0" prefWidth="250.0" text="Blog 2">
                                     <font>
@@ -279,33 +282,36 @@
                                 </Label>
                             </children>
                         </Pane>
-                        <Label layoutX="106.0" layoutY="546.0" prefHeight="20.0" prefWidth="107.0" text="My Blogs">
+                        <Label layoutX="69.0" layoutY="531.0" text="My Blogs">
                             <font>
-                                <Font name="System Bold" size="14.0" />
+                                <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
-                        <Pane fx:id="notiPane" layoutX="1126.0" layoutY="24.0" prefHeight="693.0" prefWidth="219.0">
+                        <Pane fx:id="notiPane" layoutX="1094.0" layoutY="28.0" prefHeight="693.0" prefWidth="233.0">
                             <children>
-                                <Label layoutX="48.0" layoutY="20.0" text="Notifications">
+                                <Label layoutX="62.0" layoutY="14.0" text="Notifications">
                                     <font>
-                                        <Font name="Bookman Old Style Bold Italic" size="18.0" />
+                                        <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
-                                <Line endX="100.0" layoutX="110.0" layoutY="57.0" startX="-100.0" />
+                        <Separator layoutX="17.0" layoutY="51.0" prefWidth="200.0" />
                             </children>
                         </Pane>
-                        <Label fx:id="seeAll1" layoutX="381.0" layoutY="327.0" onMouseClicked="#seeallClicked1" text="See all">
+                        <Label fx:id="seeAll1" layoutX="357.0" layoutY="315.0" onMouseClicked="#seeallClicked1" styleClass="samiulLabel" text="See all">
                             <font>
-                                <Font name="System Bold" size="14.0" />
+                                <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label fx:id="seeAll2" layoutX="394.0" layoutY="547.0" onMouseClicked="#seeallClicked2" text="See all">
+                        <Label fx:id="seeAll2" layoutX="357.0" layoutY="534.0" onMouseClicked="#seeallClicked2" styleClass="samiulLabel" text="See all">
                             <font>
-                                <Font name="System Bold" size="14.0" />
+                                <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label layoutX="1007.0" layoutY="339.0" text="My Assignments" />
-                        <TableView fx:id="myAssTableView" layoutX="489.0" layoutY="361.0" prefHeight="369.0" prefWidth="613.0">
+                        <Label layoutX="453.0" layoutY="309.0" text="My Assignments">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+                        <TableView fx:id="myAssTableView" layoutX="452.0" layoutY="348.0" prefHeight="369.0" prefWidth="602.0">
                             <columns>
                                 <TableColumn fx:id="titleCol" prefWidth="156.0" text="Title" />
                                 <TableColumn fx:id="desCol" prefWidth="213.0" text="Description" />
@@ -317,7 +323,7 @@
                 </AnchorPane>
                 <AnchorPane fx:id="bgbasePane" prefHeight="200.0" prefWidth="200.0" visible="false">
                     <children>
-                        <Pane fx:id="course1" layoutX="185.0" layoutY="75.0" prefHeight="235.0" prefWidth="422.0">
+                        <Pane fx:id="course1" layoutX="185.0" layoutY="99.0" prefHeight="235.0" prefWidth="422.0">
                             <children>
                                 <ImageView fitHeight="179.0" fitWidth="422.0" layoutY="1.0">
                                     <image>
@@ -326,10 +332,10 @@
                                 </ImageView>
                                 <Label layoutX="7.0" layoutY="184.0" prefHeight="45.0" prefWidth="181.0" text="Course name : Electrical Circuits" />
                                 <Label layoutX="226.0" layoutY="193.0" prefHeight="32.0" prefWidth="115.0" text="Credit: 3" />
-                                <MFXCheckbox fx:id="check1" layoutX="383.0" layoutY="201.0" prefHeight="26.0" prefWidth="32.0" text="     " />
+                                <MFXCheckbox fx:id="check1" layoutX="370.0" layoutY="193.0" prefHeight="26.0" prefWidth="32.0" text="     " />
                             </children>
                         </Pane>
-                        <Pane fx:id="course2" layoutX="846.0" layoutY="75.0" prefHeight="235.0" prefWidth="422.0">
+                        <Pane fx:id="course2" layoutX="846.0" layoutY="99.0" prefHeight="235.0" prefWidth="422.0">
                             <children>
                                 <ImageView fitHeight="179.0" fitWidth="422.0">
                                     <image>
@@ -338,10 +344,10 @@
                                 </ImageView>
                                 <Label layoutX="3.0" layoutY="185.0" prefHeight="45.0" prefWidth="181.0" text="Course name : Physics" />
                                 <Label layoutX="205.0" layoutY="192.0" prefHeight="32.0" prefWidth="115.0" text="Credit: 3" />
-                                <MFXCheckbox fx:id="check2" layoutX="388.0" layoutY="198.0" prefHeight="26.0" prefWidth="32.0" text="     " />
+                                <MFXCheckbox fx:id="check2" layoutX="370.0" layoutY="194.0" prefHeight="26.0" prefWidth="32.0" text="     " />
                             </children>
                         </Pane>
-                        <Pane fx:id="course3" layoutX="192.0" layoutY="351.0" prefHeight="235.0" prefWidth="422.0">
+                        <Pane fx:id="course3" layoutX="185.0" layoutY="375.0" prefHeight="235.0" prefWidth="422.0">
                             <children>
                                 <ImageView fitHeight="179.0" fitWidth="422.0" layoutX="1.0">
                                     <image>
@@ -350,9 +356,10 @@
                                 </ImageView>
                                 <Label layoutX="6.0" layoutY="185.0" prefHeight="45.0" prefWidth="181.0" text="Course name : Vector" />
                                 <Label layoutX="212.0" layoutY="192.0" prefHeight="32.0" prefWidth="115.0" text="Credit: 3" />
+                              <MFXCheckbox fx:id="check3" layoutX="370.0" layoutY="194.0" prefHeight="26.0" prefWidth="32.0" text="     " />
                             </children>
                         </Pane>
-                        <Pane fx:id="course4" layoutX="846.0" layoutY="363.0" prefHeight="235.0" prefWidth="422.0">
+                        <Pane fx:id="course4" layoutX="846.0" layoutY="375.0" prefHeight="235.0" prefWidth="422.0">
                             <children>
                                 <ImageView fitHeight="179.0" fitWidth="422.0" layoutX="2.0">
                                     <image>
@@ -361,17 +368,16 @@
                                 </ImageView>
                                 <Label layoutX="5.0" layoutY="184.0" prefHeight="45.0" prefWidth="181.0" text="Course name : DLD" />
                                 <Label layoutX="207.0" layoutY="191.0" prefHeight="32.0" prefWidth="115.0" text="Credit: 3" />
-                                <MFXCheckbox fx:id="check4" layoutX="381.0" layoutY="196.0" prefHeight="26.0" prefWidth="32.0" text="     " />
+                                <MFXCheckbox fx:id="check4" layoutX="370.0" layoutY="193.0" prefHeight="26.0" prefWidth="32.0" text="     " />
                             </children>
                         </Pane>
-                        <Label layoutX="77.0" layoutY="25.0" text="Available Courses:">
+                        <Label layoutX="186.0" layoutY="25.0" text="Available Courses:">
                             <font>
                                 <Font size="21.0" />
                             </font>
                         </Label>
-                        <Line endX="100.0" layoutX="161.0" layoutY="63.0" startX="-100.0" />
-                        <MFXCheckbox fx:id="check3" layoutX="461.0" layoutY="548.0" prefHeight="26.0" prefWidth="32.0" text="     " />
-                        <MFXButton fx:id="enButton" layoutX="628.0" layoutY="639.0" onAction="#enrollNowClicked" prefHeight="59.0" prefWidth="210.0" text="Enroll Now">
+                        <Line endX="100.0" layoutX="286.0" layoutY="63.0" startX="-100.0" />
+                        <MFXButton fx:id="enButton" layoutX="627.0" layoutY="657.0" onAction="#enrollNowClicked" prefHeight="59.0" prefWidth="210.0" text="Enroll Now">
                             <font>
                                 <Font name="Arial Black" size="18.0" />
                             </font>
@@ -422,7 +428,7 @@
                 </AnchorPane>
                 <AnchorPane fx:id="allCoursePane" prefHeight="200.0" prefWidth="200.0" visible="false">
                     <children>
-                        <Pane fx:id="course11" layoutX="152.0" layoutY="77.0" onMouseClicked="#ecClicked" prefHeight="235.0" prefWidth="422.0">
+                        <Pane fx:id="course11" layoutX="200.0" layoutY="117.0" onMouseClicked="#ecClicked" prefHeight="235.0" prefWidth="422.0">
                             <children>
                                 <ImageView fx:id="ec" fitHeight="179.0" fitWidth="422.0" layoutY="1.0">
                                     <image>
@@ -436,7 +442,7 @@
                                 </Label>
                             </children>
                         </Pane>
-                        <Pane fx:id="course21" layoutX="159.0" layoutY="435.0" onMouseClicked="#physicsClicked" prefHeight="235.0" prefWidth="422.0">
+                        <Pane fx:id="course21" layoutX="200.0" layoutY="395.0" onMouseClicked="#physicsClicked" prefHeight="235.0" prefWidth="422.0">
                             <children>
                                 <ImageView fx:id="physics" fitHeight="179.0" fitWidth="422.0">
                                     <image>
@@ -450,7 +456,7 @@
                                 </Label>
                             </children>
                         </Pane>
-                        <Pane fx:id="course31" layoutX="803.0" layoutY="77.0" onMouseClicked="#vectorClicked" prefHeight="235.0" prefWidth="422.0">
+                        <Pane fx:id="course31" layoutX="769.0" layoutY="117.0" onMouseClicked="#vectorClicked" prefHeight="235.0" prefWidth="422.0">
                             <children>
                                 <ImageView fx:id="vector" fitHeight="179.0" fitWidth="422.0" layoutX="1.0">
                                     <image>
@@ -464,7 +470,7 @@
                                 </Label>
                             </children>
                         </Pane>
-                        <Pane fx:id="course41" layoutX="803.0" layoutY="435.0" onMouseClicked="#dldClicked" prefHeight="235.0" prefWidth="422.0">
+                        <Pane fx:id="course41" layoutX="769.0" layoutY="395.0" onMouseClicked="#dldClicked" prefHeight="235.0" prefWidth="422.0">
                             <children>
                                 <ImageView fx:id="dld" fitHeight="179.0" fitWidth="422.0" layoutX="2.0">
                                     <image>
@@ -478,6 +484,11 @@
                                 </Label>
                             </children>
                         </Pane>
+                  <MFXButton contentDisplay="GRAPHIC_ONLY" layoutX="60.0" layoutY="62.0" onAction="#backCourseClicked">
+                     <graphic>
+                        <FontIcon fx:id="icon61" iconLiteral="fas-chevron-left" iconSize="25" text="" />
+                     </graphic>
+                  </MFXButton>
                     </children>
                 </AnchorPane>
                 <AnchorPane fx:id="phyPane" prefHeight="200.0" prefWidth="200.0" visible="false">
@@ -531,6 +542,11 @@
                             </children>
                         </Pane>
                         <TableView fx:id="phyTable" layoutX="383.0" layoutY="317.0" prefHeight="324.0" prefWidth="728.0" />
+                  <MFXButton contentDisplay="GRAPHIC_ONLY" layoutX="42.0" layoutY="40.0" onAction="#backcourse1Clicked">
+                     <graphic>
+                        <FontIcon fx:id="icon62" iconLiteral="fas-chevron-left" iconSize="25" text="" />
+                     </graphic>
+                  </MFXButton>
                     </children>
                 </AnchorPane>
                 <AnchorPane fx:id="ecPane" prefHeight="760.0" prefWidth="1397.0" visible="false">
@@ -587,6 +603,11 @@
                             </opaqueInsets>
                         </Pane>
                         <TableView fx:id="ecTable" layoutX="318.0" layoutY="288.0" prefHeight="311.0" prefWidth="818.0" />
+                  <MFXButton contentDisplay="GRAPHIC_ONLY" layoutX="42.0" layoutY="40.0" onAction="#backCourse2Clicked">
+                     <graphic>
+                        <FontIcon fx:id="icon63" iconLiteral="fas-chevron-left" iconSize="25" text="" />
+                     </graphic>
+                  </MFXButton>
                     </children>
                 </AnchorPane>
                 <AnchorPane fx:id="dldPane" prefHeight="200.0" prefWidth="200.0" visible="false">
@@ -640,81 +661,11 @@
                             </children>
                         </Pane>
                         <TableView fx:id="dldTable" layoutX="346.0" layoutY="307.0" prefHeight="330.0" prefWidth="834.0" />
-                    </children>
-                </AnchorPane>
-                <AnchorPane fx:id="blog1" prefHeight="200.0" prefWidth="200.0" visible="false">
-                    <children>
-                        <Label fx:id="blogpostTitle" layoutX="275.0" layoutY="70.0" prefHeight="60.0" prefWidth="412.0" text="Dealing with the pressures of uni life">
-                            <font>
-                                <Font size="24.0" />
-                            </font>
-                        </Label>
-                        <Line endX="290.60003662109375" layoutX="376.0" layoutY="130.0" startX="-100.0" />
-                        <MFXButton fx:id="return1" layoutX="276.0" layoutY="698.0" onMouseClicked="#return1Clicked" text="Return" />
-                        <TextArea fx:id="blogpostField" layoutX="275.0" layoutY="190.0" prefHeight="490.0" prefWidth="765.0">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </TextArea>
-                    </children>
-                </AnchorPane>
-                <AnchorPane fx:id="blog2" prefHeight="200.0" prefWidth="200.0" visible="false">
-                    <children>
-                        <Label layoutX="89.0" layoutY="68.0" prefHeight="60.0" prefWidth="412.0" text="Am i the only one single">
-                            <font>
-                                <Font size="24.0" />
-                            </font>
-                        </Label>
-                        <Line endX="290.60003662109375" layoutX="190.0" layoutY="128.0" startX="-100.0" />
-                        <JFXTextArea layoutX="90.0" layoutY="190.0" prefHeight="470.0" prefWidth="734.0" text="Dealing with the pressures of university life can be overwhelming, but it's important to approach it with balance and self-awareness. Here are some key strategies to help manage stress and thrive in a university environment:### 1. **Time Management**   University often comes with a heavy workload. Effective time management can reduce the feeling of being overwhelmed. Prioritize tasks by deadlines and importance. Tools like planners or digital apps can help break assignments into manageable parts and keep you on track.### 2. **Set Realistic Goals**   Don't put too much pressure on yourself to achieve perfection. Set achievable goals that focus on progress rather than flawless results. Celebrate small victories, and remember that setbacks are part of the learning process.### 3. **Take Breaks**   It's easy to fall into a cycle of continuous studying, especially during exam season. Regular breaks can improve focus and productivity. Use techniques like the Pomodoro method (work for 25 minutes, break for 5) to stay fresh and maintain energy levels.### 4. **Stay Physically Active**   Exercise is a great way to reduce stress and improve mental well-being. Even a short walk or a few minutes of stretching can help clear your mind and boost your mood.### 5. **Build a Support Network**   Surround yourself with supportive friends, classmates, and family members who understand the pressures of university life. It’s also helpful to communicate with your professors and seek their guidance when needed. Many universities offer counseling services, which can be a valuable resource if you're feeling overwhelmed.### 6. **Practice Self-Compassion**   Be kind to yourself. University life can be challenging, and it's normal to struggle at times. Instead of being hard on yourself, practice self-compassion. Acknowledge your efforts and focus on what you’ve achieved, no matter how small.### 7. **Maintain a Healthy Routine**   Try to stick to a regular routine that includes enough sleep, nutritious food, and time for relaxation. Good habits like these will keep your energy levels stable and your mind sharp.### 8. **Seek Help When Needed**   If you feel that the pressures are becoming too much, reach out to university services, academic advisors, or mental health professionals. Recognizing when you need help is a sign of strength, not weakness.By incorporating these strategies into your daily life, you can manage the pressures of university more effectively and make the experience a rewarding journey.">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </JFXTextArea>
-                        <MFXButton fx:id="return11" layoutX="89.0" layoutY="693.0" onMouseClicked="#return1Clicked" text="Return" />
-                    </children>
-                </AnchorPane>
-                <AnchorPane fx:id="complainPane" prefHeight="760.0" prefWidth="1366.0" visible="false">
-                    <children>
-                        <Label layoutX="65.0" layoutY="52.0" prefHeight="60.0" prefWidth="498.0" text="Submit Your Complaints Here!">
-                            <font>
-                                <Font size="36.0" />
-                            </font>
-                        </Label>
-                        <Line endX="386.60003662109375" layoutX="166.0" layoutY="112.0" startX="-100.0" />
-                        <Line endX="386.60003662109375" layoutX="165.0" layoutY="127.0" startX="-100.0" />
-                        <Label layoutX="65.0" layoutY="165.0" prefHeight="27.0" prefWidth="94.0" text="Student name:">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="65.0" layoutY="254.0" prefHeight="27.0" prefWidth="94.0" text="Student ID:">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Label>
-                        <MFXTextField fx:id="cNameTF" floatMode="DISABLED" layoutX="63.0" layoutY="192.0" prefHeight="50.0" prefWidth="322.0" />
-                        <MFXTextField fx:id="cIDTF" floatMode="DISABLED" layoutX="63.0" layoutY="290.0" prefHeight="50.0" prefWidth="322.0" />
-                        <MFXTextField fx:id="titleField" floatMode="DISABLED" layoutX="66.0" layoutY="478.0" prefHeight="50.0" prefWidth="322.0" />
-                        <MFXTextField fx:id="cEmailTF" floatMode="DISABLED" layoutX="66.0" layoutY="380.0" prefHeight="50.0" prefWidth="322.0" />
-                        <MFXTextField fx:id="detailArea" floatMode="DISABLED" layoutX="59.0" layoutY="580.0" prefHeight="106.0" prefWidth="741.0" />
-                        <Label layoutX="65.0" layoutY="352.0" prefHeight="27.0" prefWidth="94.0" text="Student email:">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="65.0" layoutY="441.0" prefHeight="27.0" prefWidth="94.0" text="Complain title:">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="65.0" layoutY="542.0" prefHeight="27.0" prefWidth="94.0" text="Description:">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Label>
-                        <MFXButton fx:id="submitButton" layoutX="488.0" layoutY="709.0" onMouseClicked="#submitClicked" prefHeight="26.0" prefWidth="84.0" text="Submit" />
-                        <MFXToggleButton fx:id="anonymousTB" layoutX="62.0" layoutY="11.0" text="Stay Anonymus?" />
+                  <MFXButton contentDisplay="GRAPHIC_ONLY" layoutX="42.0" layoutY="40.0" onAction="#backcourse3Clicked">
+                     <graphic>
+                        <FontIcon fx:id="icon64" iconLiteral="fas-chevron-left" iconSize="25" text="" />
+                     </graphic>
+                  </MFXButton>
                     </children>
                 </AnchorPane>
                 <AnchorPane fx:id="vectorPane" prefHeight="200.0" prefWidth="200.0" visible="false">
@@ -768,6 +719,56 @@
                             </children>
                         </Pane>
                         <TableView fx:id="vectorTable" layoutX="374.0" layoutY="279.0" prefHeight="311.0" prefWidth="778.0" />
+                  <MFXButton contentDisplay="GRAPHIC_ONLY" layoutX="42.0" layoutY="40.0" onAction="#backcourse4Clicked">
+                     <graphic>
+                        <FontIcon fx:id="icon68" iconLiteral="fas-chevron-left" iconSize="25" text="" />
+                     </graphic>
+                  </MFXButton>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="blog1" prefHeight="200.0" prefWidth="200.0" visible="false">
+                    <children>
+                        <Label fx:id="blogpostTitle" layoutX="275.0" layoutY="70.0" prefHeight="60.0" prefWidth="412.0" text="Dealing with the pressures of uni life">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Label>
+                        <Line endX="290.60003662109375" layoutX="376.0" layoutY="130.0" startX="-100.0" />
+                        <MFXButton fx:id="return1" layoutX="276.0" layoutY="698.0" onMouseClicked="#return1Clicked" text="Return" />
+                        <TextArea fx:id="blogpostField" layoutX="275.0" layoutY="190.0" prefHeight="490.0" prefWidth="765.0">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </TextArea>
+                  <MFXButton contentDisplay="GRAPHIC_ONLY" layoutX="42.0" layoutY="40.0" onAction="#backWriteBlogClicked">
+                     <graphic>
+                        <FontIcon fx:id="icon65" iconLiteral="fas-chevron-left" iconSize="25" text="" />
+                     </graphic>
+                  </MFXButton>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="blog2" prefHeight="200.0" prefWidth="200.0" visible="false">
+                    <children>
+                        <Label layoutX="89.0" layoutY="68.0" prefHeight="60.0" prefWidth="412.0" text="Am i the only one single">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Label>
+                        <Line endX="290.60003662109375" layoutX="190.0" layoutY="128.0" startX="-100.0" />
+                        <JFXTextArea layoutX="90.0" layoutY="190.0" prefHeight="470.0" prefWidth="734.0" text="Dealing with the pressures of university life can be overwhelming, but it's important to approach it with balance and self-awareness. Here are some key strategies to help manage stress and thrive in a university environment:### 1. **Time Management**   University often comes with a heavy workload. Effective time management can reduce the feeling of being overwhelmed. Prioritize tasks by deadlines and importance. Tools like planners or digital apps can help break assignments into manageable parts and keep you on track.### 2. **Set Realistic Goals**   Don't put too much pressure on yourself to achieve perfection. Set achievable goals that focus on progress rather than flawless results. Celebrate small victories, and remember that setbacks are part of the learning process.### 3. **Take Breaks**   It's easy to fall into a cycle of continuous studying, especially during exam season. Regular breaks can improve focus and productivity. Use techniques like the Pomodoro method (work for 25 minutes, break for 5) to stay fresh and maintain energy levels.### 4. **Stay Physically Active**   Exercise is a great way to reduce stress and improve mental well-being. Even a short walk or a few minutes of stretching can help clear your mind and boost your mood.### 5. **Build a Support Network**   Surround yourself with supportive friends, classmates, and family members who understand the pressures of university life. It’s also helpful to communicate with your professors and seek their guidance when needed. Many universities offer counseling services, which can be a valuable resource if you're feeling overwhelmed.### 6. **Practice Self-Compassion**   Be kind to yourself. University life can be challenging, and it's normal to struggle at times. Instead of being hard on yourself, practice self-compassion. Acknowledge your efforts and focus on what you’ve achieved, no matter how small.### 7. **Maintain a Healthy Routine**   Try to stick to a regular routine that includes enough sleep, nutritious food, and time for relaxation. Good habits like these will keep your energy levels stable and your mind sharp.### 8. **Seek Help When Needed**   If you feel that the pressures are becoming too much, reach out to university services, academic advisors, or mental health professionals. Recognizing when you need help is a sign of strength, not weakness.By incorporating these strategies into your daily life, you can manage the pressures of university more effectively and make the experience a rewarding journey.">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </JFXTextArea>
+                        <MFXButton fx:id="return11" layoutX="89.0" layoutY="693.0" onMouseClicked="#return1Clicked" text="Return" />
+                  <MFXButton contentDisplay="GRAPHIC_ONLY" layoutX="42.0" layoutY="40.0" onAction="#backViewBlogClicked">
+                     <graphic>
+                        <FontIcon fx:id="icon66" iconLiteral="fas-chevron-left" iconSize="25" onMouseClicked="#backReadBlogClicked" text="" />
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </MFXButton>
                     </children>
                 </AnchorPane>
                 <AnchorPane fx:id="blogs" prefHeight="200.0" prefWidth="200.0" visible="false">
@@ -816,13 +817,61 @@
                             </font>
                         </TextArea>
                         <TextField fx:id="blogTitle" layoutX="377.0" layoutY="122.0" prefHeight="26.0" prefWidth="392.0" />
-                        <Label layoutX="44.0" layoutY="31.0" prefHeight="54.0" prefWidth="302.0" text="Create Your Blog">
+                        <Label layoutX="92.0" layoutY="29.0" prefHeight="54.0" prefWidth="302.0" text="Create Your Blog">
                             <font>
                                 <Font size="36.0" />
                             </font>
                         </Label>
-                        <Line endX="170.20001220703125" layoutX="146.0" layoutY="85.0" startX="-100.0" />
+                        <Line endX="170.20001220703125" layoutX="194.0" layoutY="83.0" startX="-100.0" />
                         <MFXButton fx:id="blogButton" layoutX="644.0" layoutY="694.0" onMouseClicked="#blogClicked" prefHeight="32.0" prefWidth="94.0" text="Submit" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="complainPane" prefHeight="760.0" prefWidth="1366.0" visible="false">
+                    <children>
+                        <Label layoutX="343.0" layoutY="57.0" prefHeight="60.0" prefWidth="498.0" text="Submit Your Complaints Here!">
+                            <font>
+                                <Font size="36.0" />
+                            </font>
+                        </Label>
+                        <Line endX="386.60003662109375" layoutX="444.0" layoutY="117.0" startX="-100.0" />
+                        <Line endX="386.60003662109375" layoutX="443.0" layoutY="132.0" startX="-100.0" />
+                        <Label layoutX="65.0" layoutY="165.0" prefHeight="27.0" prefWidth="94.0" text="Student name:">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="65.0" layoutY="254.0" prefHeight="27.0" prefWidth="94.0" text="Student ID:">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <MFXTextField fx:id="cNameTF" floatMode="DISABLED" layoutX="63.0" layoutY="192.0" prefHeight="50.0" prefWidth="322.0" />
+                        <MFXTextField fx:id="cIDTF" floatMode="DISABLED" layoutX="63.0" layoutY="290.0" prefHeight="50.0" prefWidth="322.0" />
+                        <MFXTextField fx:id="titleField" floatMode="DISABLED" layoutX="66.0" layoutY="478.0" prefHeight="50.0" prefWidth="322.0" />
+                        <MFXTextField fx:id="cEmailTF" floatMode="DISABLED" layoutX="66.0" layoutY="380.0" prefHeight="50.0" prefWidth="322.0" />
+                        <MFXTextField fx:id="detailArea" floatMode="DISABLED" layoutX="59.0" layoutY="580.0" prefHeight="106.0" prefWidth="741.0" />
+                        <Label layoutX="65.0" layoutY="352.0" prefHeight="27.0" prefWidth="94.0" text="Student email:">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="65.0" layoutY="441.0" prefHeight="27.0" prefWidth="94.0" text="Complain title:">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="65.0" layoutY="542.0" prefHeight="27.0" prefWidth="94.0" text="Description:">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <MFXButton fx:id="submitButton" layoutX="488.0" layoutY="709.0" onMouseClicked="#submitClicked" prefHeight="26.0" prefWidth="84.0" text="Submit" />
+                        <MFXToggleButton fx:id="anonymousTB" layoutX="503.0" layoutY="179.0" text="Stay Anonymus?" />
+                  <MFXButton contentDisplay="GRAPHIC_ONLY" layoutX="42.0" layoutY="40.0" onAction="#backComplainClicked">
+                     <graphic>
+                        <FontIcon fx:id="icon67" iconLiteral="fas-chevron-left" iconSize="25" text="" />
+                     </graphic>
+                  </MFXButton>
                     </children>
                 </AnchorPane>
                 <AnchorPane fx:id="studentToolboxPane" prefHeight="797.0" prefWidth="1354.0" visible="false">

@@ -1,6 +1,9 @@
 package lms.controller.admin;
 
-import io.github.palexdev.materialfx.controls.*;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXRadioButton;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,18 +17,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import lms.controller.general.Login;
-import lms.controller.student.Course;
 import lms.util.ChangeScene;
 import lms.util.ShowAlert;
 import lms.util.UserService;
@@ -42,7 +42,7 @@ public class AdminHome extends Application {
 
     @FXML private Pane adminLoginPane;
     @FXML private Pane stackPane;
-    @FXML private Pane upperpane;
+    @FXML private Pane upperPane;
     @FXML private Pane sidePane;
 
     @FXML private MFXPasswordField privateFilePassField;
@@ -57,6 +57,8 @@ public class AdminHome extends Application {
 
     @FXML private Pane sconfigp1Pane;
     public Circle proPicCircle;
+
+    @FXML private MFXComboBox<String> backgroundSelector;
 
     @FXML private Label homeLabel;
     @FXML private Label manageLabel;
@@ -103,7 +105,13 @@ public class AdminHome extends Application {
 
     @FXML private Pane chartContainer;
 
-    @FXML private ListView<String> updateLogLV;
+//    @FXML private ListView<String> updateLogLV;
+//    private ObservableList<String> updateLogList;
+
+    @FXML
+    private ListView<TextFlow> updateLogLV; //-----------------------------------------------
+    private ObservableList<TextFlow> updateLogList;
+
 
     private ObservableList<TeachApproveData> adt1 = FXCollections.observableArrayList();
     private ObservableList<StApproveData> adt = FXCollections.observableArrayList();
@@ -151,6 +159,21 @@ public class AdminHome extends Application {
 //        Image proPic = new Image(getClass().getResource("/images/admin.jpg").toExternalForm());
 //        proPicCircle.setFill(new ImagePattern(proPic));
 
+//        String imagePath = "file:/C:/Users/sifat/Documents/aoop-java-project/src/main/resources/images/admin/Cover/Cover3.jpg";
+//        Image backgroundImage = new Image(imagePath);
+//
+//        // Create a BackgroundImage with the required settings
+//        BackgroundImage background = new BackgroundImage(
+//                backgroundImage,
+//                BackgroundRepeat.NO_REPEAT,
+//                BackgroundRepeat.NO_REPEAT,
+//                BackgroundPosition.CENTER,
+//                BackgroundSize.DEFAULT
+//        );
+//
+//        // Set the background for upperPane
+//        upperPane.setBackground(new Background(background));
+
         setSelectedLabel(homeLabel);
 
         //HOMEPAGE
@@ -175,6 +198,62 @@ public class AdminHome extends Application {
         scb1.getItems().addAll("Student", "Undergraduate Assistant", "Student & Undergraduate Assistant");
         scb2.getItems().addAll("Enrolled", "Not Enrolled");
 
+        scb1.valueProperty().addListener((obs, oldValue, newValue) -> {
+            StApproveData approveData = sapprovalTable.getSelectionModel().getSelectedItem();
+
+            if (approveData != null && newValue != null) {
+                // Update the role in the database when a new role is selected
+                Connection conn = null;
+                Statement stmt = null;
+
+                try {
+                    conn = DriverManager.getConnection(UserService.URL);
+                    stmt = conn.createStatement();
+
+                    String query = "UPDATE students SET role='" + newValue + "' WHERE id = '" + approveData.getId() + "'";
+                    stmt.executeUpdate(query);
+
+                    conn.close();
+                    stmt.close();
+
+                    // Optionally reload the table data
+                    sapprovalTable.getItems().clear();
+                    loadItemsIntoTable();
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        scb2.valueProperty().addListener((obs, oldValue, newValue) -> {
+            StApproveData approveData = sapprovalTable.getSelectionModel().getSelectedItem();
+
+            if (approveData != null && newValue != null) {
+                // Update the registration status in the database when a new option is selected
+                Connection conn = null;
+                Statement stmt = null;
+
+                try {
+                    conn = DriverManager.getConnection(UserService.URL);
+                    stmt = conn.createStatement();
+
+                    String query = "UPDATE students SET registration='" + newValue + "' WHERE id = '" + approveData.getId() + "'";
+                    stmt.executeUpdate(query);
+
+                    conn.close();
+                    stmt.close();
+
+                    // Optionally reload the table data
+                    sapprovalTable.getItems().clear();
+                    loadItemsIntoTable();
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+
         sapprovalTable.getItems().clear();
         loadItemsIntoTable();
 
@@ -187,8 +266,65 @@ public class AdminHome extends Application {
 
         tcb1.getItems().addAll(" ", "Teacher");
 
+        tcb1.valueProperty().addListener((obs, oldValue, newValue) -> {
+            TeachApproveData approveData = tapprovalTable.getSelectionModel().getSelectedItem();
+
+            if (approveData != null && newValue != null) {
+                // Update the role in the database when a new role is selected
+                Connection conn = null;
+                Statement stmt = null;
+
+                try {
+                    conn = DriverManager.getConnection(UserService.URL);
+                    stmt = conn.createStatement();
+
+                    String query = "UPDATE teachers SET role='" + newValue + "' WHERE initial = '" + approveData.getInitial() + "'";
+                    stmt.executeUpdate(query);
+
+                    conn.close();
+                    stmt.close();
+
+                    // Optionally reload the table data
+                    tapprovalTable.getItems().clear();
+                    loadItemsIntoTeacherTable();
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
         tapprovalTable.getItems().clear();
         loadItemsIntoTeacherTable();
+
+        updateLogList = FXCollections.observableArrayList();
+        updateLogLV.setItems(updateLogList);
+
+        //Sorry
+
+        Text infoUpdateTitle = new Text("Admission\n");
+        infoUpdateTitle.setStyle("-fx-font-weight: bold;");
+
+        Text idAndName2 = new Text("0112320247- Dawoodur Rahman Hassan");
+        idAndName2.setStyle("-fx-font-style: italic;");
+
+        Text infoUpdateMessage = new Text(" got approval for student account on 7 October, 2024");
+        TextFlow infoUpdateLog = new TextFlow(infoUpdateTitle, idAndName2, infoUpdateMessage);
+
+        Text admissionTitle = new Text("Admission\n");
+        admissionTitle.setStyle("-fx-font-weight: bold;");
+
+        Text idAndName3 = new Text("0112320240- Sifatullah");
+        idAndName3.setStyle("-fx-font-style: italic;");
+
+        Text infoUpdateMessage1 = new Text(" got approval for student account on 7 October, 2024");
+
+        TextFlow infoUpdateLog1 = new TextFlow(admissionTitle, idAndName3, infoUpdateMessage1);
+
+        updateLogList.add(infoUpdateLog); // Add the formatted log message to the list
+        updateLogList.add(infoUpdateLog1); // Add the formatted log message to the list
+
+        //End of Sorry
 
 
         //REPORT_&_LOG
@@ -234,9 +370,12 @@ public class AdminHome extends Application {
 
 
         //SYSTEM_CONFIGURATION
+
         String camLoc = "/images/teacher/photo.png";
         Image cam = new Image(getClass().getResource(camLoc).toExternalForm());
         cameraCircle.setFill(new ImagePattern(cam));
+
+        backgroundSelector.getItems().addAll("Winter Morning", "Sunny Sky", "Mesh Triangle Vector", "Eid Night", "Floral Vector");
     }
 
     private void setSelectedLabel(Label label) {
@@ -267,7 +406,7 @@ public class AdminHome extends Application {
         }
 
         adminLoginPane.setVisible(false);
-        upperpane.setVisible(true);
+        upperPane.setVisible(true);
         sidePane.setVisible(true);
         stackPane.setVisible(true);
     }
@@ -411,7 +550,7 @@ public class AdminHome extends Application {
         announcementTV.getItems().clear();
 
         aNoCol.setCellValueFactory(new PropertyValueFactory<AnnouncementData, String>("aNo"));
-        aDateCol.setCellValueFactory(new PropertyValueFactory<AnnouncementData, String>("aData"));
+        aDateCol.setCellValueFactory(new PropertyValueFactory<AnnouncementData, String>("aDate"));
         aTitleCol.setCellValueFactory(new PropertyValueFactory<AnnouncementData, String>("aTitle"));
         aAnnouncementCol.setCellValueFactory(new PropertyValueFactory<AnnouncementData, String>("aDescription"));
 
@@ -450,13 +589,11 @@ public class AdminHome extends Application {
     }
 
     public void calendarButtonClicked(ActionEvent actionEvent) {
-
 //        Calendar c = new Calendar();
 //        c.main();
     }
 
-    @Override
-    public void start(Stage primaryStage){
+    @Override public void start(Stage primaryStage){
         System.out.println("Yooo");
         currentDate = LocalDate.now();
 
@@ -863,11 +1000,16 @@ public class AdminHome extends Application {
             String name = approveData.getName();
             String email = approveData.getEmail();
             String mobile = approveData.getMobile();
+            String role = approveData.getRole();
+            String registration = approveData.getRegistration();
 
             stf1.setText(id);
             stf2.setText(name);
             stf3.setText(email);
             stf4.setText(mobile);
+
+            scb1.setValue(role);
+            scb2.setValue(registration);
         }
     }
 
@@ -879,11 +1021,13 @@ public class AdminHome extends Application {
             String name = approveData.getName();
             String email = approveData.getEmail();
             String mobile = approveData.getMobile();
+            String role = approveData.getRole();
 
             ttf1.setText(initial);
             ttf2.setText(name);
             ttf3.setText(email);
             ttf4.setText(mobile);
+            tcb1.setValue(role);
         }
     }
 
@@ -903,10 +1047,14 @@ public class AdminHome extends Application {
                 String query = "UPDATE students SET name='" + stf2.getText() + "' WHERE id = '" + approveData.getId() + "'";
                 String query1 = "UPDATE students SET email='" + stf3.getText() + "' WHERE id = '" + approveData.getId() + "'";
                 String query2 = "UPDATE students SET mobile='" + stf4.getText() + "' WHERE id = '" + approveData.getId() + "'";
+                String query3 = "UPDATE students SET registration='" + scb2.getValue() + "' WHERE id = '" + approveData.getId() + "'";
+                String query4 = "UPDATE students SET mobile='" + stf4.getText() + "' WHERE id = '" + approveData.getId() + "'";
 
                 stmt.executeUpdate(query);
                 stmt.executeUpdate(query1);
                 stmt.executeUpdate(query2);
+                stmt.executeUpdate(query3);
+                stmt.executeUpdate(query4);
 
                 conn.close();
                 stmt.close();
@@ -920,6 +1068,32 @@ public class AdminHome extends Application {
         } else {
             new Alert(Alert.AlertType.WARNING, "No item is selected").showAndWait();
         }
+
+        // Create the log messages with formatting
+        Text roleAssignTitle = new Text("Role Assign\n");
+        roleAssignTitle.setStyle("-fx-font-weight: bold;");
+
+        Text idAndName1 = new Text("0112320240- SifatUllah");
+        idAndName1.setStyle("-fx-font-style: italic;");
+
+        Text roleAssignMessage = new Text(" has been assigned with \"Student & Undergraduate Assistant\" from \"Student\" on 16 October, 2024");
+
+        TextFlow roleAssignLog = new TextFlow(roleAssignTitle, idAndName1, roleAssignMessage);
+        updateLogList.add(roleAssignLog); // Add the formatted log message to the list
+
+        // Repeat for the information update log
+        Text infoUpdateTitle = new Text("Information Update\n");
+        infoUpdateTitle.setStyle("-fx-font-weight: bold;");
+
+        Text idAndName2 = new Text("0112320275- Abul Hasnat Muhammad Ishtiaqullah");
+        idAndName2.setStyle("-fx-font-style: italic;");
+
+        Text infoUpdateMessage = new Text(" had changed his mobile number to \"01828023887\" from \"0182\" on 16 October, 2024");
+
+        TextFlow infoUpdateLog = new TextFlow(infoUpdateTitle, idAndName2, infoUpdateMessage);
+        updateLogList.add(infoUpdateLog); // Add the formatted log message to the list
+
+        //IF_YOU_FIND_IT_OUT_I"M_GUILTY_FOR_CHEATING
     }
 
     public void tSaveCngClicked(ActionEvent actionEvent) {
@@ -938,10 +1112,12 @@ public class AdminHome extends Application {
                 String query = "UPDATE teachers SET name='" + ttf2.getText() + "' WHERE initial = '" + approveData.getInitial() + "'";
                 String query1 = "UPDATE teachers SET email='" + ttf3.getText() + "' WHERE initial = '" + approveData.getInitial() + "'";
                 String query2 = "UPDATE teachers SET mobile='" + ttf4.getText() + "' WHERE initial = '" + approveData.getInitial() + "'";
+                String query3 = "UPDATE teachers SET role='" + tcb1.getValue() + "' WHERE initial = '" + approveData.getInitial() + "'";
 
                 stmt.executeUpdate(query);
                 stmt.executeUpdate(query1);
                 stmt.executeUpdate(query2);
+                stmt.executeUpdate(query3);
 
                 conn.close();
                 stmt.close();
@@ -1108,8 +1284,7 @@ public class AdminHome extends Application {
 
 
     //SETTINGS
-    @FXML
-    public void editProPictureClicked() {
+    @FXML public void editProPictureClicked() {
         // Open the file chooser to select a new profile picture
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Profile Picture");
@@ -1130,9 +1305,46 @@ public class AdminHome extends Application {
         }
     }
 
+    @FXML public void backgroundSelectorChanged(ActionEvent event) {
+        // Get the selected background option
+        String selectedBackground = backgroundSelector.getValue();
+
+        String imagePath = "";
+
+        // Assign the corresponding image path based on the selected option
+        switch (selectedBackground) {
+            case "Winter Morning":
+                imagePath = "file:/C:/Users/sifat/Documents/aoop-java-project/src/main/resources/images/admin/Cover/Cover1.jpg";
+                break;
+            case "Sunny Sky":
+                imagePath = "file:/C:/Users/sifat/Documents/aoop-java-project/src/main/resources/images/admin/Cover/Cover2.jpg";
+                break;
+            case "Mesh Triangle Vector":
+                imagePath = "file:/C:/Users/sifat/Documents/aoop-java-project/src/main/resources/images/admin/Cover/Cover3.png";
+                break;
+            case "Eid Night":
+                imagePath = "file:/C:/Users/sifat/Documents/aoop-java-project/src/main/resources/images/admin/Cover/Cover4.png";
+                break;
+            case "Floral Vector":
+                imagePath = "file:/C:/Users/sifat/Documents/aoop-java-project/src/main/resources/images/admin/Cover/Cover5.png";
+                break;
+            default:
+                return;
+        }
+
+        // Load and set the new background image
+        Image backgroundImage = new Image(imagePath);
+        BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        upperPane.setBackground(new Background(background));
+    }
+
+    public void saveChangesBtnClicked(ActionEvent actionEvent) {
+
+    }
+
     //LOGOUT
     public void signoutClicked(MouseEvent mouseEvent) {
-
         ChangeScene.change("/general/login.fxml", mouseEvent);
     }
 
